@@ -75,3 +75,10 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 @keyframes sectionFloat{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-18px,12px,0) scale(1.08)}}
 @keyframes useOrbit{from{transform:rotate(0deg) translate3d(0,0,0)}50%{transform:rotate(180deg) translate3d(-16px,10px,0)}to{transform:rotate(360deg) translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.issuance-section:after,.notes-section:after,.uses-section:after{animation:none}}
+
+/* Keep the instrument-classes section white; motion lives only in the linework. */
+.uses-section{background:var(--paper)}
+.uses-section:before{background-image:repeating-linear-gradient(90deg,transparent 0 118px,rgba(16,17,18,.035) 119px,transparent 120px);background-size:100% 100%;animation:useLines 20s linear infinite}
+.uses-section:after{width:220px;height:220px;right:7%;top:13%;border:1px solid rgba(33,133,71,.14);background:transparent;box-shadow:0 0 0 28px rgba(33,133,71,.025),0 0 0 58px rgba(33,133,71,.018);animation:useOrbit 22s linear infinite}
+@keyframes useLines{from{transform:translateX(0)}to{transform:translateX(-118px)}}
+@media(prefers-reduced-motion:reduce){.uses-section:before{animation:none}}
