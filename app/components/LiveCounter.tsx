@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function LiveCounter({ target = 90 }: { target?: number }) {
+export default function LiveCounter({ target = 90, comma = false }: { target?: number; comma?: boolean }) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -29,5 +29,5 @@ export default function LiveCounter({ target = 90 }: { target?: number }) {
     return () => { observer.disconnect(); cancelAnimationFrame(frame); };
   }, [target]);
 
-  return <span ref={ref}>{value}</span>;
+  return <span ref={ref}>{comma ? value.toLocaleString("en-US") : value}</span>;
 }
