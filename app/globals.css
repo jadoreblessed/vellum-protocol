@@ -69,8 +69,9 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 .notes-section:before{background:radial-gradient(circle at 12% 18%,rgba(47,91,232,.11) 0 2px,transparent 3px),radial-gradient(circle at 78% 70%,rgba(33,133,71,.14) 0 2px,transparent 3px);background-size:34px 34px,42px 42px;opacity:.65}
 .notes-section:after{width:520px;height:220px;left:35%;bottom:-110px;background:radial-gradient(ellipse,rgba(47,91,232,.12),transparent 68%);animation-delay:-3s}
 .uses-section{background:#f1f0e8}
-.uses-section:before{background:linear-gradient(125deg,transparent 0 28%,rgba(199,67,44,.08) 28.1% 28.25%,transparent 28.35% 100%),repeating-linear-gradient(90deg,transparent 0 96px,rgba(16,17,18,.035) 97px,transparent 98px)}
-.uses-section:after{width:300px;height:300px;right:4%;top:8%;background:radial-gradient(circle,rgba(199,67,44,.13),transparent 68%);animation-delay:-6s}
+.uses-section:before{background:repeating-linear-gradient(90deg,transparent 0 96px,rgba(16,17,18,.035) 97px,transparent 98px),linear-gradient(125deg,transparent 0 28%,rgba(33,133,71,.08) 28.1% 28.25%,transparent 28.35% 100%)}
+.uses-section:after{width:370px;height:370px;right:3%;top:4%;border:1px solid rgba(33,133,71,.16);background:radial-gradient(circle,rgba(33,133,71,.08),transparent 62%);box-shadow:0 0 0 34px rgba(33,133,71,.035),0 0 0 70px rgba(47,91,232,.025);animation:useOrbit 18s linear infinite}
 .issuance-section>.section-head,.issuance-section>.issuance-visual,.issuance-section>.steps,.notes-section>.section-head,.notes-section>.notes-grid,.uses-section>.section-head,.uses-section>.use-grid{position:relative;z-index:1}
 @keyframes sectionFloat{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-18px,12px,0) scale(1.08)}}
+@keyframes useOrbit{from{transform:rotate(0deg) translate3d(0,0,0)}50%{transform:rotate(180deg) translate3d(-16px,10px,0)}to{transform:rotate(360deg) translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.issuance-section:after,.notes-section:after,.uses-section:after{animation:none}}
