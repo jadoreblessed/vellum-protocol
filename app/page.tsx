@@ -1,75 +1,117 @@
 import Link from "next/link";
-import ScrollReveal from "./components/ScrollReveal";
-import LiveCounter from "./components/LiveCounter";
+import LivingHero from "./components/LivingHero";
 import TokenLogo from "./components/TokenLogo";
-import HeroParallax from "./components/HeroParallax";
+import styles from "./home.module.css";
 
-const notes = [
-  { symbol: "$CASHCAT", name: "Cash Cat", color: "#218547", amount: "250,000", pnl: "+38.6%", term: "90 DAYS" },
-  { symbol: "$PONS", name: "Pons", color: "#2f5be8", amount: "1,200,000", pnl: "−11.3%", term: "30 DAYS" },
-  { symbol: "$IF", name: "What IF", color: "#c7432c", amount: "4,000,000", pnl: "+85.7%", term: "365 DAYS" },
+const instruments = [
+  { symbol: "$CASHCAT", name: "Cash Cat", color: "#147b43", amount: "250,000", value: "$30,150", pnl: "+38.6%", term: "90d", number: "000421" },
+  { symbol: "$PONS", name: "Pons", color: "#315eea", amount: "1,200,000", value: "$43,836", pnl: "−11.3%", term: "30d", number: "000188" },
+  { symbol: "$IF", name: "What IF", color: "#cf452f", amount: "4,000,000", value: "$45,320", pnl: "+85.7%", term: "365d", number: "000097" },
 ];
 
-function NoteCard({ note, compact = false }: { note: typeof notes[number]; compact?: boolean }) {
-  return <article className={compact ? "mini-note" : "note"}>
-    <div className="note-top"><strong>vellum</strong><span>BEARER NOTE · ERC-721</span><b>W/ 000421</b></div>
-    <div className="note-band" style={{ background: note.color }}><div className="token-icon"><TokenLogo symbol={note.symbol} color={note.color} /></div><div><div className="token-symbol">{note.symbol}</div><div>{note.name}</div><div className="token-meta">ROBINHOOD CHAIN</div></div></div>
-    <div className="note-body"><div className="label">Position</div><div className="position">{note.amount} <small>{note.symbol.slice(1)}</small></div><div className="label">≈ $30,150 &nbsp; at mark</div>
-      <div className="note-stats"><div className="stat"><div className="label">Entry</div><b>$0.0870</b></div><div className="stat"><div className="label">Mark</div><b>$0.1206</b></div><div className="stat"><div className="label">PnL</div><b className={note.pnl.startsWith("+") ? "positive" : ""}>{note.pnl}</b></div></div>
-      <div className="lock-band">⌗ &nbsp; LOCKED UNTIL 04 NOV 2026</div>
-      <div className="note-details"><div><div className="label">Supply share</div><b>0.03%</b></div><div><div className="label">Term</div><b>{note.term}</b></div><div><div className="label">Deposit date</div><b>06 AUG 2026</b></div><div><div className="label">Unlock</div><b>04 NOV 2026</b></div></div>
-    </div>
-    {!compact && <div className="note-foot"><span>PAYABLE TO BEARER</span><span>0x9c4e...7a21</span></div>}
-  </article>;
-}
-
-function HeroScene() {
-  return <section className="hero-v2">
-    <video className="hero-v2-video" autoPlay muted loop playsInline preload="metadata" aria-hidden="true"><source src="/hero-motion.mp4" type="video/mp4" /></video>
-    <div className="hero-v2-grid" aria-hidden="true" />
-    <div className="hero-v2-ribbon ribbon-one" aria-hidden="true" /><div className="hero-v2-ribbon ribbon-two" aria-hidden="true" />
-    <div className="hero-v2-orbit orbit-one" aria-hidden="true" /><div className="hero-v2-orbit orbit-two" aria-hidden="true" />
-    <div className="hero-v2-content">
-      <div className="hero-v2-copy">
-        <div className="eyebrow mono hero-reveal">BEARER POSITIONS · VELLUM NETWORK</div>
-        <h1 className="hero-v2-title hero-reveal delay-one">Make any token <em>holdable.</em></h1>
-        <p className="hero-v2-description hero-reveal delay-two">A living position deserves a document. Lock the balance, carry the claim, and let the facts travel with it.</p>
-        <div className="hero-actions hero-reveal delay-three"><Link className="button acid" href="/app">Create a note <span>↗</span></Link><Link className="button" href="/how-it-works">See the flow</Link></div>
-        <div className="hero-v2-meta mono hero-reveal delay-three"><span>01 / WRAP</span><span>02 / CARRY</span><span>03 / UNWRAP</span></div>
-        <div className="hero-lifecycle mono hero-reveal delay-three"><span className="active"><b>01</b> CHOOSE TOKEN</span><i>→</i><span><b>02</b> SET TERM</span><i>→</i><span><b>03</b> ISSUE NOTE</span><i>→</i><span><b>04</b> TRANSFER CLAIM</span></div>
+function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
+  return (
+    <Link href="/app/note" className={styles.instrument} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
+      <div className={styles.instrumentTop}><span>VLM / {item.number}</span><span>{item.term} NOTE ↗</span></div>
+      <div className={styles.instrumentToken}>
+        <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
+        <span><small>UNDERLYING</small><b>{item.symbol}</b><em>{item.name}</em></span>
       </div>
-      <HeroParallax><div className="hero-v2-art" aria-label="Animated Vellum bearer note preview">
-        <div className="hero-assembly-label label-token mono"><span>01</span> TOKEN SELECTED</div>
-        <div className="hero-assembly-label label-term mono"><span>02</span> TERM SEALED</div>
-        <div className="hero-assembly-label label-claim mono"><span>03</span> CLAIM READY</div>
-        <div className="hero-v2-token token-float token-float-one"><span>ERC-20</span><b>CASHCAT</b><small>250,000</small></div>
-        <div className="hero-v2-token token-float token-float-two"><span>NOTE / 000421</span><b>90 DAYS</b><small>TRANSFERABLE</small></div>
-        <div className="hero-v2-token token-float token-float-three"><span>NETWORK</span><b>ROBINHOOD</b><small>LIVE ROUTE</small></div>
-        <div className="hero-v2-signal mono">BLOCK 18,421 <i /> VERIFIED</div><div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
-        <div className="hero-card-scan" aria-hidden="true" /><div className="hero-assembly-stamp mono">INSTRUMENT<br/><b>ASSEMBLED</b></div>
-        <div className="hero-live-readout mono"><span>POSITION <b><LiveCounter target={250000} /> CASHCAT</b></span><span>PNL <b>+38.6%</b></span><span>OWNER <b>BEARER</b></span></div>
-        <div className="hero-route mono" aria-hidden="true"><span className="route-dot active" /><i /><span className="route-dot" /><i /><span className="route-dot" /><i /><span className="route-dot" /></div>
-        <div className="hero-v2-caption mono"><span>LIVE INSTRUMENT</span><span>VLM / 001</span></div>
-      </div></HeroParallax>
-    </div>
-    <div className="hero-v2-scroll mono">SCROLL TO TRACE THE POSITION <span>↓</span></div>
-  </section>;
+      <div className={styles.instrumentAmount}><small>POSITION</small><b>{item.amount}</b><span>{item.symbol.slice(1)}</span></div>
+      <div className={styles.instrumentData}><span>MARK <b>{item.value}</b></span><span>PNL <b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
+      <div className={styles.instrumentLock}>LOCKED · CLAIM FOLLOWS HOLDER</div>
+    </Link>
+  );
 }
 
 export default function Home() {
-  return <main>
-    <header className="nav"><div className="container nav-inner"><Link href="/" className="wordmark">vellum</Link><nav className="nav-links"><Link href="/how-it-works"><span>01</span>How it works</Link><Link href="/notes"><span>02</span>Notes</Link><Link href="/protocol"><span>03</span>Protocol</Link><Link href="/docs"><span>04</span>Docs</Link></nav><Link className="button acid" href="/app">Launch App</Link></div></header>
-    <HeroScene />
-    <ScrollReveal><section id="how" className="section container issuance-section"><div className="section-head"><div><div className="eyebrow mono">01 / ISSUANCE</div><h2 className="section-title">The token stays.<em>The note travels.</em></h2></div><p className="section-intro">Vellum separates ownership from the chart. The underlying position stays inside an immutable vault while its claim becomes a portable instrument.</p></div><div className="issuance-visual"><div className="issuance-token"><span className="mono">ERC-20</span><b>250,000 ORBIT</b><small>DEPOSIT</small></div><div className="issuance-path"><i /><i /><i /></div><div className="issuance-vault"><span className="mono">VAULT</span><b>POSITION HELD</b><small>IMMUTABLE</small></div><div className="issuance-note"><span className="mono">ERC-721</span><b>NOTE / 000421</b><small>TRANSFERABLE CLAIM</small></div></div><div className="steps">{[["01","Deposit","Tokens enter a vault. The contract records the amount that actually arrived."],["02","Issue","Vellum prints one ERC-721 note with amount, entry, term and provenance."],["03","Transfer","The note moves between wallets. The underlying position never does."],["04","Claim","At maturity, the holder can unwrap the position back to the wallet."]].map(([n,t,p])=><div className="step" key={n}><div className="step-num">{n}</div><h3>{t}</h3><p>{p}</p></div>)}</div></section></ScrollReveal>
-    <ScrollReveal><section className="trace-section"><div className="container trace-layout"><div className="trace-copy"><div className="eyebrow mono">02 / OWNERSHIP</div><h2 className="section-title">The position changed hands.<em>The balance did not.</em></h2><p className="section-intro">A Vellum note is the moving part. Wallet A can pass the claim to Wallet B while the vault continues to hold the same underlying tokens.</p><div className="trace-status mono"><span className="live-dot" /> LIVE TRANSFER ROUTE <b>BLOCK 18,421</b></div></div><div className="ownership-map"><div className="route-grid" aria-hidden="true" /><div className="moving-note mono"><span>NOTE / 000421</span><b>250,000 ORBIT</b></div><div className="route-pulse pulse-a" aria-hidden="true" /><div className="route-pulse pulse-b" aria-hidden="true" /><div className="wallet-node"><span className="mono">WALLET A</span><b>0xA1...FA3D</b></div><div className="map-line"><i /><span className="mono">ERC-721 TRANSFER</span><i /><span className="transfer-note mono">NOTE ↗</span></div><div className="wallet-node active"><span className="mono">WALLET B</span><b>0x7C...91BE</b></div><div className="vault-node"><span className="mono">UNDERLYING VAULT</span><b>250,000 ORBIT</b><small>UNCHANGED</small></div></div></div></section></ScrollReveal>
-    <div className="ticker"><div className="ticker-track">PAYABLE TO BEARER · ISSUED ONCHAIN · TRANSFERABLE · IMMUTABLE · &nbsp; PAYABLE TO BEARER · ISSUED ONCHAIN · TRANSFERABLE · IMMUTABLE · &nbsp;</div></div>
-    <ScrollReveal><section id="notes" className="section container notes-section"><div className="section-head"><div><div className="eyebrow mono">03 / NOTEBOOK</div><h2 className="section-title">One position.<em>Many ways to carry it.</em></h2></div><p className="section-intro">A note keeps the facts that matter visible: quantity, entry, mark, PnL, unlock date and the wallet that can claim it.</p></div><div className="notes-grid">{notes.map(note=><NoteCard key={note.symbol} note={note} compact />)}</div></section></ScrollReveal>
-    <ScrollReveal><section className="uses-section section container"><div className="section-head"><div><div className="eyebrow mono">04 / INSTRUMENT CLASSES</div><h2 className="section-title">Four uses.<em>One note standard.</em></h2></div><p className="section-intro">The same portable claim can power different coordination primitives without changing the underlying vault.</p></div><div className="use-grid">{[["01","OTC POSITIONS","Move an onchain position without selling the tokens."],["02","LOCKED COLLATERAL","Give a pool a fixed amount and known maturity."],["03","TEAM VESTING","Make allocations public, timed and auditable."],["04","CONVICTION GATING","Gate access by amount × remaining term."]].map(([n,t,p])=><Link href={t === "TEAM VESTING" ? "/vesting" : t === "CONVICTION GATING" ? "/gating" : "/classes"} className="use-tile" key={n}><span className="step-num">{n}</span><strong>{t}</strong><p>{p}</p><span className="use-arrow">↗</span></Link>)}</div></section></ScrollReveal>
-    <ScrollReveal><section className="prepare-section"><div className="container prepare-layout"><div className="prepare-copy"><div className="eyebrow mono">04.1 / PREPARE</div><h2 className="section-title">Add a term.<br/>The tokens stay.<br/><em>The note doesn’t<br/>have to.</em></h2><p className="section-intro">Choose a position, set the lock and turn the balance into a portable claim. The preview updates as the instrument takes shape.</p><div className="prepare-table"><div className="prepare-table-head mono"><span>TOKEN</span><span>FDV / MARK</span></div>{[["01","$CASHCAT","$119.2M"],["02","$PONS","$26.2M"],["03","$IF","$10.3M"],["04","$PRINTER","$1.5M"],["05","$LEMON","$0.45M"]].map(([n,t,v],i)=><div className={`prepare-row ${i === 0 ? "selected" : ""}`} key={t}><span className="mono">{n}</span><b>{t}</b><span className="mono">{v}</span><i>↗</i></div>)}</div></div><div className="prepare-preview"><div className="preview-status mono"><span className="live-dot" /> NOTE PREVIEW <b>LIVE</b></div><div className="prepare-note-wrap"><div className="prepare-note-glow" /><div className="prepare-note-card"><NoteCard note={{symbol:"$CASHCAT",name:"Cash Cat",color:"#218547",amount:"250,000",pnl:"+38.6%",term:"90 DAYS"}} /></div><div className="prepare-lock mono"><span>⌗</span> LOCKED UNTIL 04 NOV 2026 <b>SEALED</b></div><div className="prepare-float mono"><span>ENTRY</span><b>$0.0870</b></div></div><div className="prepare-controls mono"><span>TERM <b>90 DAYS</b></span><span>POSITION <b>250,000</b></span><span>CLAIM <b>TRANSFERABLE</b></span></div></div></div></section></ScrollReveal>
-    <ScrollReveal><section className="maturity-scene"><div className="maturity-noise" aria-hidden="true" /><div className="container maturity-inner"><div><div className="eyebrow mono">05 / MATURITY</div><h2 className="section-title">Locked now.<em>Claimable later.</em></h2><p className="section-intro">The clock is part of the instrument. It can move, but it cannot be rewritten.</p><div className="maturity-readout mono"><span className="live-dot" /> BLOCK CLOCK ONLINE <b>FINALITY / 12s</b></div></div><div className="countdown-art"><div className="countdown-orbit orbit-c1" aria-hidden="true" /><div className="countdown-orbit orbit-c2" aria-hidden="true" /><div className="countdown-ghost" aria-hidden="true">89</div><div className="countdown-number"><LiveCounter target={90} /></div><div className="mono">DAYS REMAINING</div><div className="countdown-line"><span /><b>06 AUG 2026</b><b>04 NOV 2026</b></div><div className="countdown-events mono"><span>ISSUED <b>06 AUG</b></span><span>NOW <b>BLOCK 18,421</b></span><span>UNLOCK <b>04 NOV</b></span></div></div></div></section></ScrollReveal>
-    <ScrollReveal><section className="state-section"><div className="container state-inner"><div><div className="eyebrow mono">06 / LIFECYCLE</div><h2 className="section-title">Locked becomes<br/><em>claimable.</em></h2><p className="section-intro">Every note has a visible state. When the clock reaches zero, the claim opens and the holder can release the balance.</p><Link className="button acid" href="/claimable">Explore the lifecycle →</Link></div><div className="state-track"><div className="state-step active"><span>01</span><b>LOCKED</b><small>90 DAYS</small></div><div className="state-connector" /><div className="state-step"><span>02</span><b>MATURED</b><small>DAY 0</small></div><div className="state-connector" /><div className="state-step claim"><span>03</span><b>CLAIMABLE</b><small>UNWRAP</small></div></div></div></section></ScrollReveal>
-    <ScrollReveal><section id="protocol" className="section container"><div className="protocol"><div><div className="eyebrow mono">07 / PROTOCOL</div><h2 className="section-title">No owner.<em>No pause.</em></h2><p className="section-intro">The contract is the custodian. Three public functions make the lifecycle legible and verifiable.</p></div><div className="protocol-list">{[["wrap(token, amount, term)","Deposit, price and mint one note."],["transfer(noteId)","Move the claim without selling the position."],["unwrap(noteId)","Burn the note and release the underlying tokens."]].map(([a,b])=><div className="protocol-row" key={a}><b>{a}</b><span>{b}</span></div>)}</div></div></section></ScrollReveal>
-    <div className="protocol-bridge" aria-hidden="true"><div className="bridge-line" /><span className="mono">PUBLIC CONTRACT SURFACE</span><div className="bridge-line" /></div>
-    <section id="docs" className="section dark docs-section"><div className="docs-ambient" aria-hidden="true"><span className="docs-stamp">VLM</span><i /><i /><i /></div><div className="container"><div className="section-head"><div><div className="eyebrow mono">06 / DOCUMENTATION</div><h2 className="section-title">Turn a position <em>into an instrument.</em></h2></div><p className="section-intro">Read the protocol, inspect the note standard and understand the lifecycle before connecting a wallet.</p></div><div className="docs-stage" aria-hidden="true"><div className="docs-orbit" /><div className="docs-cursor mono">READ / 06</div><div className="docs-card docs-card-a"><span>NOTE STANDARD</span><b>ERC—721</b><small>PUBLIC · AUDITABLE</small></div><div className="docs-card docs-card-b"><span>STATE</span><b>CLAIMABLE</b><small>BLOCK 18,421</small></div><div className="docs-signal" /></div><div className="hero-links"><Link href="/issuance">Issuance <span>01</span></Link><Link href="/ownership">Ownership <span>02</span></Link><Link href="/classes">Instrument classes <span>03</span></Link><Link href="/maturity">Maturity <span>04</span></Link><Link href="/claimable">Claimable state <span>05</span></Link><Link href="/security">Guarantees <span>06</span></Link></div><Link className="button acid" href="/app">Enter the app →</Link><footer className="footer" style={{marginTop:100}}><span className="mono">VELLUM PROTOCOL</span><span className="mono">ROBINHOOD NETWORK · ERC-721</span><a className="social-link mono" href="https://x.com/vellum" target="_blank" rel="noreferrer" aria-label="Vellum on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5 19 19.5M19 4.5 5 19.5" /></svg><span>SOCIALS / X</span></a></footer></div></section>
-  </main>;
+  return (
+    <main className={styles.page}>
+      <header className={styles.nav}>
+        <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
+        <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
+        <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
+      </header>
+      <LivingHero />
+
+      <section className={styles.signalRail} aria-label="Network status">
+        <div><span className={styles.liveDot} /> Network live</div><div>18,421 block</div><div>$119.2m tracked</div><div>12s finality</div><div>ERC-20 → ERC-721</div>
+      </section>
+
+      <section className={styles.market} id="market">
+        <div className={styles.sectionIntro}>
+          <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
+          <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
+        </div>
+        <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+      </section>
+
+      <section className={styles.flow} id="how">
+        <div className={styles.flowSticky}>
+          <span className={styles.index}>02 / THE MECHANISM</span><h2>One deposit.<br />Two things<br /><em>can move.</em></h2>
+          <p>The balance stays inside the vault. Its claim becomes a visible instrument you can carry, transfer or redeem.</p><Link href="/how-it-works">Read the full flow ↗</Link>
+        </div>
+        <div className={styles.flowSteps}>
+          <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Choose a position</h3><p>Select a supported token and the exact balance that should become portable.</p><small>TOKEN · AMOUNT</small></article>
+          <article><span>02</span><div className={styles.vaultGraphic}><i /><b>250,000</b><small>VAULTED</small></div><h3>Seal the facts</h3><p>Vellum records quantity, entry mark, term and provenance in one note.</p><small>PRICE · TERM · OWNER</small></article>
+          <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Move the claim</h3><p>Transfer the note. The underlying token balance remains untouched in the vault.</p><small>ERC-721 TRANSFER</small></article>
+          <article><span>04</span><div className={styles.claimGraphic}><b>00</b><i>CLAIM OPEN</i></div><h3>Unwrap at maturity</h3><p>The bearer burns the note and releases the locked position to their wallet.</p><small>NOTE → POSITION</small></article>
+        </div>
+      </section>
+
+      <section className={styles.lab}>
+        <div className={styles.labGlow} />
+        <div className={styles.labHeader}><span className={styles.index}>03 / POSITION LAB</span><span><i className={styles.liveDot} /> Live preview</span></div>
+        <div className={styles.labCopy}><h2>Pick the facts.<br /><em>Watch the note form.</em></h2><p>A product preview that behaves like the app: token, amount and time become a single transferable object.</p></div>
+        <div className={styles.builder}>
+          <div className={styles.builderControls}>
+            <div className={styles.controlLabel}><span>UNDERLYING TOKEN</span><b>01</b></div>
+            <div className={styles.tokenChoice}><span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span><div><b>$CASHCAT</b><small>Cash Cat</small></div><em>SELECTED</em></div>
+            <label><span>POSITION AMOUNT</span><b>250,000</b><i>CASHCAT</i></label><label><span>LOCK TERM</span><b>90</b><i>DAYS</i></label>
+            <div className={styles.builderStatus}><span>ENTRY MARK</span><b>$0.0870</b><span>EST. VALUE</span><b>$30,150</b></div>
+            <Link href="/app" className={styles.buildButton}>Continue in app <span>↗</span></Link>
+          </div>
+          <div className={styles.builderScene}>
+            <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
+            <div className={styles.miniNote}>
+              <div><b>vellum</b><span>BEARER NOTE · 000421</span></div>
+              <header><TokenLogo symbol="$CASHCAT" color="#147b43" /><span><small>ROBINHOOD CHAIN</small><b>$CASHCAT</b></span></header>
+              <main><small>POSITION</small><strong>250,000</strong><p>≈ $30,150 &nbsp; AT MARK</p></main>
+              <footer><span>ENTRY <b>$0.0870</b></span><span>TERM <b>90 DAYS</b></span></footer><aside>LOCKED UNTIL 04 NOV 2026</aside>
+            </div>
+            <div className={styles.builderScan}>INSTRUMENT ASSEMBLED</div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.useCases}>
+        <div className={styles.sectionIntro}>
+          <div><span className={styles.index}>04 / USE CASES</span><h2>Built to carry<br /><em>real intent.</em></h2></div>
+          <div className={styles.introSide}><p>One instrument standard, used wherever ownership and liquidity should not be the same thing.</p></div>
+        </div>
+        <div className={styles.caseGrid}>
+          {[["OTC", "Move a position between parties without market impact.", "/classes"],["Vesting", "Make team allocations timed, public and transferable.", "/vesting"],["Collateral", "Lock a known balance with a visible maturity date.", "/collateral"],["Access", "Gate communities by size and remaining conviction.", "/gating"]].map(([title, copy, href], index) => <Link href={href} key={title} className={styles.case}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore ↗</b><i>{title.slice(0, 1)}</i></Link>)}
+        </div>
+      </section>
+
+      <section className={styles.maturity}>
+        <div><span className={styles.index}>05 / BLOCK CLOCK</span><h2>Time is part<br />of the <em>instrument.</em></h2><p>Maturity cannot be edited, paused or hidden. The state changes when the chain says it does.</p><Link href="/maturity">Inspect maturity ↗</Link></div>
+        <div className={styles.clock}><div className={styles.clockRings}><i /><i /><i /></div><b>90</b><span>DAYS REMAINING</span><div className={styles.progress}><i /></div><footer><span>06 AUG 2026</span><span>04 NOV 2026</span></footer></div>
+      </section>
+
+      <section className={styles.docs}>
+        <div className={styles.docsTop}><span className={styles.index}>06 / READ THE SYSTEM</span><h2>Nothing hidden.<br /><em>Every state legible.</em></h2><Link href="/docs">Open documentation ↗</Link></div>
+        <div className={styles.docsLinks}>
+          <Link href="/issuance"><span>01</span>Issuance<b>↗</b></Link><Link href="/ownership"><span>02</span>Ownership<b>↗</b></Link><Link href="/transfer"><span>03</span>Transfer<b>↗</b></Link><Link href="/claimable"><span>04</span>Claimable state<b>↗</b></Link><Link href="/security"><span>05</span>Guarantees<b>↗</b></Link><Link href="/faq"><span>06</span>FAQ<b>↗</b></Link>
+        </div>
+        <footer className={styles.footer}>
+          <div><Link href="/" className={styles.wordmark}>vellum<span>.</span></Link><p>Portable positions for Robinhood Chain.</p></div>
+          <div><span>PRODUCT</span><Link href="/app">App</Link><Link href="/notes">Notes</Link><Link href="/protocol">Protocol</Link></div>
+          <div><span>LEARN</span><Link href="/how-it-works">How it works</Link><Link href="/docs">Docs</Link><Link href="/faq">FAQ</Link></div>
+          <div><span>SOCIAL</span><a href="https://x.com/vellum" target="_blank" rel="noreferrer">X / Twitter ↗</a></div>
+        </footer>
+        <div className={styles.footerWord}>vellum</div>
+      </section>
+    </main>
+  );
 }
