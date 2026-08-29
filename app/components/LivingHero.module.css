@@ -3,3 +3,35 @@
 @media(max-width:820px){.hero{min-height:auto}.heroInner{width:calc(100% - 32px);grid-template-columns:1fr;padding:72px 0 90px;gap:28px}.copy h1{font-size:clamp(64px,15vw,108px);max-width:720px}.copy p{max-width:540px}.stage{min-height:650px;transform:scale(.92)}.cord{height:120%;top:15%;width:160%;left:-35%}.tagTop{right:4%}.tagSide{left:2%}.bottomRail span:nth-child(2){display:none}}
 @media(max-width:560px){.heroInner{padding-top:55px}.kicker{font-size:8px;gap:8px}.kicker i{width:18px}.copy h1{font-size:clamp(55px,17vw,82px);margin:26px 0 25px;line-height:.86}.copy p{font-size:15px}.actions{flex-direction:column;align-items:stretch;margin-top:28px}.primary,.secondary{min-height:52px}.proof{gap:12px;flex-wrap:wrap;margin-top:30px}.proof span{width:calc(50% - 6px);font-size:8px}.stage{min-height:520px;transform:scale(.78);transform-origin:top center;margin-bottom:-110px;width:128%;margin-left:-14%}.note{height:610px}.tagTop{right:0}.tagSide{left:0;bottom:9%}.routeLabel{display:none}.bottomRail{padding:0 16px}.bottomRail span:last-child{margin-left:auto}.cord{top:24%;height:110%;width:190%;left:-48%}}
 @media(prefers-reduced-motion:reduce){.mesh,.cordPulse,.note,.floatTag,.scan,.routeLabel span{animation:none}.copy h1,.copy h1 em,.copy p,.actions,.proof,.kicker{animation:none;opacity:1;transform:none}.cord,.stage,.note{transition:none;transform:none}.note{left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg)}}
+
+/* V3 living scene: physical rope, reactive optical field and staged note assembly. */
+.mesh{z-index:-4;background:radial-gradient(circle at 74% 34%,rgba(0,224,95,.18),transparent 24%),radial-gradient(circle at 28% 72%,rgba(201,255,0,.12),transparent 22%),linear-gradient(rgba(17,19,15,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(17,19,15,.055) 1px,transparent 1px)}
+.hypnotic{position:absolute;z-index:-3;width:min(68vw,920px);aspect-ratio:1;right:-12%;top:-12%;transform:translate(calc(var(--mx)*-28px),calc(var(--my)*-22px));transition:transform .6s cubic-bezier(.2,.8,.2,1);filter:saturate(1.12)}
+.hypnotic>i{position:absolute;inset:var(--ring,8%);border:1px solid rgba(5,128,66,.19);border-radius:44% 56% 49% 51%/52% 43% 57% 48%;animation:liquidRing 16s linear infinite}
+.hypnotic>i:nth-child(2){--ring:19%;animation-duration:12s;animation-direction:reverse;border-color:rgba(17,19,15,.12)}
+.hypnotic>i:nth-child(3){--ring:31%;animation-duration:9s}
+.hypnotic>i:nth-child(4){--ring:42%;animation-duration:7s;animation-direction:reverse;background:radial-gradient(circle,rgba(0,220,98,.16),transparent 66%)}
+.hypnotic>span{position:absolute;display:block;border-radius:50%;mix-blend-mode:multiply;filter:blur(2px)}
+.lensOne{width:36%;height:36%;right:21%;top:20%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.8),rgba(0,220,98,.2) 38%,transparent 70%);animation:lensDrift 8s ease-in-out infinite}
+.lensTwo{width:23%;height:23%;right:48%;bottom:18%;background:radial-gradient(circle,rgba(201,255,0,.32),transparent 70%);animation:lensDrift 10s -4s ease-in-out infinite reverse}
+.cord{filter:none;transform:translate(calc(var(--mx)*-15px),calc(var(--my)*-11px));overflow:visible}
+.cordShadow{stroke:rgba(17,19,15,.19);stroke-width:42;transform:translate(8px,12px);stroke-dasharray:2600;stroke-dashoffset:2600;animation:ropeDraw 1.8s .1s cubic-bezier(.5,0,.2,1) forwards}
+.cordBase{stroke:#10120f;stroke-width:30;stroke-dasharray:2600;stroke-dashoffset:2600;animation:ropeDraw 1.8s .12s cubic-bezier(.5,0,.2,1) forwards,ropeBreathe 4.6s 2s ease-in-out infinite}
+.cordHighlight{stroke:rgba(255,255,255,.38);stroke-width:4;stroke-dasharray:3 12;stroke-dashoffset:2600;transform:translate(-3px,-4px);animation:ropeDraw 1.8s .16s cubic-bezier(.5,0,.2,1) forwards,cordRunV3 6s 2s linear infinite}
+.cordPulse{stroke:#00e468;stroke-width:7;stroke-dasharray:2 42;opacity:0;animation:cordRunV3 3.6s 1.9s linear infinite,pulseReveal .4s 1.8s forwards}
+.signalBead{fill:#c9ff00;stroke:#10120f;stroke-width:5;opacity:0;filter:drop-shadow(0 5px 6px rgba(17,19,15,.25));animation:beadReveal .35s 1.8s forwards}
+.signalBeadSmall{fill:#00dc62;stroke:#10120f;stroke-width:2;opacity:0;animation:beadReveal .35s 2.1s forwards}
+.tokenBand{animation:pieceIn .55s .9s both}
+.stats{animation:pieceIn .55s 1.12s both}
+.lock{animation:lockSnap .65s 1.34s both}
+@keyframes ropeDraw{to{stroke-dashoffset:0}}
+@keyframes ropeBreathe{0%,100%{stroke-width:30;opacity:1}50%{stroke-width:34;opacity:.94}}
+@keyframes cordRunV3{to{stroke-dashoffset:-176}}
+@keyframes pulseReveal{to{opacity:1}}
+@keyframes beadReveal{to{opacity:1}}
+@keyframes liquidRing{0%{transform:rotate(0) scale(1);border-radius:44% 56% 49% 51%/52% 43% 57% 48%}50%{transform:rotate(180deg) scale(1.06);border-radius:57% 43% 61% 39%/40% 58% 42% 60%}100%{transform:rotate(360deg) scale(1);border-radius:44% 56% 49% 51%/52% 43% 57% 48%}}
+@keyframes lensDrift{50%{transform:translate(-34px,28px) scale(1.13)}}
+@keyframes pieceIn{from{opacity:0;transform:translateY(18px);clip-path:inset(0 100% 0 0)}to{opacity:1;transform:none;clip-path:inset(0)}}
+@keyframes lockSnap{from{opacity:0;transform:translateX(-90px) rotate(-2deg)}to{opacity:1;transform:none}}
+@media(max-width:820px){.hypnotic{width:120vw;right:-58%;top:31%}}
+@media(prefers-reduced-motion:reduce){.hypnotic>i,.hypnotic>span,.cordShadow,.cordBase,.cordHighlight,.cordPulse,.signalBead,.signalBeadSmall,.tokenBand,.stats,.lock{animation:none}.cordShadow,.cordBase,.cordHighlight{stroke-dashoffset:0}.cordPulse,.signalBead,.signalBeadSmall{opacity:1}}
