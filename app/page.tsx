@@ -43,7 +43,7 @@ function HeroScene() {
         <div className="hero-v2-token token-float token-float-two"><span>NOTE / 000421</span><b>90 DAYS</b><small>TRANSFERABLE</small></div>
         <div className="hero-v2-token token-float token-float-three"><span>NETWORK</span><b>ROBINHOOD</b><small>LIVE ROUTE</small></div>
         <div className="hero-v2-signal mono">BLOCK 18,421 <i /> VERIFIED</div><div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
-        <div className="hero-live-readout mono"><span>POSITION <b><LiveCounter target={250000} comma /> CASHCAT</b></span><span>PNL <b>+38.6%</b></span><span>OWNER <b>BEARER</b></span></div>
+        <div className="hero-live-readout mono"><span>POSITION <b><LiveCounter target={250000} /> CASHCAT</b></span><span>PNL <b>+38.6%</b></span><span>OWNER <b>BEARER</b></span></div>
         <div className="hero-route mono" aria-hidden="true"><span className="route-dot active" /><i /><span className="route-dot" /><i /><span className="route-dot" /><i /><span className="route-dot" /></div>
         <div className="hero-v2-caption mono"><span>LIVE INSTRUMENT</span><span>VLM / 001</span></div>
       </div></HeroParallax>
