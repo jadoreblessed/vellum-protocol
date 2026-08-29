@@ -5,7 +5,7 @@ import TokenLogo from "../components/TokenLogo";
 
 type EthereumProvider = { request: (args: { method: string; params?: unknown[] }) => Promise<unknown>; on?: (event: string, handler: (...args: unknown[]) => void) => void; removeListener?: (event: string, handler: (...args: unknown[]) => void) => void };
 declare global { interface Window { ethereum?: EthereumProvider } }
-const tokens = [{ symbol: "$CASHCAT", name: "Cash Cat", color: "#218547" }, { symbol: "$PONS", name: "Pons", color: "#d7c900" }, { symbol: "$IF", name: "IF", color: "#242424" }, { symbol: "$PRINTER", name: "Printer", color: "#7a65d8" }, { symbol: "$LEMON", name: "Lemon", color: "#e0c800" }];
+const tokens = [{ symbol: "$CASHCAT", name: "Cash Cat", color: "#218547" }, { symbol: "$PONS", name: "Pons", color: "#2f5be8" }, { symbol: "$IF", name: "What IF", color: "#c7432c" }];
 const terms = ["NONE", "30D", "90D", "180D", "1Y", "CUSTOM"];
 const shorten = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 const hexToChain = (hex: string) => Number.parseInt(hex, 16).toString();
