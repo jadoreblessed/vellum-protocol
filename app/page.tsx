@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ScrollReveal from "./components/ScrollReveal";
 import LiveCounter from "./components/LiveCounter";
+import TokenLogo from "./components/TokenLogo";
 
 const notes = [
   { symbol: "$ORBIT", name: "Orbit", color: "#176b57", amount: "250,000", pnl: "+38.6%", term: "90 DAYS" },
@@ -11,7 +12,7 @@ const notes = [
 function NoteCard({ note, compact = false }: { note: typeof notes[number]; compact?: boolean }) {
   return <article className={compact ? "mini-note" : "note"}>
     <div className="note-top"><strong>vellum</strong><span>BEARER NOTE · ERC-721</span><b>W/ 000421</b></div>
-    <div className="note-band" style={{ background: note.color }}><div className="token-icon">◈</div><div><div className="token-symbol">{note.symbol}</div><div>{note.name}</div><div className="token-meta">VELLUM NETWORK</div></div></div>
+    <div className="note-band" style={{ background: note.color }}><div className="token-icon"><TokenLogo symbol={note.symbol} color={note.color} /></div><div><div className="token-symbol">{note.symbol}</div><div>{note.name}</div><div className="token-meta">ROBINHOOD CHAIN</div></div></div>
     <div className="note-body"><div className="label">Position</div><div className="position">{note.amount} <small>{note.symbol.slice(1)}</small></div><div className="label">≈ $30,150 &nbsp; at mark</div>
       <div className="note-stats"><div className="stat"><div className="label">Entry</div><b>$0.0870</b></div><div className="stat"><div className="label">Mark</div><b>$0.1206</b></div><div className="stat"><div className="label">PnL</div><b className={note.pnl.startsWith("+") ? "positive" : ""}>{note.pnl}</b></div></div>
       <div className="lock-band">⌗ &nbsp; LOCKED UNTIL 04 NOV 2026</div>
