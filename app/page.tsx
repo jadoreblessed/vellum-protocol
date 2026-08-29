@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LivingHero from "./components/LivingHero";
+import ScrollClock from "./components/ScrollClock";
 import TokenLogo from "./components/TokenLogo";
 import styles from "./home.module.css";
 
@@ -94,10 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.maturity}>
-        <div><span className={styles.index}>05 / BLOCK CLOCK</span><h2>Time is part<br />of the <em>instrument.</em></h2><p>Maturity cannot be edited, paused or hidden. The state changes when the chain says it does.</p><Link href="/maturity">Inspect maturity ↗</Link></div>
-        <div className={styles.clock}><div className={styles.clockRings}><i /><i /><i /></div><b>90</b><span>DAYS REMAINING</span><div className={styles.progress}><i /></div><footer><span>06 AUG 2026</span><span>04 NOV 2026</span></footer></div>
-      </section>
+      <ScrollClock />
 
       <section className={styles.docs}>
         <div className={styles.docsTop}><span className={styles.index}>06 / READ THE SYSTEM</span><h2>Nothing hidden.<br /><em>Every state legible.</em></h2><Link href="/docs">Open documentation ↗</Link></div>
