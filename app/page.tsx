@@ -2,6 +2,7 @@ import Link from "next/link";
 import ScrollReveal from "./components/ScrollReveal";
 import LiveCounter from "./components/LiveCounter";
 import TokenLogo from "./components/TokenLogo";
+import HeroParallax from "./components/HeroParallax";
 
 const notes = [
   { symbol: "$CASHCAT", name: "Cash Cat", color: "#218547", amount: "250,000", pnl: "+38.6%", term: "90 DAYS" },
@@ -36,12 +37,13 @@ function HeroScene() {
         <div className="hero-actions hero-reveal delay-three"><Link className="button acid" href="/app">Create a note <span>↗</span></Link><Link className="button" href="/how-it-works">See the flow</Link></div>
         <div className="hero-v2-meta mono hero-reveal delay-three"><span>01 / WRAP</span><span>02 / CARRY</span><span>03 / UNWRAP</span></div>
       </div>
-      <div className="hero-v2-art" aria-label="Animated Vellum bearer note preview">
-        <div className="hero-v2-token token-float token-float-one"><span>ERC-20</span><b>ORBIT</b><small>250,000</small></div>
+      <HeroParallax><div className="hero-v2-art" aria-label="Animated Vellum bearer note preview">
+        <div className="hero-v2-token token-float token-float-one"><span>ERC-20</span><b>CASHCAT</b><small>250,000</small></div>
         <div className="hero-v2-token token-float token-float-two"><span>NOTE / 000421</span><b>90 DAYS</b><small>TRANSFERABLE</small></div>
-        <div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
+        <div className="hero-v2-token token-float token-float-three"><span>NETWORK</span><b>ROBINHOOD</b><small>LIVE ROUTE</small></div>
+        <div className="hero-v2-signal mono">BLOCK 18,421 <i /> VERIFIED</div><div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
         <div className="hero-v2-caption mono"><span>LIVE INSTRUMENT</span><span>VLM / 001</span></div>
-      </div>
+      </div></HeroParallax>
     </div>
     <div className="hero-v2-scroll mono">SCROLL TO TRACE THE POSITION <span>↓</span></div>
   </section>;
