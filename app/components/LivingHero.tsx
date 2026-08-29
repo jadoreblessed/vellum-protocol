@@ -54,6 +54,8 @@ export default function LivingHero() {
         <div className={styles.world}>
           <div className={styles.horizon}><i /><i /><i /></div>
           <div className={styles.trackRig}>
+            <div className={`${styles.roller} ${styles.rollerStart}`}><i /></div>
+            <div className={`${styles.roller} ${styles.rollerEnd}`}><i /></div>
             <div className={styles.trackBed}>
               <div className={styles.railLeft} /><div className={styles.railRight} /><div className={styles.energyLane} />
               <div className={styles.sleepers} />
@@ -61,6 +63,8 @@ export default function LivingHero() {
                 <span><TokenLogo symbol={asset.symbol} color={asset.color} /></span><b>{asset.symbol}</b><small>{asset.amount}</small><i />
               </div>)}
             </div>
+            <div className={styles.conveyorEdge}><span>VELLUM ASSET ROUTE</span><i /><i /><i /></div>
+            <div className={styles.supports}><i /><i /><i /></div>
           </div>
 
           <div className={styles.vaultAssembly}>
