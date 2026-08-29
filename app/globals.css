@@ -55,3 +55,22 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 .hero-parallax{height:100%;width:100%;--hero-scroll:0}.hero-v2-art{transform:translate3d(0,calc(var(--hero-scroll) * -34px),0)}.hero-v2-copy{opacity:calc(1 - var(--hero-scroll) * .55);transform:translate3d(calc(var(--hero-scroll) * -16px),calc(var(--hero-scroll) * -12px),0);transition:opacity .15s linear,transform .15s linear}.hero-v2-signal{position:absolute;z-index:5;top:31%;left:-12%;right:-12%;display:flex;align-items:center;gap:12px;color:var(--acid);font-size:9px;letter-spacing:.16em;transform:rotate(-8deg);animation:heroSignal 5s ease-in-out infinite}.hero-v2-signal i{display:block;height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--acid),transparent);box-shadow:0 0 12px var(--acid)}.token-float-three{left:13%;bottom:17%;transform:rotate(5deg);animation:tokenFloatThree 7s ease-in-out infinite}.hero-v2-grid{animation:gridDrift 18s linear infinite}.hero-v2-video{opacity:.28;mix-blend-mode:multiply;filter:saturate(.7) contrast(.9)}.hero-v2:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:80px;background:linear-gradient(180deg,transparent,var(--paper));z-index:2;pointer-events:none}.hero-v2-scroll{animation:scrollHint 2.4s ease-in-out infinite}@keyframes heroSignal{0%,100%{transform:translateX(-8%) rotate(-8deg);opacity:.15}25%,75%{opacity:.75}50%{transform:translateX(8%) rotate(-8deg);opacity:1}}@keyframes tokenFloatThree{0%,100%{transform:rotate(5deg) translate(0,0)}50%{transform:rotate(-2deg) translate(-14px,12px)}}@keyframes scrollHint{50%{transform:translate(-50%,5px)}}
 @media(max-width:760px){.hero-v2-signal{top:34%;font-size:8px}.token-float-three{left:2%;bottom:20%;transform:scale(.82) rotate(5deg)}}
 @media(prefers-reduced-motion:reduce){.hero-v2-grid,.hero-v2-signal,.token-float-three,.hero-v2-scroll{animation:none!important}.hero-v2-copy,.hero-v2-art{transform:none!important;opacity:1!important}}
+
+/* Lighter visual rhythm for the primary storytelling sections. */
+.hero-v2{background:#f4f6f0}
+.hero-v2-video{opacity:.18}
+.hero-v2-grid{background-image:linear-gradient(rgba(16,17,18,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(16,17,18,.045) 1px,transparent 1px);mask-image:linear-gradient(90deg,rgba(0,0,0,.72),transparent 92%)}
+.issuance-section,.notes-section,.uses-section{position:relative;isolation:isolate;overflow:hidden}
+.issuance-section:before,.notes-section:before,.uses-section:before{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none}
+.issuance-section:after,.notes-section:after,.uses-section:after{content:'';position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(2px);animation:sectionFloat 12s ease-in-out infinite alternate}
+.issuance-section:before{background-image:linear-gradient(rgba(33,133,71,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(33,133,71,.055) 1px,transparent 1px);background-size:78px 78px;mask-image:linear-gradient(135deg,rgba(0,0,0,.9),transparent 64%)}
+.issuance-section:after{width:390px;height:390px;right:-150px;top:100px;background:radial-gradient(circle,rgba(0,200,5,.17),rgba(0,200,5,0) 68%)}
+.notes-section{background:linear-gradient(112deg,#eef3ee 0%,#f4f4ee 58%,#e9f0ea 100%)}
+.notes-section:before{background:radial-gradient(circle at 12% 18%,rgba(47,91,232,.11) 0 2px,transparent 3px),radial-gradient(circle at 78% 70%,rgba(33,133,71,.14) 0 2px,transparent 3px);background-size:34px 34px,42px 42px;opacity:.65}
+.notes-section:after{width:520px;height:220px;left:35%;bottom:-110px;background:radial-gradient(ellipse,rgba(47,91,232,.12),transparent 68%);animation-delay:-3s}
+.uses-section{background:#f1f0e8}
+.uses-section:before{background:linear-gradient(125deg,transparent 0 28%,rgba(199,67,44,.08) 28.1% 28.25%,transparent 28.35% 100%),repeating-linear-gradient(90deg,transparent 0 96px,rgba(16,17,18,.035) 97px,transparent 98px)}
+.uses-section:after{width:300px;height:300px;right:4%;top:8%;background:radial-gradient(circle,rgba(199,67,44,.13),transparent 68%);animation-delay:-6s}
+.issuance-section>.section-head,.issuance-section>.issuance-visual,.issuance-section>.steps,.notes-section>.section-head,.notes-section>.notes-grid,.uses-section>.section-head,.uses-section>.use-grid{position:relative;z-index:1}
+@keyframes sectionFloat{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-18px,12px,0) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.issuance-section:after,.notes-section:after,.uses-section:after{animation:none}}
