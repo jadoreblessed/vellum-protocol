@@ -36,12 +36,15 @@ function HeroScene() {
         <p className="hero-v2-description hero-reveal delay-two">A living position deserves a document. Lock the balance, carry the claim, and let the facts travel with it.</p>
         <div className="hero-actions hero-reveal delay-three"><Link className="button acid" href="/app">Create a note <span>↗</span></Link><Link className="button" href="/how-it-works">See the flow</Link></div>
         <div className="hero-v2-meta mono hero-reveal delay-three"><span>01 / WRAP</span><span>02 / CARRY</span><span>03 / UNWRAP</span></div>
+        <div className="hero-lifecycle mono hero-reveal delay-three"><span className="active"><b>01</b> CHOOSE TOKEN</span><i>→</i><span><b>02</b> SET TERM</span><i>→</i><span><b>03</b> ISSUE NOTE</span><i>→</i><span><b>04</b> TRANSFER CLAIM</span></div>
       </div>
       <HeroParallax><div className="hero-v2-art" aria-label="Animated Vellum bearer note preview">
         <div className="hero-v2-token token-float token-float-one"><span>ERC-20</span><b>CASHCAT</b><small>250,000</small></div>
         <div className="hero-v2-token token-float token-float-two"><span>NOTE / 000421</span><b>90 DAYS</b><small>TRANSFERABLE</small></div>
         <div className="hero-v2-token token-float token-float-three"><span>NETWORK</span><b>ROBINHOOD</b><small>LIVE ROUTE</small></div>
         <div className="hero-v2-signal mono">BLOCK 18,421 <i /> VERIFIED</div><div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
+        <div className="hero-live-readout mono"><span>POSITION <b><LiveCounter target={250000} comma /> CASHCAT</b></span><span>PNL <b>+38.6%</b></span><span>OWNER <b>BEARER</b></span></div>
+        <div className="hero-route mono" aria-hidden="true"><span className="route-dot active" /><i /><span className="route-dot" /><i /><span className="route-dot" /><i /><span className="route-dot" /></div>
         <div className="hero-v2-caption mono"><span>LIVE INSTRUMENT</span><span>VLM / 001</span></div>
       </div></HeroParallax>
     </div>
