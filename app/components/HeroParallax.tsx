@@ -17,5 +17,20 @@ export default function HeroParallax({ children }: { children: React.ReactNode }
     update(); window.addEventListener("scroll", onScroll, { passive: true }); window.addEventListener("resize", onScroll);
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); if (frame) cancelAnimationFrame(frame); };
   }, []);
-  return <div ref={ref} className="hero-parallax">{children}</div>;
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const node = ref.current;
+    if (!node) return;
+    const bounds = node.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    node.style.setProperty("--hero-pointer-x", x.toFixed(3));
+    node.style.setProperty("--hero-pointer-y", y.toFixed(3));
+  };
+  const handlePointerLeave = () => {
+    const node = ref.current;
+    if (!node) return;
+    node.style.setProperty("--hero-pointer-x", "0");
+    node.style.setProperty("--hero-pointer-y", "0");
+  };
+  return <div ref={ref} className="hero-parallax" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>{children}</div>;
 }
