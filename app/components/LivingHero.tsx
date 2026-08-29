@@ -5,100 +5,89 @@ import { useEffect, useRef } from "react";
 import TokenLogo from "./TokenLogo";
 import styles from "./LivingHero.module.css";
 
+const assets = [
+  { symbol: "$CASHCAT", amount: "250K", color: "#147b43", className: styles.podOne },
+  { symbol: "$PONS", amount: "1.2M", color: "#315eea", className: styles.podTwo },
+  { symbol: "$IF", amount: "4M", color: "#cf452f", className: styles.podThree },
+];
+
 export default function LivingHero() {
-  const scene = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const node = scene.current;
-    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const hero = heroRef.current;
+    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let frame = 0;
     const move = (event: PointerEvent) => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const rect = node.getBoundingClientRect();
-        node.style.setProperty("--mx", `${(event.clientX - rect.left) / rect.width - 0.5}`);
-        node.style.setProperty("--my", `${(event.clientY - rect.top) / rect.height - 0.5}`);
+        const rect = hero.getBoundingClientRect();
+        hero.style.setProperty("--mx", String((event.clientX - rect.left) / rect.width - 0.5));
+        hero.style.setProperty("--my", String((event.clientY - rect.top) / rect.height - 0.5));
       });
     };
-    const reset = () => {
-      node.style.setProperty("--mx", "0");
-      node.style.setProperty("--my", "0");
-    };
-    node.addEventListener("pointermove", move);
-    node.addEventListener("pointerleave", reset);
+    const reset = () => { hero.style.setProperty("--mx", "0"); hero.style.setProperty("--my", "0"); };
+    hero.addEventListener("pointermove", move);
+    hero.addEventListener("pointerleave", reset);
     return () => {
       cancelAnimationFrame(frame);
-      node.removeEventListener("pointermove", move);
-      node.removeEventListener("pointerleave", reset);
+      hero.removeEventListener("pointermove", move);
+      hero.removeEventListener("pointerleave", reset);
     };
   }, []);
 
   return (
-    <section className={styles.hero} ref={scene}>
-      <div className={styles.mesh} aria-hidden="true" />
-      <div className={styles.hypnotic} aria-hidden="true">
-        <i /><i /><i /><i />
-        <span className={styles.lensOne} /><span className={styles.lensTwo} />
-      </div>
-      <svg className={styles.cord} viewBox="0 0 1600 900" fill="none" aria-hidden="true">
-        <defs>
-          <filter id="living-rope" x="-15%" y="-20%" width="130%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.018" numOctaves="2" seed="8" result="noise">
-              <animate attributeName="baseFrequency" dur="7s" values="0.006 0.018;0.009 0.012;0.006 0.018" repeatCount="indefinite" />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="B" />
-          </filter>
-        </defs>
-        <g filter="url(#living-rope)">
-        <path className={styles.cordShadow} d="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" />
-        <path className={styles.cordBase} d="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" />
-        <path className={styles.cordHighlight} d="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" />
-        <path className={styles.cordPulse} d="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" />
-        </g>
-        <circle className={styles.signalBead} r="11"><animateMotion dur="5.5s" repeatCount="indefinite" path="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" /></circle>
-        <circle className={styles.signalBeadSmall} r="5"><animateMotion begin="-2.2s" dur="5.5s" repeatCount="indefinite" path="M-80 670C170 610 240 265 530 330C780 386 687 762 1005 705C1284 654 1204 185 1680 130" /></circle>
-      </svg>
-
-      <div className={styles.heroInner}>
-        <div className={styles.copy}>
-          <div className={styles.kicker}><span>Robinhood Chain</span><i /> Live bearer instruments</div>
-          <h1>Positions<br />were static.<br /><em>Not anymore.</em></h1>
-          <p>Vellum turns a token balance into a portable onchain note — priced, timed and ready to move without selling the underlying position.</p>
-          <div className={styles.actions}>
-            <Link href="/app" className={styles.primary}>Build a note <span>↗</span></Link>
-            <Link href="/how-it-works" className={styles.secondary}>Trace the lifecycle</Link>
-          </div>
-          <div className={styles.proof}>
-            <span><b>01</b> Vaulted</span><span><b>02</b> Transferable</span><span><b>03</b> Claimable</span>
-          </div>
+    <section className={styles.hero} ref={heroRef}>
+      <div className={styles.atmosphere} aria-hidden="true"><i /><i /><i /><i /><i /></div>
+      <div className={styles.copy}>
+        <div className={styles.kicker}><span /> Robinhood Chain · Live route</div>
+        <h1>Positions<br />enter here.<br /><em>Claims move.</em></h1>
+        <p>Vellum routes a real token balance into an immutable vault and sends its ownership forward as a portable onchain instrument.</p>
+        <div className={styles.actions}>
+          <Link href="/app" className={styles.primary}>Route a position <span>↗</span></Link>
+          <Link href="/how-it-works" className={styles.secondary}>Watch the lifecycle</Link>
         </div>
-
-        <div className={styles.stage} aria-label="Live Vellum note preview">
-          <div className={`${styles.floatTag} ${styles.tagTop}`}><span>MARK</span><b>$0.1206</b><small>+2.41% TODAY</small></div>
-          <div className={`${styles.floatTag} ${styles.tagSide}`}><span>OWNER</span><b>0x7C...91BE</b><small>NOTE HOLDER</small></div>
-          <div className={styles.noteShadow} />
-          <article className={styles.note}>
-            <div className={styles.noteHead}><b>vellum</b><span>BEARER POSITION</span><span>№ 000421</span></div>
-            <div className={styles.tokenBand}>
-              <div className={styles.logo}><TokenLogo symbol="$CASHCAT" color="#147b43" /></div>
-              <div><small>UNDERLYING</small><strong>$CASHCAT</strong><span>Cash Cat · Robinhood</span></div>
-              <i>LIVE</i>
-            </div>
-            <div className={styles.amountLabel}>POSITION</div>
-            <div className={styles.amount}>250,000 <small>CASHCAT</small></div>
-            <div className={styles.price}>≈ $30,150 <span>AT MARK</span></div>
-            <div className={styles.stats}>
-              <div><span>ENTRY</span><b>$0.0870</b></div><div><span>MARK</span><b>$0.1206</b></div><div><span>PNL</span><b className={styles.positive}>+38.6%</b></div>
-            </div>
-            <div className={styles.lock}><span>⌗</span><b>LOCKED UNTIL 04 NOV 2026</b><small>SEALED</small></div>
-            <div className={styles.noteBottom}><span>90 DAY TERM</span><span>PAYABLE TO BEARER</span></div>
-          </article>
-          <div className={styles.scan} />
-          <div className={styles.routeLabel}><span /> ERC-721 CLAIM IN MOTION</div>
-        </div>
+        <div className={styles.metrics}><span><b>$119.2M</b> routed value</span><span><b>18,421</b> live block</span><span><b>12s</b> finality</span></div>
       </div>
 
-      <div className={styles.bottomRail}><span>VLM / 001</span><span>POSITION → NOTE → WALLET → CLAIM</span><span>SCROLL TO EXPLORE ↓</span></div>
+      <div className={styles.viewport} aria-label="A live token route entering the Vellum vault">
+        <div className={styles.world}>
+          <div className={styles.horizon}><i /><i /><i /></div>
+          <div className={styles.trackRig}>
+            <div className={styles.trackBed}>
+              <div className={styles.railLeft} /><div className={styles.railRight} /><div className={styles.energyLane} />
+              <div className={styles.sleepers} />
+              {assets.map(asset => <div className={`${styles.assetPod} ${asset.className}`} key={asset.symbol}>
+                <span><TokenLogo symbol={asset.symbol} color={asset.color} /></span><b>{asset.symbol}</b><small>{asset.amount}</small><i />
+              </div>)}
+            </div>
+          </div>
+
+          <div className={styles.vaultAssembly}>
+            <div className={styles.vaultHalo}><i /><i /><i /></div>
+            <div className={styles.vaultCube}>
+              <div className={styles.vaultTop}><span>VLM // ROUTER</span></div>
+              <div className={styles.vaultSide}><span>VAULT 01</span></div>
+              <div className={styles.vaultFront}>
+                <div className={styles.aperture}><i /><i /><b>V</b></div>
+                <span>POSITION IN CUSTODY</span><strong>250,000 CASHCAT</strong><small>IMMUTABLE · VERIFIED</small>
+              </div>
+            </div>
+            <div className={styles.intakeGlow} />
+          </div>
+
+          <div className={styles.claimRoute}>
+            <div className={styles.routeTube}><i /><i /></div>
+            <div className={styles.claimCapsule}><span>ERC-721</span><b>CLAIM / 000421</b><small>IN MOTION →</small></div>
+            <div className={styles.walletNode}><span>WALLET B</span><b>0x7C...91BE</b><i>RECEIVING</i></div>
+          </div>
+
+          <div className={styles.telemetry}>
+            <span><i /> INTAKE OPEN</span><span>TERM 90D</span><span>ROUTE 0.84s</span>
+          </div>
+        </div>
+      </div>
+      <div className={styles.scrollRail}><span>VELLUM ROUTING LAYER</span><i /><span>SCROLL TO ENTER THE SYSTEM ↓</span></div>
     </section>
   );
 }
