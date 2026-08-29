@@ -39,10 +39,14 @@ function HeroScene() {
         <div className="hero-lifecycle mono hero-reveal delay-three"><span className="active"><b>01</b> CHOOSE TOKEN</span><i>→</i><span><b>02</b> SET TERM</span><i>→</i><span><b>03</b> ISSUE NOTE</span><i>→</i><span><b>04</b> TRANSFER CLAIM</span></div>
       </div>
       <HeroParallax><div className="hero-v2-art" aria-label="Animated Vellum bearer note preview">
+        <div className="hero-assembly-label label-token mono"><span>01</span> TOKEN SELECTED</div>
+        <div className="hero-assembly-label label-term mono"><span>02</span> TERM SEALED</div>
+        <div className="hero-assembly-label label-claim mono"><span>03</span> CLAIM READY</div>
         <div className="hero-v2-token token-float token-float-one"><span>ERC-20</span><b>CASHCAT</b><small>250,000</small></div>
         <div className="hero-v2-token token-float token-float-two"><span>NOTE / 000421</span><b>90 DAYS</b><small>TRANSFERABLE</small></div>
         <div className="hero-v2-token token-float token-float-three"><span>NETWORK</span><b>ROBINHOOD</b><small>LIVE ROUTE</small></div>
         <div className="hero-v2-signal mono">BLOCK 18,421 <i /> VERIFIED</div><div className="hero-note-shadow" /><div className="hero-note-card"><NoteCard note={notes[0]} /></div>
+        <div className="hero-card-scan" aria-hidden="true" /><div className="hero-assembly-stamp mono">INSTRUMENT<br/><b>ASSEMBLED</b></div>
         <div className="hero-live-readout mono"><span>POSITION <b><LiveCounter target={250000} /> CASHCAT</b></span><span>PNL <b>+38.6%</b></span><span>OWNER <b>BEARER</b></span></div>
         <div className="hero-route mono" aria-hidden="true"><span className="route-dot active" /><i /><span className="route-dot" /><i /><span className="route-dot" /><i /><span className="route-dot" /></div>
         <div className="hero-v2-caption mono"><span>LIVE INSTRUMENT</span><span>VLM / 001</span></div>
