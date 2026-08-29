@@ -194,6 +194,14 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 @media(prefers-reduced-motion:reduce){.hero-lifecycle i,.hero-live-readout,.hero-route i,.hero-route .route-dot.active{animation:none}.hero-v2-art,.hero-note-card,.hero-note-card .note{transition:none;transform:none;margin-left:0}}
 .social-link{display:inline-flex;align-items:center;gap:8px;color:var(--paper);transition:color .25s ease,transform .25s ease}.social-link svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7}.social-link:hover{color:var(--acid);transform:translateY(-2px)}
 
+/* Shared V3 typography: internal routes now use the same type system as the landing page. */
+:root{--serif:var(--font-display),Arial,sans-serif;--sans:var(--font-body),Arial,sans-serif;--mono:var(--font-mono),monospace}
+body{font-family:var(--font-body),Arial,sans-serif}
+.doc-title,.app-title,.section-title{font-family:var(--font-display),Arial,sans-serif!important;font-style:normal;letter-spacing:-.065em}
+.doc-title em,.app-title em,.section-title em{font-family:inherit!important;font-style:normal}
+.doc-copy,.app-copy,.section-intro,.doc-card p{font-family:var(--font-body),Arial,sans-serif}
+.doc-shell .wordmark,.app-shell .wordmark{font-family:var(--font-display),Arial,sans-serif;letter-spacing:-.08em}
+
 /* Sequential hero assembly: the instrument is built in the air before it settles. */
 .hero-assembly-label{position:absolute;z-index:5;color:#748078;font-size:8px;letter-spacing:.14em;opacity:0;animation:assemblyLabel .65s ease-out forwards}
 .hero-assembly-label span{color:var(--acid);margin-right:7px}
