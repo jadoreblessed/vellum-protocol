@@ -50,40 +50,36 @@ export default function LivingHero() {
         <div className={styles.metrics}><span><b>$119.2M</b> routed value</span><span><b>18,421</b> live block</span><span><b>12s</b> finality</span></div>
       </div>
 
-      <div className={styles.viewport} aria-label="A live token route entering the Vellum vault">
+      <div className={styles.viewport} aria-label="An interactive Vellum vault preserving token ownership">
         <div className={styles.world}>
           <div className={styles.horizon}><i /><i /><i /></div>
-          <div className={styles.trackRig}>
-            <div className={`${styles.roller} ${styles.rollerStart}`}><i /></div>
-            <div className={`${styles.roller} ${styles.rollerEnd}`}><i /></div>
-            <div className={styles.trackBed}>
-              <div className={styles.railLeft} /><div className={styles.railRight} /><div className={styles.energyLane} />
-              <div className={styles.sleepers} />
-              {assets.map(asset => <div className={`${styles.assetPod} ${asset.className}`} key={asset.symbol}>
-                <span><TokenLogo symbol={asset.symbol} color={asset.color} /></span><b>{asset.symbol}</b><small>{asset.amount}</small><i />
-              </div>)}
+          <div className={styles.vaultScene}>
+            <div className={styles.sceneLabel}><span>LIVE INSTRUMENT</span><b>01 / 03</b></div>
+            <div className={styles.intakePort}>
+              <span>POSITION IN</span><b>$CASHCAT</b><i />
+              <div className={styles.intakeToken}><TokenLogo symbol="$CASHCAT" color="#147b43" /></div>
             </div>
-            <div className={styles.conveyorEdge}><span>VELLUM ASSET ROUTE</span><i /><i /><i /></div>
-            <div className={styles.supports}><i /><i /><i /></div>
-          </div>
-
-          <div className={styles.vaultAssembly}>
-            <div className={styles.vaultHalo}><i /><i /><i /></div>
-            <div className={styles.vaultCube}>
-              <div className={styles.vaultTop}><span>VLM // ROUTER</span></div>
-              <div className={styles.vaultSide}><span>VAULT 01</span></div>
-              <div className={styles.vaultFront}>
-                <div className={styles.aperture}><i /><i /><b>V</b></div>
-                <span>POSITION IN CUSTODY</span><strong>250,000 CASHCAT</strong><small>IMMUTABLE · VERIFIED</small>
+            <div className={styles.vaultAssembly}>
+              <div className={styles.vaultHalo}><i /><i /><i /></div>
+              <div className={styles.vaultCube}>
+                <div className={styles.vaultTop}><span>VLM // ROUTER</span></div>
+                <div className={styles.vaultSide}><span>VAULT 01</span></div>
+                <div className={styles.vaultFront}>
+                  <div className={styles.aperture}><i /><i /><b>V</b></div>
+                  <span>POSITION IN CUSTODY</span><strong>250,000 CASHCAT</strong><small>IMMUTABLE · VERIFIED</small>
+                </div>
               </div>
+              <div className={styles.intakeGlow} />
+              <div className={`${styles.vaultLayer} ${styles.layerOne}`} />
+              <div className={`${styles.vaultLayer} ${styles.layerTwo}`} />
             </div>
-            <div className={styles.intakeGlow} />
-          </div>
-
-          <div className={styles.claimRoute}>
-            <div className={styles.routeTube}><i /><i /></div>
-            <div className={styles.claimCapsule}><span>ERC-721</span><b>CLAIM / 000421</b><small>IN MOTION →</small></div>
-            <div className={styles.walletNode}><span>WALLET B</span><b>0x7C...91BE</b><i>RECEIVING</i></div>
+            <div className={styles.claimRoute}>
+              <div className={styles.routeTube}><i /><i /></div>
+              <div className={styles.claimCapsule}><span>ERC-721</span><b>CLAIM / 000421</b><small>IN MOTION →</small></div>
+              <div className={styles.walletNode}><span>WALLET B</span><b>0x7C...91BE</b><i>RECEIVING</i></div>
+            </div>
+            <div className={styles.routeLabel}><span>OWNERSHIP ROUTE</span><i /><b>TRANSFERABLE CLAIM</b></div>
+            <div className={styles.readout}><span>VAULT STATE</span><b>SEALED</b><i>03 / 03</i></div>
           </div>
 
           <div className={styles.telemetry}>
