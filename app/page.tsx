@@ -4,9 +4,9 @@ import LiveCounter from "./components/LiveCounter";
 import TokenLogo from "./components/TokenLogo";
 
 const notes = [
-  { symbol: "$ORBIT", name: "Orbit", color: "#176b57", amount: "250,000", pnl: "+38.6%", term: "90 DAYS" },
-  { symbol: "$MOTE", name: "Mote", color: "#d15d35", amount: "1,200,000", pnl: "−11.3%", term: "30 DAYS" },
-  { symbol: "$INDEX", name: "Index", color: "#5d49c8", amount: "4,000,000", pnl: "+85.7%", term: "365 DAYS" },
+  { symbol: "$CASHCAT", name: "Cash Cat", color: "#218547", amount: "250,000", pnl: "+38.6%", term: "90 DAYS" },
+  { symbol: "$PONS", name: "Pons", color: "#2f5be8", amount: "1,200,000", pnl: "−11.3%", term: "30 DAYS" },
+  { symbol: "$IF", name: "What IF", color: "#c7432c", amount: "4,000,000", pnl: "+85.7%", term: "365 DAYS" },
 ];
 
 function NoteCard({ note, compact = false }: { note: typeof notes[number]; compact?: boolean }) {
