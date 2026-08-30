@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LivingHero from "./components/LivingHero";
+import CinematicHero from "./components/CinematicHero";
 import PositionLab from "./components/PositionLab";
 import ScrollClock from "./components/ScrollClock";
 import TokenLogo from "./components/TokenLogo";
@@ -34,7 +34,7 @@ export default function Home() {
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
         <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
       </header>
-      <LivingHero />
+      <CinematicHero />
 
       <section className={styles.signalRail} aria-label="Network status">
         <div><span className={styles.liveDot} /> Network live</div><div>18,421 block</div><div>$119.2m tracked</div><div>12s finality</div><div>ERC-20 → ERC-721</div>
