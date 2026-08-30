@@ -106,20 +106,13 @@ export default function AppPage() {
       </header>
 
       <div className="app-main">
-        <div className="wallet-bar">
-          {address ? <><span className="live-dot" /> WALLET CONNECTED <b>{shorten(address)}</b><span>{balance || "Reading balance..."}</span></> : <span>Connect a wallet to read balances and create a real note.</span>}
-        </div>
         {error && <div className="wallet-error">{error}</div>}
 
         <div className="app-layout">
           <section className="app-form-panel">
-            <div className="eyebrow mono">{tab === "wrap" ? "WRAP" : "NOTEBOOK"}</div>
             <h1 className="app-title">
               {tab === "wrap" ? <>Lock a token,<br/><em>hold the note.</em></> : <>Your notes<br/><em>carry the claim.</em></>}
             </h1>
-            <p className="app-copy">
-              {tab === "wrap" ? "One deposit, one note. The amount recorded is the balance the vault actually receives." : "Transferable positions, rendered with the complete facts of the underlying deposit."}
-            </p>
             <div className="tabs">
               <button className={`tab ${tab === "notes" ? "active" : ""}`} onClick={() => setTab("notes")}>Notes</button>
               <button className={`tab ${tab === "wrap" ? "active" : ""}`} onClick={() => setTab("wrap")}>Wrap</button>
@@ -164,21 +157,19 @@ export default function AppPage() {
             {tab === "wrap" ? (
               <div className="note-wrap app-note">
                 <article className="note">
-                  <div className="note-top"><strong>vellum<span>.</span></strong><span>BEARER NOTE · ERC-721</span><b>W/ ......</b></div>
+                  <div className="note-top"><strong>vellum<span>.</span></strong><b>W / 421</b></div>
                   <div className="note-band" style={{ background: token.color }}>
                     <div className="token-icon"><TokenLogo symbol={token.symbol} color={token.color}/></div>
-                    <div><div className="token-symbol">{token.symbol}</div><div>{token.name}</div><div className="token-meta">{network.toUpperCase()} · ERC-20</div></div>
+                    <div><div className="token-symbol">{token.symbol}</div><div className="token-name">{token.name}</div></div>
                   </div>
                   <div className="empty-card deposit-state" style={{ height: 220, margin: "15px 0" }}>
                     <span className="deposit-orbit"><i /><i /><b>V</b></span>
-                    <strong>Awaiting deposit</strong>
-                    <small>Connect wallet → choose token → seal position</small>
+                    <strong>{address ? "Ready to seal" : "Connect to seal"}</strong>
                   </div>
-                  <div className="note-foot"><span>PAYABLE TO BEARER</span><span>0x020b...18B4</span></div>
+                  <div className="note-foot"><span>TRANSFERABLE CLAIM</span><b>{term === "NONE" ? "OPEN" : term}</b></div>
                 </article>
               </div>
             ) : <div className="empty-card">NO NOTES YET</div>}
-            <div className="preview-caption mono">preview · same render path as the onchain note</div>
           </section>
         </div>
       </div>
