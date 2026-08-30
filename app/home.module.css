@@ -42,6 +42,13 @@
 @media(max-width:900px){.nav{top:12px}.nav nav{display:none}.nav{grid-template-columns:1fr auto}.market,.useCases,.flow,.lab,.docs{padding-left:22px;padding-right:22px}.sectionIntro,.labCopy{grid-template-columns:1fr;gap:24px}.instrumentGrid{grid-template-columns:1fr;max-width:620px}.instrument{border-right:0;border-bottom:1px solid var(--line)}.instrument:last-child{border-bottom:0}.flowSteps{grid-template-columns:1fr 1fr}.flowSteps article:nth-child(2){border-right:0}.flowSteps article:nth-child(n+3){border-top:1px solid var(--line)}.builder{grid-template-columns:1fr}.builderControls{border-right:0;border-bottom:1px solid var(--line)}.builderScene{min-height:540px}.docsTop{grid-template-columns:1fr}.docsTop>a{justify-self:start}}
 @media(max-width:620px){.nav{width:calc(100% - 24px);height:56px;padding-left:18px}.wordmark{font-size:23px}.launch{padding:10px 14px;font-size:12px}.launch span{display:none}.market,.useCases,.flow,.lab,.docs{padding-top:100px;padding-bottom:100px}.sectionIntro h2,.flowSticky h2,.labCopy h2,.maturityCopy h2,.docsTop h2{font-size:clamp(48px,14vw,70px)}.instrument{min-height:370px;padding:22px}.flowSteps{grid-template-columns:1fr}.flowSteps article{min-height:285px;border-right:0;border-top:1px solid var(--line)}.flowSteps article:first-child{border-top:0}.maturitySticky{padding:72px 22px}.docs{padding-bottom:0}.footer{grid-template-columns:1fr}.footer>div:first-child{grid-column:auto}}
 
+/* One large terminal scene instead of a grid of floating product cards. */
+.marketWorld{position:relative;min-height:620px;padding:100px 42px 44px;overflow:hidden;border-radius:22px;border:1px solid var(--line);background:#040705;isolation:isolate}
+.marketLandscape{position:absolute;z-index:-1;inset:auto -3% -20% auto;width:110%;height:auto;opacity:.82;filter:saturate(.82) contrast(1.04)}
+.marketWorld:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,#030603 0%,rgba(3,6,3,.88) 35%,rgba(3,6,3,.1) 72%,#030603 100%)}
+.marketWorld .instrumentGrid{position:relative;max-width:100%;border-color:rgba(238,249,235,.2);background:rgba(4,8,5,.78);backdrop-filter:blur(10px);box-shadow:0 32px 80px rgba(0,0,0,.42)}
+@media(max-width:900px){.marketWorld{min-height:0;padding:28px 18px 46px}.marketLandscape{width:170%;max-width:none;right:-40%;bottom:-5%;opacity:.62}}
+
 /* Interactive position lab: scroll assembles the layers, pointer adds restrained depth. */
 .lab{
   --lab-progress:.35;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import CinematicHero from "./components/CinematicHero";
 import PositionLab from "./components/PositionLab";
 import ScrollClock from "./components/ScrollClock";
@@ -45,7 +46,10 @@ export default function Home() {
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
-        <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+        <div className={styles.marketWorld}>
+          <Image className={styles.marketLandscape} src="/brand/terminal-fibreworld.png" alt="" width={1536} height={864} />
+          <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+        </div>
       </section>
 
       <section className={styles.flow} id="how">

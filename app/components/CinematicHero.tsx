@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import styles from "./CinematicHero.module.css";
 
@@ -92,7 +93,7 @@ export default function CinematicHero() {
   return (
     <section className={styles.hero} ref={sectionRef}>
       <video className={styles.video} autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
-        <source src="/hero-motion.mp4" type="video/mp4" />
+        <source src="/brand/hero-fibre-field-loop.mp4" type="video/mp4" />
       </video>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
@@ -108,11 +109,7 @@ export default function CinematicHero() {
 
         <div className={styles.object} aria-label="A sealed Vellum position">
           <div className={styles.halo} />
-          <div className={styles.sealShadow} />
-          <div className={styles.seal}>
-            <div className={styles.sealInner}><b>V</b><span>VELLUM</span></div>
-          </div>
-          <div className={styles.ribbon} /><div className={styles.ribbonBack} />
+          <Image className={styles.ticketAsset} src="/brand/hero-ticket-sculpture.png" alt="" width={1024} height={1536} priority />
         </div>
       </div>
       <div className={styles.bottomFade} aria-hidden="true" />
