@@ -24,7 +24,14 @@ export default function LivingHero() {
       if (disposed) return;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      let renderer: InstanceType<typeof THREE.WebGLRenderer>;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      } catch {
+        hero.dataset.webgl = "fallback";
+        return;
+      }
+      hero.dataset.webgl = "ready";
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.55));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -364,6 +371,26 @@ export default function LivingHero() {
   return (
     <section className={styles.hero} ref={heroRef}>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
+      <div className={styles.fallbackArtifact} aria-hidden="true">
+        <svg className={styles.fallbackCord} viewBox="0 0 1200 700" fill="none">
+          <defs>
+            <linearGradient id="cord-dark" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#020f0a"/><stop offset=".48" stopColor="#0b5d36"/><stop offset="1" stopColor="#01140b"/></linearGradient>
+            <linearGradient id="cord-green" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#8effaa"/><stop offset=".46" stopColor="#00bd59"/><stop offset="1" stopColor="#006633"/></linearGradient>
+            <filter id="cord-shadow"><feDropShadow dx="0" dy="18" stdDeviation="13" floodColor="#07562f" floodOpacity=".22"/></filter>
+          </defs>
+          <path className={styles.cordDark} d="M-90 490 C130 690 250 100 520 280 C760 440 820 70 1280 210" stroke="url(#cord-dark)" strokeWidth="46" strokeLinecap="round" filter="url(#cord-shadow)"/>
+          <path className={styles.cordGreen} d="M-90 490 C130 690 250 100 520 280 C760 440 820 70 1280 210" stroke="url(#cord-green)" strokeWidth="25" strokeLinecap="round"/>
+          <path className={styles.cordHighlight} d="M-90 484 C130 684 250 94 520 274 C760 434 820 64 1280 204" stroke="rgba(232,255,237,.7)" strokeWidth="4" strokeLinecap="round"/>
+        </svg>
+        <div className={styles.fallbackSeal}><span><b>V</b><small>VELLUM</small></span></div>
+        <div className={styles.fallbackNote}>
+          <header><b>vellum</b><span>BEARER NOTE · W/000421</span></header>
+          <div className={styles.fallbackBand}><i /> <span><b>$CASHCAT</b><small>ROBINHOOD CHAIN</small></span></div>
+          <main><small>POSITION</small><strong>250,000</strong><span>≈ $30,150 AT MARK</span></main>
+          <footer><span>ENTRY <b>$0.0870</b></span><span>TERM <b>90 DAYS</b></span></footer>
+          <aside>SEALED UNTIL 04 NOV 2026</aside>
+        </div>
+      </div>
       <div className={styles.ambient} aria-hidden="true"><i /><i /><i /></div>
 
       <div className={styles.copy}>
