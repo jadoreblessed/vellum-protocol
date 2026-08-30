@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LivingHero from "./components/LivingHero";
+import PositionLab from "./components/PositionLab";
 import ScrollClock from "./components/ScrollClock";
 import TokenLogo from "./components/TokenLogo";
 import styles from "./home.module.css";
@@ -60,30 +61,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.lab}>
-        <div className={styles.labGlow} />
-        <div className={styles.labHeader}><span className={styles.index}>03 / POSITION LAB</span><span><i className={styles.liveDot} /> Live preview</span></div>
-        <div className={styles.labCopy}><h2>Pick the facts.<br /><em>Watch the note form.</em></h2><p>A product preview that behaves like the app: token, amount and time become a single transferable object.</p></div>
-        <div className={styles.builder}>
-          <div className={styles.builderControls}>
-            <div className={styles.controlLabel}><span>UNDERLYING TOKEN</span><b>01</b></div>
-            <div className={styles.tokenChoice}><span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span><div><b>$CASHCAT</b><small>Cash Cat</small></div><em>SELECTED</em></div>
-            <label><span>POSITION AMOUNT</span><b>250,000</b><i>CASHCAT</i></label><label><span>LOCK TERM</span><b>90</b><i>DAYS</i></label>
-            <div className={styles.builderStatus}><span>ENTRY MARK</span><b>$0.0870</b><span>EST. VALUE</span><b>$30,150</b></div>
-            <Link href="/app" className={styles.buildButton}>Continue in app <span>↗</span></Link>
-          </div>
-          <div className={styles.builderScene}>
-            <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
-            <div className={styles.miniNote}>
-              <div><b>vellum</b><span>BEARER NOTE · 000421</span></div>
-              <header><TokenLogo symbol="$CASHCAT" color="#147b43" /><span><small>ROBINHOOD CHAIN</small><b>$CASHCAT</b></span></header>
-              <main><small>POSITION</small><strong>250,000</strong><p>≈ $30,150 &nbsp; AT MARK</p></main>
-              <footer><span>ENTRY <b>$0.0870</b></span><span>TERM <b>90 DAYS</b></span></footer><aside>LOCKED UNTIL 04 NOV 2026</aside>
-            </div>
-            <div className={styles.builderScan}>INSTRUMENT ASSEMBLED</div>
-          </div>
-        </div>
-      </section>
+      <PositionLab />
 
       <section className={styles.useCases}>
         <div className={styles.sectionIntro}>
