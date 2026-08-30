@@ -203,6 +203,80 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 @media(prefers-reduced-motion:reduce){.hero-lifecycle i,.hero-live-readout,.hero-route i,.hero-route .route-dot.active{animation:none}.hero-v2-art,.hero-note-card,.hero-note-card .note{transition:none;transform:none;margin-left:0}}
 .social-link{display:inline-flex;align-items:center;gap:8px;color:var(--paper);transition:color .25s ease,transform .25s ease}.social-link svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7}.social-link:hover{color:var(--acid);transform:translateY(-2px)}
 
+/* Launch app V4: same typography and material language as the landing page. */
+.app-shell{
+  min-height:100svh;
+  background:
+    radial-gradient(circle at 88% 22%,rgba(0,200,91,.08),transparent 28%),
+    radial-gradient(circle at 12% 72%,rgba(193,255,78,.055),transparent 26%),
+    linear-gradient(135deg,#f7f8f2,#eef3ed);
+}
+.app-shell:before{content:"";position:fixed;z-index:0;inset:72px 0 0;pointer-events:none;background-image:linear-gradient(rgba(20,38,25,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(20,38,25,.035) 1px,transparent 1px);background-size:76px 76px;mask-image:linear-gradient(90deg,#000,transparent 82%)}
+.app-shell .app-nav{position:relative;z-index:10;height:82px;padding:0 clamp(22px,3.6vw,72px);background:rgba(248,249,243,.87);backdrop-filter:blur(18px);border-bottom-color:rgba(20,38,25,.16)}
+.app-shell .app-nav .wordmark{font:700 29px/.8 var(--font-display),Arial,sans-serif!important;letter-spacing:-.095em!important}
+.app-shell .app-nav .wordmark:after{display:none}
+.app-shell .app-nav .wordmark span,.app-shell .note-top strong span{color:#00bd58}
+.app-shell .app-nav-right{gap:12px}
+.app-shell .app-nav .button{padding:14px 19px;background:rgba(255,255,250,.5);font:650 9px var(--font-mono),monospace}
+.app-shell .app-nav .button:hover{background:#11140f}
+.app-shell .wallet{min-height:48px;padding:13px 19px;background:#11140f;color:#f8faf4;border:1px solid #11140f;box-shadow:6px 6px 0 #00c45a;font:650 10px var(--font-mono),monospace;letter-spacing:.04em;transition:transform .25s ease,box-shadow .25s ease}
+.app-shell .wallet:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #00c45a}
+.app-shell .wallet small{color:#afbbb1}
+.app-shell .app-main{position:relative;z-index:1;width:min(1470px,calc(100% - 64px));padding:68px 0 110px}
+.app-shell .wallet-bar{min-height:56px;margin-bottom:54px;padding:12px 16px;border:1px solid rgba(20,38,25,.18);background:rgba(250,251,246,.64);backdrop-filter:blur(12px);justify-content:center;text-align:center;font-size:9px}
+.app-shell .app-layout{grid-template-columns:minmax(0,1.03fr) minmax(430px,.8fr);gap:clamp(70px,8vw,140px)}
+.app-shell .app-form-panel{position:relative;padding:35px 0 30px}
+.app-shell .app-form-panel:before{content:"";position:absolute;z-index:-1;width:230px;height:230px;left:-110px;top:-60px;border:1px solid rgba(0,189,88,.13);border-radius:50%;box-shadow:0 0 0 34px rgba(0,189,88,.025),0 0 0 72px rgba(0,189,88,.018);animation:appOrbit 18s linear infinite}
+.app-shell .eyebrow{color:#647068;font:600 8px var(--font-mono),monospace;letter-spacing:.15em}
+.app-shell .app-title{margin:24px 0 29px;font:700 clamp(62px,5.5vw,92px)/.86 var(--font-display),Arial,sans-serif!important;letter-spacing:-.078em!important}
+.app-shell .app-title em{color:#00ad50;font-style:normal!important}
+.app-shell .app-copy{max-width:630px;color:#59655c;font:500 17px/1.58 var(--font-body),Arial,sans-serif}
+.app-shell .tabs{gap:31px;margin:44px 0 39px;border-bottom-color:rgba(20,38,25,.2)}
+.app-shell .tab{padding:0 0 13px;font:650 11px var(--font-mono),monospace;letter-spacing:.06em;text-transform:uppercase}
+.app-shell .tab.active{border-bottom-color:#00bd58;color:#00a94e}
+.app-shell .form-label{margin:23px 0 9px;color:#5d6b61;font:600 8px var(--font-mono),monospace;letter-spacing:.13em;text-transform:uppercase}
+.app-shell .field{min-height:58px;padding:16px 18px;background:rgba(251,251,246,.77);border-color:rgba(20,38,25,.22);color:#121712;font:500 16px var(--font-body),Arial,sans-serif;box-shadow:inset 0 1px rgba(255,255,255,.8);transition:border-color .25s ease,box-shadow .25s ease,background .25s ease}
+.app-shell .field:focus{background:#fff;border-color:#00ad50;box-shadow:0 0 0 4px rgba(0,189,88,.07)}
+.app-shell .token-pills,.app-shell .term-pills{gap:9px;margin:11px 0}
+.app-shell .pill{min-height:45px;padding:10px 14px;background:rgba(249,250,244,.6);border-color:rgba(20,38,25,.19);font:600 9px var(--font-mono),monospace;transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.app-shell .pill:hover{transform:translateY(-2px);background:#fff;box-shadow:0 6px 20px rgba(24,54,33,.08)}
+.app-shell .pill.active{background:#00c65d;border-color:#11140f;box-shadow:4px 4px 0 #11140f}
+.app-shell .token-pill{min-width:145px;justify-content:flex-start}
+.app-shell .token-pill .token-logo{width:31px;height:31px}
+.app-shell .token-pill span:last-child{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.app-shell .token-pill b{font:650 12px var(--font-display),sans-serif;letter-spacing:-.02em}
+.app-shell .token-pill small{color:#657168;font:500 10px var(--font-body),sans-serif}
+.app-shell .pill.active small{color:#183722}
+.app-shell .notice{margin-top:25px;padding:14px 16px;background:rgba(255,255,250,.5);border-color:rgba(20,38,25,.25);font:500 12px/1.5 var(--font-body),Arial,sans-serif}
+.app-shell .wrap-action{margin-top:25px;padding:20px;border:1px solid rgba(20,38,25,.18);background:rgba(255,255,250,.56);backdrop-filter:blur(10px)}
+.app-shell .preview-card{top:108px;padding-top:16px;perspective:1200px}
+.app-shell .preview-card:before{content:"";position:absolute;z-index:-1;width:510px;height:510px;left:50%;top:42%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(0,204,94,.18),rgba(200,255,53,.06) 42%,transparent 68%);filter:blur(4px);animation:previewGlow 8s ease-in-out infinite}
+.app-shell .app-note{transform:scale(.92) rotate(1.2deg);transform-origin:top center;margin-bottom:-45px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.app-shell .app-note:hover{transform:scale(.94) rotate(-.4deg) translateY(-7px)}
+.app-shell .app-note .note{position:relative;overflow:hidden;background:linear-gradient(125deg,rgba(255,255,255,.75),transparent 25%),#f7f4e9;box-shadow:16px 20px 0 rgba(0,174,80,.2),0 35px 70px rgba(30,67,42,.18)}
+.app-shell .app-note .note:after{content:"";position:absolute;inset:0;opacity:.12;pointer-events:none;background-image:radial-gradient(#2a392b 0 .5px,transparent .75px);background-size:9px 11px;mix-blend-mode:multiply}
+.app-shell .app-note .note>*{position:relative;z-index:1}
+.app-shell .app-note .note-top strong{font:700 20px var(--font-display),sans-serif;letter-spacing:-.07em}
+.app-shell .app-note .note-band{background-image:linear-gradient(120deg,rgba(255,255,255,.14),transparent 42%)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.app-shell .deposit-state{position:relative!important;height:245px!important;margin:16px 0!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;color:#e9f2eb;background:radial-gradient(circle at 50% 48%,#173122,#09110c 55%,#050806 100%)!important;border:1px solid #101a13;letter-spacing:0!important}
+.app-shell .deposit-state:before{content:"";position:absolute;width:380px;height:380px;border:1px solid rgba(0,220,98,.17);border-radius:50%;box-shadow:0 0 0 38px rgba(0,220,98,.025),0 0 0 78px rgba(0,220,98,.018);animation:depositRadar 9s linear infinite}
+.app-shell .deposit-state:after{content:"";position:absolute;left:-25%;right:-25%;height:1px;top:14%;background:linear-gradient(90deg,transparent,#c8ff35,transparent);box-shadow:0 0 16px rgba(200,255,53,.55);animation:depositScan 3.8s ease-in-out infinite}
+.app-shell .deposit-state>strong{z-index:2;color:#f3f7f1;font:650 14px var(--font-display),sans-serif;letter-spacing:-.02em;text-transform:none}
+.app-shell .deposit-state>small{z-index:2;color:#8fa096;font:500 7px var(--font-mono),monospace;letter-spacing:.12em;text-transform:uppercase}
+.app-shell .deposit-orbit{position:relative;z-index:2;width:74px;height:74px;display:grid;place-items:center;border:1px solid rgba(0,220,98,.45);border-radius:50%;box-shadow:0 0 26px rgba(0,220,98,.12)}
+.app-shell .deposit-orbit:before,.app-shell .deposit-orbit:after,.app-shell .deposit-orbit i{content:"";position:absolute;border:1px solid rgba(200,255,53,.28);border-radius:50%}
+.app-shell .deposit-orbit:before{inset:8px}.app-shell .deposit-orbit:after{inset:16px;background:#00bd58;box-shadow:inset 0 0 15px rgba(0,0,0,.2),0 0 20px rgba(0,220,98,.28)}
+.app-shell .deposit-orbit i:first-child{inset:-10px;border-style:dashed;animation:appOrbit 8s linear infinite}.app-shell .deposit-orbit i:nth-child(2){inset:-19px;border-color:rgba(0,220,98,.12);animation:appOrbit 13s linear infinite reverse}
+.app-shell .deposit-orbit b{position:relative;z-index:2;color:#fff;font:700 20px var(--font-display),sans-serif}
+.app-shell .preview-caption{margin-top:24px;color:#68746b;font:600 7px var(--font-mono),monospace;letter-spacing:.14em;text-transform:uppercase}
+@keyframes appOrbit{to{transform:rotate(360deg)}}
+@keyframes previewGlow{50%{transform:translate(-50%,-50%) scale(1.08);opacity:.72}}
+@keyframes depositRadar{to{transform:rotate(360deg) scale(1.08)}}
+@keyframes depositScan{0%,12%{top:12%;opacity:0}25%{opacity:1}85%{opacity:.6}100%{top:88%;opacity:0}}
+@media(max-width:1000px){.app-shell .app-main{width:min(820px,calc(100% - 38px));padding-top:50px}.app-shell .app-layout{grid-template-columns:1fr}.app-shell .preview-card{position:relative;top:auto;margin-top:35px}.app-shell .app-note{transform:scale(.82);margin-bottom:-95px}.app-shell .app-note:hover{transform:scale(.84) translateY(-5px)}}
+@media(max-width:650px){.app-shell .app-nav{height:70px;padding:0 14px}.app-shell .app-nav .wordmark{font-size:22px!important}.app-shell .app-nav-right{gap:5px}.app-shell .app-nav .button{display:none}.app-shell .wallet{padding:11px 12px;font-size:8px;box-shadow:4px 4px 0 #00c45a}.app-shell .app-main{width:calc(100% - 28px);padding:34px 0 70px}.app-shell .wallet-bar{margin-bottom:32px;font-size:7px}.app-shell .app-form-panel{padding-top:12px}.app-shell .app-title{font-size:clamp(49px,14vw,70px);margin-top:19px}.app-shell .app-copy{font-size:15px}.app-shell .tabs{margin-top:34px}.app-shell .token-pill{min-width:calc(50% - 5px)}.app-shell .app-note{transform:scale(.62);margin-left:-31%;margin-right:-31%;margin-bottom:-190px}.app-shell .app-note:hover{transform:scale(.62)}.app-shell .preview-card:before{width:340px;height:340px}.app-shell .preview-caption{margin-top:20px}.app-shell .deposit-state>small{font-size:6px}}
+@media(prefers-reduced-motion:reduce){.app-shell .app-form-panel:before,.app-shell .preview-card:before,.app-shell .deposit-state:before,.app-shell .deposit-state:after,.app-shell .deposit-orbit i{animation:none}.app-shell .app-note{transition:none}}
+
 /* Shared V3 typography: internal routes now use the same type system as the landing page. */
 :root{--serif:var(--font-display),Arial,sans-serif;--sans:var(--font-body),Arial,sans-serif;--mono:var(--font-mono),monospace}
 body{font-family:var(--font-body),Arial,sans-serif}
