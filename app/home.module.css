@@ -43,11 +43,22 @@
 @media(max-width:620px){.nav{width:calc(100% - 24px);height:56px;padding-left:18px}.wordmark{font-size:23px}.launch{padding:10px 14px;font-size:12px}.launch span{display:none}.market,.useCases,.flow,.lab,.docs{padding-top:100px;padding-bottom:100px}.sectionIntro h2,.flowSticky h2,.labCopy h2,.maturityCopy h2,.docsTop h2{font-size:clamp(48px,14vw,70px)}.instrument{min-height:370px;padding:22px}.flowSteps{grid-template-columns:1fr}.flowSteps article{min-height:285px;border-right:0;border-top:1px solid var(--line)}.flowSteps article:first-child{border-top:0}.maturitySticky{padding:72px 22px}.docs{padding-bottom:0}.footer{grid-template-columns:1fr}.footer>div:first-child{grid-column:auto}}
 
 /* One large terminal scene instead of a grid of floating product cards. */
-.marketWorld{position:relative;min-height:620px;padding:100px 42px 44px;overflow:hidden;border-radius:22px;border:1px solid var(--line);background:#040705;isolation:isolate}
-.marketLandscape{position:absolute;z-index:-1;inset:auto -3% -20% auto;width:110%;height:auto;opacity:.82;filter:saturate(.82) contrast(1.04)}
-.marketWorld:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,#030603 0%,rgba(3,6,3,.88) 35%,rgba(3,6,3,.1) 72%,#030603 100%)}
-.marketWorld .instrumentGrid{position:relative;max-width:100%;border-color:rgba(238,249,235,.2);background:rgba(4,8,5,.78);backdrop-filter:blur(10px);box-shadow:0 32px 80px rgba(0,0,0,.42)}
-@media(max-width:900px){.marketWorld{min-height:0;padding:28px 18px 46px}.marketLandscape{width:170%;max-width:none;right:-40%;bottom:-5%;opacity:.62}}
+.marketWorld{position:relative;min-height:680px;padding:112px 42px 44px;overflow:hidden;border-radius:22px;border:1px solid var(--line);background:#040705;isolation:isolate}
+.marketRidge{position:absolute;z-index:1;inset:0 0 auto;height:360px;overflow:hidden;pointer-events:none;mask-image:linear-gradient(180deg,#000 0 62%,transparent 100%)}
+.marketLandscape{position:absolute;inset:-54% -4% auto;width:108%;height:auto;max-width:none;opacity:.94;filter:saturate(.88) contrast(1.08) brightness(.9);animation:ridgeDrift 19s ease-in-out infinite alternate}
+.marketWorld:before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(180deg,rgba(3,6,3,.28) 0%,rgba(3,6,3,.72) 42%,#030603 78%)}
+.marketWorld .instrumentGrid{position:relative;z-index:2;max-width:100%;border-color:rgba(238,249,235,.2);background:rgba(4,8,5,.78);backdrop-filter:blur(10px);box-shadow:0 32px 80px rgba(0,0,0,.42)}
+@keyframes ridgeDrift{to{transform:scale(1.035) translate3d(-1.2%,1.4%,0);filter:saturate(1) contrast(1.1) brightness(.98)}}
+@media(max-width:900px){.marketWorld{min-height:0;padding:130px 18px 46px}.marketRidge{height:280px}.marketLandscape{width:156%;max-width:none;inset:-24% auto auto -34%;opacity:.75}}
+
+/* Slow environmental motion, kept behind the reading layer. */
+.flow,.useCases{isolation:isolate;overflow:hidden}
+.flow:after,.useCases:after{content:"";position:absolute;z-index:0;width:58vw;aspect-ratio:1;pointer-events:none;border-radius:50%;filter:blur(28px);opacity:.65;animation:sectionDrift 18s ease-in-out infinite alternate}
+.flow:after{right:-24vw;top:8%;background:radial-gradient(circle,rgba(71,238,130,.13),rgba(30,130,77,.035) 37%,transparent 68%)}
+.useCases:after{left:-28vw;bottom:-22vw;background:radial-gradient(circle,rgba(174,255,91,.12),rgba(18,101,56,.03) 44%,transparent 68%);animation-duration:23s;animation-delay:-7s}
+.flowSticky,.flowSteps,.useCases .sectionIntro,.caseGrid{position:relative;z-index:1}
+.case:after{content:"";position:absolute;inset:auto -22% -45%;height:64%;background:radial-gradient(ellipse,rgba(126,255,136,.1),transparent 68%);filter:blur(8px);opacity:.45;transform:translateY(18px);transition:transform .8s ease,opacity .8s ease;pointer-events:none}.case:hover:after{opacity:.92;transform:translateY(-4px)}
+@keyframes sectionDrift{to{transform:translate3d(-7vw,5vh,0) scale(1.16)}}
 
 /* Interactive position lab: scroll assembles the layers, pointer adds restrained depth. */
 .lab{

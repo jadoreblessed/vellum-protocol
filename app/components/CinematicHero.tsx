@@ -92,8 +92,16 @@ export default function CinematicHero() {
 
   return (
     <section className={styles.hero} ref={sectionRef}>
+      <svg className={styles.filterDefs} aria-hidden="true" focusable="false">
+        <filter id="vellum-liquid-waves" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency=".005 .018" numOctaves="2" seed="8" result="flow">
+            <animate attributeName="baseFrequency" dur="15s" values=".005 .018;.011 .03;.006 .016;.005 .018" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="flow" scale="19" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       <video className={styles.video} autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
-        <source src="/brand/hero-fibre-field-loop.mp4" type="video/mp4" />
+        <source src="/brand/hero-liquid-waves-v2.mp4" type="video/mp4" />
       </video>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
@@ -109,7 +117,7 @@ export default function CinematicHero() {
 
         <div className={styles.object} aria-label="A sealed Vellum position">
           <div className={styles.halo} />
-          <Image className={styles.ticketAsset} src="/brand/hero-ticket-sculpture.png" alt="" width={1024} height={1536} priority />
+          <Image className={styles.ticketAsset} src="/brand/hero-ticket-sculpture-v2.webp" alt="" width={1024} height={1536} priority />
         </div>
       </div>
       <div className={styles.bottomFade} aria-hidden="true" />

@@ -47,7 +47,9 @@ export default function Home() {
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
         <div className={styles.marketWorld}>
-          <Image className={styles.marketLandscape} src="/brand/terminal-fibreworld.png" alt="" width={1536} height={864} />
+          <div className={styles.marketRidge} aria-hidden="true">
+            <Image className={styles.marketLandscape} src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} />
+          </div>
           <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
         </div>
       </section>
