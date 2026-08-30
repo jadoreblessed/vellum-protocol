@@ -277,6 +277,26 @@ body{overflow-x:hidden}.hero{background:var(--paper);color:var(--ink);isolation:
 @media(max-width:650px){.app-shell .app-nav{height:70px;padding:0 14px}.app-shell .app-nav .wordmark{font-size:22px!important}.app-shell .app-nav-right{gap:5px}.app-shell .app-nav .button{display:none}.app-shell .wallet{padding:11px 12px;font-size:8px;box-shadow:4px 4px 0 #00c45a}.app-shell .app-main{width:calc(100% - 28px);padding:34px 0 70px}.app-shell .wallet-bar{margin-bottom:32px;font-size:7px}.app-shell .app-form-panel{padding-top:12px}.app-shell .app-title{font-size:clamp(49px,14vw,70px);margin-top:19px}.app-shell .app-copy{font-size:15px}.app-shell .tabs{margin-top:34px}.app-shell .token-pill{min-width:calc(50% - 5px)}.app-shell .app-note{transform:scale(.62);margin-left:-31%;margin-right:-31%;margin-bottom:-190px}.app-shell .app-note:hover{transform:scale(.62)}.app-shell .preview-card:before{width:340px;height:340px}.app-shell .preview-caption{margin-top:20px}.app-shell .deposit-state>small{font-size:6px}}
 @media(prefers-reduced-motion:reduce){.app-shell .app-form-panel:before,.app-shell .preview-card:before,.app-shell .deposit-state:before,.app-shell .deposit-state:after,.app-shell .deposit-orbit i{animation:none}.app-shell .app-note{transition:none}}
 
+/* Strip the launch screen back to one confident canvas and one large instrument. */
+.app-shell{background:linear-gradient(135deg,#fafbf6,#f1f6ee)}
+.app-shell:before{display:none}
+.app-shell .app-main{width:min(1560px,calc(100% - 76px));padding-top:82px}
+.app-shell .app-layout{grid-template-columns:minmax(0,.9fr) minmax(500px,1.08fr);gap:clamp(70px,9vw,170px)}
+.app-shell .app-title{font-size:clamp(76px,6.3vw,118px);line-height:.8;letter-spacing:-.095em!important;margin:16px 0 0}
+.app-shell .tabs{margin-top:54px}
+.app-shell .preview-card{display:flex;align-items:center;justify-content:center;min-height:760px;padding:32px;background:radial-gradient(circle at 48% 42%,rgba(0,196,88,.16),transparent 32%),linear-gradient(145deg,#e8f2e7,#dbeedc);border:1px solid rgba(20,38,25,.16);box-shadow:inset 0 1px rgba(255,255,255,.85)}
+.app-shell .preview-card:before{display:none}
+.app-shell .app-note.note-wrap{display:block;width:min(100%,520px);margin:0;transform:rotate(-1.6deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.app-shell .app-note.note-wrap:hover{transform:rotate(.2deg) translateY(-9px)}
+.app-shell .app-note{transform:none;margin:0}
+.app-shell .app-note:hover{transform:none}
+.app-shell .app-note .note{width:100%;min-height:680px;padding:18px;border-radius:0;background:linear-gradient(125deg,rgba(255,255,255,.82),transparent 24%),#f8f4e7;box-shadow:15px 17px 0 #00a94e,0 35px 70px rgba(30,67,42,.2)}
+.app-shell .app-note .note:before{inset:8px;border-radius:0}
+.app-shell .app-note .note-top{padding:12px 15px;font-size:9px}.app-shell .app-note .note-top strong{font-size:26px}.app-shell .app-note .note-band{margin:20px 8px;padding:20px;border-radius:0;grid-template-columns:72px 1fr}.app-shell .app-note .token-icon{width:72px;height:72px}.app-shell .app-note .token-symbol{font:700 31px var(--font-display),sans-serif;letter-spacing:-.06em}.app-shell .app-note .token-meta{font-size:8px}
+.app-shell .deposit-state{height:345px!important;margin:22px 0!important}.app-shell .deposit-state>strong{font-size:22px;letter-spacing:-.04em}.app-shell .deposit-state>small{font-size:7px}.app-shell .deposit-orbit{width:102px;height:102px}.app-shell .deposit-orbit:before{inset:11px}.app-shell .deposit-orbit:after{inset:23px}.app-shell .deposit-orbit b{font-size:27px}.app-shell .note-foot{padding:17px 15px;font-size:9px}
+@media(max-width:1000px){.app-shell .app-main{width:min(820px,calc(100% - 34px))}.app-shell .app-layout{grid-template-columns:1fr}.app-shell .preview-card{min-height:640px;padding:28px;margin-top:30px}.app-shell .app-note.note-wrap{width:min(100%,500px)}.app-shell .app-note{transform:none;margin:0}.app-shell .app-title{font-size:clamp(66px,11vw,94px)}}
+@media(max-width:650px){.app-shell .app-main{width:calc(100% - 28px);padding-top:38px}.app-shell .app-title{font-size:clamp(54px,15vw,74px)}.app-shell .tabs{margin-top:38px}.app-shell .preview-card{min-height:480px;padding:16px;margin-top:28px}.app-shell .app-note.note-wrap{width:100%;transform:none}.app-shell .app-note.note-wrap:hover{transform:none}.app-shell .app-note .note{min-height:540px;padding:13px;box-shadow:8px 10px 0 #00a94e,0 25px 50px rgba(30,67,42,.18)}.app-shell .app-note .note-top strong{font-size:21px}.app-shell .app-note .note-band{grid-template-columns:56px 1fr;margin:14px 6px;padding:14px}.app-shell .app-note .token-icon{width:56px;height:56px}.app-shell .app-note .token-symbol{font-size:25px}.app-shell .deposit-state{height:245px!important}.app-shell .deposit-orbit{width:76px;height:76px}.app-shell .deposit-orbit:after{inset:17px}.app-shell .deposit-state>strong{font-size:17px}}
+
 /* Shared V3 typography: internal routes now use the same type system as the landing page. */
 :root{--serif:var(--font-display),Arial,sans-serif;--sans:var(--font-body),Arial,sans-serif;--mono:var(--font-mono),monospace}
 body{font-family:var(--font-body),Arial,sans-serif}
@@ -313,3 +333,12 @@ body{font-family:var(--font-body),Arial,sans-serif}
   .hero-card-scan{width:300px;top:14%}
 }
 @media(prefers-reduced-motion:reduce){.hero-assembly-label,.hero-assembly-stamp,.hero-card-scan,.hero-note-card,.hero-note-card .note,.hero-v2-token{animation:none;opacity:1;filter:none;clip-path:none;transform:none}}
+
+/* Launch app: a single large instrument, not a dashboard of labels. */
+.app-shell .app-form-panel{padding-top:78px}.app-shell .app-form-panel:before{display:none}.app-shell .app-layout{align-items:center}
+.app-shell .preview-card{position:relative;overflow:hidden;background:radial-gradient(circle at 42% 36%,rgba(0,207,95,.22),transparent 33%),linear-gradient(145deg,#edf5eb,#d7ebd8)}
+.app-shell .preview-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(rgba(17,40,24,.18) .55px,transparent .8px);background-size:10px 13px;opacity:.16;mix-blend-mode:multiply}
+.app-shell .app-note.note-wrap{position:relative;z-index:1}.app-shell .app-note .note-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(20,38,25,.54)}.app-shell .app-note .note-top span{display:none}.app-shell .app-note .note-top b{font:650 10px var(--font-mono),monospace;letter-spacing:.1em}
+.app-shell .app-note .token-name{margin-top:5px;font:500 17px var(--font-body),sans-serif;color:rgba(255,255,255,.85)}
+.app-shell .deposit-state{gap:17px;background:radial-gradient(circle at 50% 48%,#153d26,#07130b 61%,#030705 100%)!important}.app-shell .deposit-state>strong{font-size:24px!important;text-transform:none!important}.app-shell .deposit-state>small{display:none}
+.app-shell .note-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(20,38,25,.45);font:650 10px var(--font-mono),monospace;letter-spacing:.08em}.app-shell .note-foot b{display:grid;place-items:center;min-width:58px;padding:9px 10px;background:#11140f;color:#d7ff45;font:650 9px var(--font-mono),monospace;letter-spacing:.08em}
