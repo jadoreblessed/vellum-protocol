@@ -110,7 +110,7 @@ export default function LivingHero() {
         for (let index = 0; index <= segments; index += 1) {
           const t = index / segments;
           const x = -9.4 + t * 18.8;
-          const arc = Math.sin(t * Math.PI * 2.02 - 0.82) * 0.72 + Math.sin(t * Math.PI * 4.15 + 0.3) * 0.18;
+          const arc = Math.sin(t * Math.PI * 1.34 - 1.08) * 0.94 + Math.sin(t * Math.PI * 3.25 + 0.34) * 0.24;
           const depth = -0.5 + Math.cos(t * Math.PI * 2.2) * 0.2 + depthOffset;
           const twist = t * Math.PI * 14 + phase;
           points.push(new THREE.Vector3(
@@ -279,7 +279,7 @@ export default function LivingHero() {
         camera.fov = width < 760 ? 44 : 30;
         camera.updateProjectionMatrix();
         world.position.x = width < 760 ? 0 : 1.15;
-        world.position.y = width < 760 ? -1.85 : -0.12;
+        world.position.y = width < 760 ? -1.92 : -1.48;
         world.scale.setScalar(width < 760 ? 0.68 : width < 1120 ? 0.87 : 1);
       };
       const resizeObserver = new ResizeObserver(resize);
@@ -373,12 +373,10 @@ export default function LivingHero() {
       <div className={styles.ambient} aria-hidden="true"><i /><i /><i /></div>
 
       <div className={styles.copy}>
-        <div className={styles.kicker}><span /> Robinhood Chain · Bearer instruments</div>
-        <h1><span>Lock the</span><br /><span>position.</span><br /><em>Move the claim.</em></h1>
-        <p>A real token balance becomes a portable onchain note — sealed with its amount, term and provenance.</p>
+        <h1><span>Lock value.</span><br /><em>Move ownership.</em></h1>
         <div className={styles.actions}>
-          <Link href="/app" className={styles.primary}>Create a note <span>↗</span></Link>
-          <Link href="/how-it-works" className={styles.secondary}>See how it moves</Link>
+          <Link href="/app" className={styles.primary}>Enter Vellum <span>↗</span></Link>
+          <Link href="/how-it-works" className={styles.secondary}>How it works <span>→</span></Link>
         </div>
       </div>
 
@@ -389,46 +387,23 @@ export default function LivingHero() {
           <div className={styles.ticketGrain} />
           <header className={styles.ticketTop}>
             <b>vellum<span>.</span></b>
-            <small>BEARER NOTE · ERC-721</small>
-            <strong>W/000421</strong>
+            <strong>NOTE / 421</strong>
           </header>
           <div className={styles.ticketBand}>
             <span className={styles.ticketLogo}><TokenLogo symbol="$CASHCAT" color="#147b43" /></span>
-            <span><small>UNDERLYING / ROBINHOOD CHAIN</small><b>$CASHCAT</b><em>Cash Cat</em></span>
-            <i>VERIFIED</i>
+            <span><b>$CASHCAT</b><em>Cash Cat</em></span>
           </div>
           <div className={styles.ticketAmount}>
-            <small>POSITION / 01</small>
             <strong>250,000</strong>
             <span>CASHCAT</span>
-            <p>≈ $30,150 <i>AT MARK</i></p>
           </div>
-          <div className={styles.ticketFacts}>
-            <span>ENTRY<b>$0.0870</b></span>
-            <span>MARK<b>$0.1206</b></span>
-            <span>TERM<b>90 DAYS</b></span>
-          </div>
-          <div className={styles.ticketSealBar}><span>✦</span> SEALED UNTIL 04 NOV 2026 <b>ACTIVE</b></div>
+          <div className={styles.ticketSealBar}><span>✦</span> LOCKED FOR 90 DAYS <b>SEALED</b></div>
           <footer className={styles.ticketFoot}>
-            <p>WHOEVER HOLDS THIS NOTE HOLDS THE CLAIM.</p>
-            <span>PAYABLE TO BEARER</span><span>0x020b…18b4</span>
+            <span>TRANSFERABLE CLAIM</span><b>V</b>
           </footer>
           <i className={styles.ticketScan} />
         </article>
       </div>
-
-      <div className={styles.objectLabels} aria-hidden="true">
-        <span className={styles.labelOne}>01 / POSITION SEALED</span>
-        <span className={styles.labelTwo}>02 / NOTE FORMED</span>
-        <span className={styles.labelThree}>03 / CLAIM PORTABLE</span>
-      </div>
-
-      <div className={styles.metrics}>
-        <span><b>$119.2M</b> routed value</span>
-        <span><b>18,421</b> live block</span>
-        <span><b>12s</b> finality</span>
-      </div>
-      <div className={styles.scroll}>Scroll to enter <i /> ↓</div>
     </section>
   );
 }
