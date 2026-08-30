@@ -1,0 +1,112 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import TokenLogo from "./TokenLogo";
+import styles from "../home.module.css";
+
+export default function PositionLab() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let frame = 0;
+    const updateScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const distance = window.innerHeight + rect.height;
+        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / distance));
+        section.style.setProperty("--lab-progress", progress.toFixed(3));
+      });
+    };
+    const updatePointer = (event: PointerEvent) => {
+      const rect = section.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      section.style.setProperty("--lab-x", x.toFixed(3));
+      section.style.setProperty("--lab-y", y.toFixed(3));
+    };
+    const resetPointer = () => {
+      section.style.setProperty("--lab-x", "0");
+      section.style.setProperty("--lab-y", "0");
+    };
+
+    updateScroll();
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("resize", updateScroll, { passive: true });
+    section.addEventListener("pointermove", updatePointer, { passive: true });
+    section.addEventListener("pointerleave", resetPointer);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateScroll);
+      window.removeEventListener("resize", updateScroll);
+      section.removeEventListener("pointermove", updatePointer);
+      section.removeEventListener("pointerleave", resetPointer);
+    };
+  }, []);
+
+  return (
+    <section className={styles.lab} ref={sectionRef}>
+      <div className={styles.labGlow} />
+      <div className={styles.labAurora} aria-hidden="true"><i /><i /><i /></div>
+      <div className={styles.labHeader}>
+        <span className={styles.index}>03 / POSITION LAB</span>
+        <span><i className={styles.liveDot} /> Live preview</span>
+      </div>
+      <div className={styles.labCopy}>
+        <h2>Pick the facts.<br /><em>Watch the note form.</em></h2>
+        <p>A product preview that behaves like the app: token, amount and time converge into one transferable object.</p>
+      </div>
+
+      <div className={styles.builder}>
+        <div className={styles.builderProgress} aria-hidden="true"><i /><span>ASSEMBLY / 72%</span></div>
+        <div className={styles.builderControls}>
+          <div className={styles.controlLabel}><span>UNDERLYING TOKEN</span><b>01</b></div>
+          <div className={styles.tokenChoice}>
+            <span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span>
+            <div><b>$CASHCAT</b><small>Cash Cat</small></div>
+            <em>SELECTED</em>
+          </div>
+          <label><span>POSITION AMOUNT</span><b>250,000</b><i>CASHCAT</i></label>
+          <label><span>LOCK TERM</span><b>90</b><i>DAYS</i></label>
+          <div className={styles.builderStatus}><span>ENTRY MARK</span><b>$0.0870</b><span>EST. VALUE</span><b>$30,150</b></div>
+          <div className={styles.labSteps} aria-hidden="true">
+            <span className={styles.labStepActive}>01 TOKEN</span><i />
+            <span>02 TERM</span><i />
+            <span>03 NOTE</span>
+          </div>
+          <Link href="/app" className={styles.buildButton}>Continue in app <span>↗</span></Link>
+        </div>
+
+        <div className={styles.builderScene}>
+          <div className={styles.sceneGrid} />
+          <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
+          <div className={styles.assemblyRail} aria-hidden="true"><i /><i /><i /><i /></div>
+          <div className={styles.noteStack}>
+            <i className={styles.noteLayerOne} />
+            <i className={styles.noteLayerTwo} />
+            <div className={styles.miniNote}>
+              <div><b>vellum<span>.</span></b><span>BEARER NOTE · 000421</span></div>
+              <header><TokenLogo symbol="$CASHCAT" color="#147b43" /><span><small>ROBINHOOD CHAIN</small><b>$CASHCAT</b></span><i>VERIFIED</i></header>
+              <main><small>POSITION</small><strong>250,000</strong><p>≈ $30,150 &nbsp; AT MARK</p></main>
+              <footer><span>ENTRY <b>$0.0870</b></span><span>TERM <b>90 DAYS</b></span></footer>
+              <aside>LOCKED UNTIL 04 NOV 2026</aside>
+              <div className={styles.notePulse} />
+            </div>
+          </div>
+          <div className={styles.labTelemetry} aria-hidden="true">
+            <span><i /> VAULT SEALED</span>
+            <span>BLOCK <b>18,421</b></span>
+            <span>ROUTE <b>0.84s</b></span>
+          </div>
+          <div className={styles.builderScan}>INSTRUMENT ASSEMBLED</div>
+          <div className={styles.sceneBeam} />
+        </div>
+      </div>
+    </section>
+  );
+}
