@@ -74,6 +74,10 @@ export default function LivingHero() {
             <div className={`${styles.ribbon} ${styles.ribbonOne}`} />
             <div className={`${styles.ribbon} ${styles.ribbonTwo}`} />
             <div className={`${styles.ribbon} ${styles.ribbonThree}`} />
+            <div className={styles.waxSeal}>
+              <span className={styles.sealInner}><b>V</b><small>VELLUM</small></span>
+              <i /><i /><i /><i />
+            </div>
           </div>
           <div className={styles.flowLine}><i /><i /><i /><span>OWNERSHIP ROUTE</span></div>
           {tokens.map((token, index) => (
