@@ -546,3 +546,49 @@
   .ticketScan { display: none; }
   .ticket { transform: none; transition: none; }
 }
+
+/* Art-direction pass: one object, big type, no dashboard grid or debug labels. */
+.hero{
+  background:
+    radial-gradient(ellipse at 78% 68%,rgba(0,205,91,.19),transparent 31%),
+    radial-gradient(ellipse at 74% 19%,rgba(210,255,108,.18),transparent 29%),
+    radial-gradient(ellipse at 16% 76%,rgba(255,229,177,.18),transparent 30%),
+    linear-gradient(125deg,#fffdf6 0%,#f7fbef 52%,#e6f5e9 100%);
+}
+.hero::before{display:none}
+.hero::after{width:68vw;height:68vw;right:-28vw;top:-36vw;border-color:rgba(0,174,80,.09);box-shadow:0 0 0 11vw rgba(0,193,88,.018),0 0 0 23vw rgba(121,219,165,.016)}
+.copy{width:min(910px,59vw);padding-top:clamp(96px,14vh,174px);padding-bottom:100px}
+.copy h1{margin:0;font-size:clamp(83px,8.45vw,166px);line-height:.78;letter-spacing:-.095em}
+.copy h1 span:first-child{animation-delay:3.7s}
+.copy h1 em{animation-delay:4.04s;color:#009f49}
+.actions{margin-top:45px;animation-delay:4.68s;gap:18px}
+.primary,.secondary{min-width:0;border:0;box-shadow:none;text-transform:none;letter-spacing:-.02em;font:650 14px/1 var(--font-display),sans-serif}
+.primary{min-width:202px;padding:9px 10px 9px 22px;border-radius:999px;background:#11140f;color:#f8faf2;gap:18px}
+.primary span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#d7ff45;color:#11140f;font:700 16px/1 var(--font-body),sans-serif;transition:transform .3s ease}
+.primary:hover{transform:translateY(-4px);box-shadow:none;background:#11140f}.primary:hover span{transform:rotate(45deg)}
+.secondary{padding:9px 0;background:transparent;color:#29352d;gap:10px;border-bottom:1px solid #29352d;border-radius:0}.secondary:hover{background:transparent;color:#009f49;transform:translateX(6px)}
+.ticketStage{right:clamp(45px,7vw,138px);top:clamp(136px,18vh,210px);width:412px;height:545px;animation-duration:1.95s,9s}
+.ticketShadow{inset:27px -31px -28px 31px;background:rgba(14,66,37,.18);filter:blur(22px)}
+.ticketBack{inset:12px -15px -15px 15px;background:#009d47;box-shadow:18px 27px 48px rgba(12,66,37,.18)}
+.ticket{padding:20px;background:linear-gradient(122deg,rgba(255,255,255,.78),transparent 26%),#faf7ed;box-shadow:inset 0 0 0 7px #faf7ed,inset 0 0 0 8px rgba(24,32,24,.24),0 22px 56px rgba(21,53,31,.18)}
+.ticket::before,.ticket::after{top:66%}
+.ticketTop{grid-template-columns:1fr auto;padding:9px 4px 15px}.ticketTop b{font-size:26px}.ticketTop strong{font-size:7px;color:#657167}
+.ticketBand{grid-template-columns:68px 1fr;gap:16px;margin-top:18px;padding:16px;background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 42%),#147b43}.ticketLogo{width:68px;height:68px;padding:6px}.ticketBand b{margin:0;font-size:34px;letter-spacing:-.07em}.ticketBand em{margin-top:5px;font-size:14px}.ticketBand small,.ticketBand>i{display:none}
+.ticketAmount{padding:38px 7px 30px}.ticketAmount>small,.ticketAmount p{display:none}.ticketAmount>strong{margin:0;font-size:68px;letter-spacing:-.085em}.ticketAmount>span{margin-left:10px;font-size:10px}
+.ticketFacts{display:none}
+.ticketSealBar{margin:4px -27px 0;padding:16px 26px;font-size:8px;letter-spacing:.11em}.ticketSealBar span{font-size:14px}.ticketSealBar b{font-size:6px}
+.ticketFoot{display:flex;align-items:center;justify-content:space-between;margin:29px 6px 0;color:#526056;font-size:7px;letter-spacing:.12em}.ticketFoot span:last-child{float:none}.ticketFoot b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#11140f;color:#d9ff46;font:700 18px/.8 var(--font-display),sans-serif;letter-spacing:-.08em}
+.ticketScan{animation-delay:7.9s}
+.fallbackCord{top:18%;transform:translateY(112px)}
+.fallbackSeal{top:55%;left:51%}
+@media(max-width:1180px){.copy{width:58vw}.copy h1{font-size:clamp(76px,8.7vw,126px)}.ticketStage{width:355px;height:492px;top:21%}.ticketTop b{font-size:22px}.ticketBand{grid-template-columns:56px 1fr;padding:13px}.ticketLogo{width:56px;height:56px}.ticketBand b{font-size:28px}.ticketAmount{padding:31px 6px 23px}.ticketAmount>strong{font-size:56px}}
+@media(max-width:900px){.hero{min-height:950px}.copy{width:auto;padding-top:72px}.copy h1{font-size:clamp(70px,14vw,108px)}.ticketStage{top:49%;width:360px;height:495px;margin-left:-180px}.fallbackCord{top:30%;transform:translateY(80px)}}
+@media(max-width:600px){.hero{min-height:870px}.copy{padding-top:48px}.copy h1{font-size:clamp(58px,17.5vw,84px)}.actions{margin-top:30px}.primary,.secondary{font-size:12px}.ticketStage{top:47%;width:310px;height:430px;margin-left:-155px}.ticket{padding:15px}.ticketTop b{font-size:20px}.ticketBand{grid-template-columns:48px 1fr;margin-top:13px;padding:11px}.ticketLogo{width:48px;height:48px}.ticketBand b{font-size:24px}.ticketBand em{font-size:11px}.ticketAmount{padding:27px 4px 18px}.ticketAmount>strong{font-size:46px}.ticketSealBar{margin-inline:-21px;padding:13px 20px;font-size:6.5px}.ticketFoot{margin-top:18px}.fallbackCord{top:34%;transform:translateY(40px)}}
+
+/* Keep the rope below the message and make the few remaining note details legible. */
+.fallbackCord{top:42%;transform:translateY(112px)}
+.ticketTop strong{font-size:10px;font-weight:650;letter-spacing:.08em}
+.ticketSealBar{font-size:10px;letter-spacing:.08em}.ticketSealBar b{font-size:8px}
+.ticketFoot{font-size:9px;letter-spacing:.08em}
+@media(max-width:900px){.fallbackCord{top:42%;transform:translateY(80px)}}
+@media(max-width:600px){.fallbackCord{top:43%;transform:translateY(40px)}.ticketSealBar{font-size:8px}.ticketFoot{font-size:8px}}
