@@ -69,13 +69,7 @@ export default function LivingHero() {
 
         <div className={styles.scene} aria-label="Live Vellum position visualization">
           <div className={styles.sceneHeader}><span>01 / POSITION ROUTE</span><b><i /> LIVE</b></div>
-          <div className={styles.sceneCenter}>
-            <div className={`${styles.ring} ${styles.ringOuter}`} />
-            <div className={`${styles.ring} ${styles.ringMiddle}`} />
-            <div className={`${styles.ring} ${styles.ringInner}`} />
-            <div className={styles.core}><span>V</span><small>VELLUM</small></div>
-            <div className={styles.coreLabel}>IMMUTABLE<br /><b>POSITION</b></div>
-          </div>
+          <div className={styles.fluidFocus} aria-hidden="true"><i /><i /><i /><b>LIVE<br />LIQUIDITY</b></div>
           <div className={styles.flowLine}><i /><i /><i /><span>OWNERSHIP ROUTE</span></div>
           {tokens.map((token, index) => (
             <div className={`${styles.token} ${styles[token.position as "tokenA" | "tokenB" | "tokenC"]}`} key={token.symbol}>
