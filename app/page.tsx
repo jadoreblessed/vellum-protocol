@@ -3,6 +3,7 @@ import Image from "next/image";
 import CinematicHero from "./components/CinematicHero";
 import PositionLab from "./components/PositionLab";
 import ScrollClock from "./components/ScrollClock";
+import ScrollReveal from "./components/ScrollReveal";
 import TokenLogo from "./components/TokenLogo";
 import styles from "./home.module.css";
 
@@ -53,11 +54,13 @@ export default function Home() {
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
-        <div className={styles.marketLandscapeStrip} aria-hidden="true">
-          <Image src="/brand/vellum-moon-valley.png" alt="" width={1536} height={1024} priority />
-        </div>
         <div className={styles.marketWorld}>
-          <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+          <ScrollReveal className={styles.marketLandscapeStrip}>
+            <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
+          </ScrollReveal>
+          <ScrollReveal>
+            <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+          </ScrollReveal>
         </div>
       </section>
 
