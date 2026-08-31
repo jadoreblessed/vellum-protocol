@@ -147,7 +147,7 @@ export default function AppPage() {
                 <div className="wrap-action">
                   <div><div className="label">Days</div><div className="position" style={{ fontSize: 52 }}>90</div></div>
                   <div><div className="label">Entry · 30-min TWAP</div><b style={{ fontFamily: "var(--mono)" }}>—</b></div>
-                  <button className="button acid" onClick={address ? () => setError("Wrap contract is not configured yet") : connectWallet}>{address ? "Approve → Wrap" : "Connect → Wrap"}</button>
+                  <button className="wrap-submit" onClick={address ? () => setError("Wrap contract is not configured yet") : connectWallet}><span>{address ? "Approve and wrap" : "Connect to wrap"}</span><b>↗</b></button>
                 </div>
               </>
             )}
@@ -163,7 +163,7 @@ export default function AppPage() {
                     <div><div className="token-symbol">{token.symbol}</div><div className="token-name">{token.name}</div></div>
                   </div>
                   <div className="empty-card deposit-state" style={{ height: 220, margin: "15px 0" }}>
-                    <span className="deposit-orbit"><i /><i /><b>V</b></span>
+                    <span className="seal-mark"><i /><i /><b>VLM</b></span>
                     <strong>{address ? "Ready to seal" : "Connect to seal"}</strong>
                   </div>
                   <div className="note-foot"><span>TRANSFERABLE CLAIM</span><b>{term === "NONE" ? "OPEN" : term}</b></div>

@@ -12,6 +12,13 @@ const instruments = [
   { symbol: "$IF", name: "What IF", color: "#cf452f", amount: "4,000,000", value: "$45,320", pnl: "+85.7%", term: "365d", number: "000097" },
 ];
 
+const useCases = [
+  ["OTC", "Move a position between parties without market impact.", "/classes", "/brand/vellum-case-bond.png"],
+  ["Vesting", "Make team allocations timed, public and transferable.", "/vesting", "/brand/vellum-case-folio.png"],
+  ["Collateral", "Lock a known balance with a visible maturity date.", "/collateral", "/brand/vellum-case-vault.png"],
+  ["Access", "Gate communities by size and remaining conviction.", "/gating", "/brand/vellum-case-arch.png"],
+] as const;
+
 function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
   return (
     <Link href="/app/note" className={styles.instrument} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
@@ -46,10 +53,10 @@ export default function Home() {
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
+        <div className={styles.marketLandscapeStrip} aria-hidden="true">
+          <Image src="/brand/vellum-moon-valley.png" alt="" width={1536} height={1024} priority />
+        </div>
         <div className={styles.marketWorld}>
-          <div className={styles.marketRidge} aria-hidden="true">
-            <Image className={styles.marketLandscape} src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} />
-          </div>
           <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
         </div>
       </section>
@@ -61,7 +68,7 @@ export default function Home() {
         </div>
         <div className={styles.flowSteps}>
           <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
-          <article><span>02</span><div className={styles.vaultGraphic}><i /><b>V</b><small>SEALED</small></div><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
+          <article><span>02</span><div className={styles.vaultGraphic}><i /><i /><small>SEALED</small></div><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
           <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </div>
       </section>
@@ -74,13 +81,13 @@ export default function Home() {
           <div className={styles.introSide}><p>One instrument standard, used wherever ownership and liquidity should not be the same thing.</p></div>
         </div>
         <div className={styles.caseGrid}>
-          {[["OTC", "Move a position between parties without market impact.", "/classes"],["Vesting", "Make team allocations timed, public and transferable.", "/vesting"],["Collateral", "Lock a known balance with a visible maturity date.", "/collateral"],["Access", "Gate communities by size and remaining conviction.", "/gating"]].map(([title, copy, href], index) => <Link href={href} key={title} className={styles.case}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore ↗</b><i>{title.slice(0, 1)}</i></Link>)}
+          {useCases.map(([title, copy, href, image], index) => <Link href={href} key={title} className={styles.case}><Image className={styles.caseImage} src={image} alt="" width={1254} height={1254} /><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore <i>↗</i></b></Link>)}
         </div>
       </section>
 
       <section className={styles.sceneStories}>
         <article className={styles.sceneStory}>
-          <Image className={styles.sceneImage} src="/brand/vellum-fibre-valley-v1.webp" alt="A Vellum fibre landscape" width={1440} height={960} />
+          <Image className={styles.sceneImage} src="/brand/vellum-moon-valley.png" alt="A Vellum fibre landscape" width={1536} height={1024} />
           <div className={styles.sceneStoryCopy}>
             <span>01 / CUSTODY</span>
             <h2>Hold the balance.<br /><em>Move the right.</em></h2>
@@ -90,7 +97,7 @@ export default function Home() {
           <div className={styles.sceneReadout}><span>POSITION</span><b>250,000</b><small>CASHCAT · IN CUSTODY</small></div>
         </article>
         <article className={`${styles.sceneStory} ${styles.sceneStoryReverse}`}>
-          <Image className={styles.sceneImage} src="/brand/vellum-paper-vault-v1.webp" alt="A layered paper vault for a Vellum position" width={1440} height={960} />
+          <Image className={styles.sceneImage} src="/brand/vellum-column-mark.png" alt="A Vellum material landmark" width={1536} height={1024} />
           <div className={styles.sceneStoryCopy}>
             <span>02 / TERM</span>
             <h2>Keep every<br /><em>fact intact.</em></h2>
@@ -104,7 +111,7 @@ export default function Home() {
       <section className={styles.anatomy}>
         <div className={styles.anatomyHead}><div><span className={styles.anatomyKicker}>The instrument</span><h2>Position anatomy.</h2></div><p>One readable object. Four facts that remain attached through the full lifecycle.</p></div>
         <div className={styles.anatomyBoard}>
-          <div className={styles.anatomyOrb}><i /><i /><Image src="/brand/vellum-ticket-object-v1.webp" alt="" width={512} height={768} /></div>
+          <div className={styles.anatomyOrb}><i /><i /><Image src="/brand/vellum-logo.png" alt="" width={500} height={500} /></div>
           <div className={styles.anatomyRows}>
             <div><span>01</span><b>Underlying balance</b><em>250,000 CASHCAT</em></div>
             <div><span>02</span><b>Term</b><em>90 days · sealed</em></div>

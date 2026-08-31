@@ -103,8 +103,6 @@ export default function PositionLab() {
             <span>BLOCK <b>18,421</b></span>
             <span>ROUTE <b>0.84s</b></span>
           </div>
-          <div className={styles.builderScan}>INSTRUMENT ASSEMBLED</div>
-          <div className={styles.sceneBeam} />
         </div>
       </div>
     </section>
