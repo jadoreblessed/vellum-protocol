@@ -71,7 +71,7 @@ export default function Home() {
         </div>
         <div className={styles.flowSteps}>
           <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
-          <article><span>02</span><div className={styles.vaultGraphic}><i /><i /><small>SEALED</small></div><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
+          <article><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
           <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </div>
       </section>
