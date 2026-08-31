@@ -35,3 +35,29 @@
 @keyframes ticketModelSpin{0%{transform:perspective(850px) rotateX(10deg) rotateY(-28deg) rotateZ(-7deg)}25%{transform:perspective(850px) rotateX(-4deg) rotateY(36deg) rotateZ(4deg)}50%{transform:perspective(850px) rotateX(8deg) rotateY(172deg) rotateZ(-3deg)}75%{transform:perspective(850px) rotateX(-6deg) rotateY(322deg) rotateZ(6deg)}100%{transform:perspective(850px) rotateX(10deg) rotateY(332deg) rotateZ(-7deg)}}
 @media(max-width:860px){.object{right:-10px;bottom:55px;width:154px;height:154px}.ticketAsset{height:154px}.halo{width:112px;height:112px}}
 @media(max-width:540px){.object{right:-8px;bottom:48px;width:122px;height:122px}.ticketAsset{height:122px}.halo{width:92px;height:92px}}
+
+/* Final hero composition: the terrain stays behind the interface, as in the reference. */
+.hero{min-height:max(920px,100svh);background:#030603}
+.video{opacity:.78;filter:url("#vellum-liquid-waves") saturate(.94) contrast(1.03) brightness(.84)}
+.canvas{display:none}
+.noise{z-index:0;opacity:.08}
+.content{position:relative;z-index:3;display:block;width:min(1240px,calc(100% - 72px));min-height:100svh;padding:clamp(170px,19vh,228px) 0 300px}
+.copy{position:relative;z-index:4;max-width:690px;align-self:auto}
+.copy h1{font-size:clamp(62px,6.4vw,102px);color:#f4f7ef;text-shadow:none}
+.copy h1 em{color:#cfff62;text-shadow:none}
+.copy p{color:rgba(244,248,239,.82)}
+.terminal{position:absolute;z-index:5;left:clamp(38px,14vw,185px);bottom:122px;display:block;width:min(580px,calc(100% - 350px));min-height:0;border-radius:22px;background:linear-gradient(135deg,rgba(3,16,9,.96),rgba(3,10,6,.9));box-shadow:0 24px 75px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.terminalTop{display:none}
+.terminalScreen{padding:27px 30px 25px}
+.terminalLabel{color:#83e5b0;font-size:10px;letter-spacing:.14em}
+.terminalScreen>strong{margin-top:12px;font-size:clamp(25px,2.35vw,35px);letter-spacing:-.045em;color:#f3f8ef}
+.terminalHint{display:block;max-width:340px;margin:12px 0 0;color:rgba(230,241,230,.62);font:500 14px/1.4 var(--font-body),sans-serif}
+.terminalCta{margin-top:20px;padding:12px 0 2px;border-bottom:0;color:#d9ff91;font-size:15px}
+.terminalCta b{font-size:18px}
+.object{position:absolute;z-index:6;right:clamp(48px,13vw,200px);bottom:86px;width:182px;height:182px;transform:none}
+.halo{width:128px;height:128px;border-color:rgba(199,255,116,.26);opacity:.74;box-shadow:0 0 0 18px rgba(34,194,104,.025),0 0 52px rgba(71,255,137,.16)}
+.ticketAsset{height:182px;filter:drop-shadow(0 20px 25px rgba(0,0,0,.62))}
+.nearRidge{z-index:1;left:0;bottom:0;width:100%;height:clamp(145px,24vh,280px);object-fit:cover;object-position:center bottom;opacity:.82;filter:saturate(.84) contrast(1.02) brightness(.9);mask-image:linear-gradient(180deg,transparent 0%,#000 38%)}
+.bottomFade{z-index:2;height:26%;background:linear-gradient(180deg,transparent 15%,rgba(3,6,3,.16) 70%,rgba(3,6,3,.48))}
+@media(max-width:860px){.hero{min-height:930px}.content{width:calc(100% - 40px);padding:142px 0 265px;text-align:left}.kicker,.actions{justify-content:flex-start}.copy p{margin-left:0;margin-right:0}.terminal{left:20px;bottom:116px;width:min(530px,calc(100% - 180px))}.object{right:18px;bottom:103px;width:142px;height:142px}.ticketAsset{height:142px}.nearRidge{height:190px}}
+@media(max-width:540px){.hero{min-height:880px}.content{width:calc(100% - 36px);padding:120px 0 250px;text-align:left}.copy h1{font-size:clamp(50px,14.2vw,72px)}.kicker{justify-content:flex-start}.actions{justify-content:flex-start;gap:14px}.terminal{left:18px;bottom:95px;width:calc(100% - 110px);border-radius:18px}.terminalScreen{padding:21px 20px}.terminalScreen>strong{font-size:22px}.terminalHint{font-size:12px}.object{right:3px;bottom:78px;width:112px;height:112px}.ticketAsset{height:112px}.nearRidge{height:154px;opacity:.68}}

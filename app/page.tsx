@@ -47,6 +47,9 @@ export default function Home() {
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
         <div className={styles.marketWorld}>
+          <div className={styles.marketRidge} aria-hidden="true">
+            <Image className={styles.marketLandscape} src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} />
+          </div>
           <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
         </div>
       </section>
@@ -57,10 +60,9 @@ export default function Home() {
           <p>The balance stays inside the vault. Its claim becomes a visible instrument you can carry, transfer or redeem.</p><Link href="/how-it-works">Read the full flow ↗</Link>
         </div>
         <div className={styles.flowSteps}>
-          <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Choose a position</h3><p>Select a supported token and the exact balance that should become portable.</p><small>TOKEN · AMOUNT</small></article>
-          <article><span>02</span><div className={styles.vaultGraphic}><i /><b>250,000</b><small>VAULTED</small></div><h3>Seal the facts</h3><p>Vellum records quantity, entry mark, term and provenance in one note.</p><small>PRICE · TERM · OWNER</small></article>
-          <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Move the claim</h3><p>Transfer the note. The underlying token balance remains untouched in the vault.</p><small>ERC-721 TRANSFER</small></article>
-          <article><span>04</span><div className={styles.claimGraphic}><b>00</b><i>CLAIM OPEN</i></div><h3>Unwrap at maturity</h3><p>The bearer burns the note and releases the locked position to their wallet.</p><small>NOTE → POSITION</small></article>
+          <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
+          <article><span>02</span><div className={styles.vaultGraphic}><i /><b>V</b><small>SEALED</small></div><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
+          <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </div>
       </section>
 

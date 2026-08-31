@@ -116,20 +116,19 @@ export default function CinematicHero() {
           </div>
         </div>
 
-        <div className={styles.terminal} aria-label="Live position terminal">
-          <div className={styles.terminalTop}><span><i /> VELLUM TERMINAL</span><span>ROBINHOOD CHAIN</span></div>
+        <div className={styles.terminal} aria-label="Vellum contract panel">
+          <div className={styles.terminalTop}><span><i /> VELLUM CONTRACT</span><span>ROBINHOOD CHAIN</span></div>
           <div className={styles.terminalScreen}>
-            <span className={styles.terminalLabel}>LIVE POSITION</span>
-            <strong>250,000 <em>CASHCAT</em></strong>
-            <div className={styles.terminalRule} />
-            <div className={styles.terminalStats}><span>MARK <b>$30,150</b></span><span>TERM <b>90 DAYS</b></span><span>STATE <b>SEALED</b></span></div>
-            <Link href="/app/note" className={styles.terminalCta}>Inspect the note <b>↗</b></Link>
+            <span className={styles.terminalLabel}>POSITION VAULT · VERIFIED</span>
+            <strong>0x020b...18B4</strong>
+            <p className={styles.terminalHint}>A live position becomes a bearer note.</p>
+            <Link href="/app" className={styles.terminalCta}>Open Vellum <b>↗</b></Link>
           </div>
         </div>
 
         <div className={styles.object} aria-hidden="true">
           <div className={styles.halo} />
-          <Image className={styles.ticketAsset} src="/brand/hero-ticket-sculpture-v2.webp" alt="" width={1024} height={1536} priority />
+          <Image className={styles.ticketAsset} src="/brand/vellum-ticket-object-v1.webp" alt="" width={512} height={768} priority />
         </div>
       </div>
       <Image className={styles.nearRidge} src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} priority />
