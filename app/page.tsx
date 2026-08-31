@@ -24,14 +24,14 @@ const useCases = [
 function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
   return (
     <Link href="/app/note" className={styles.instrument} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
-      <div className={styles.instrumentTop}><span>VLM / {item.number}</span><span>{item.term} NOTE ↗</span></div>
-      <div className={styles.instrumentToken}>
+      <div className={styles.instrumentTop}><span>NOTE / {item.number}</span><span>VIEW ↗</span></div>
+      <div className={styles.instrumentIdentity}>
         <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
-        <span><small>UNDERLYING</small><b>{item.symbol}</b><em>{item.name}</em></span>
+        <div><small>UNDERLYING</small><b>{item.name}</b><em>{item.symbol}</em></div>
       </div>
-      <div className={styles.instrumentAmount}><small>POSITION</small><b>{item.amount}</b><span>{item.symbol.slice(1)}</span></div>
-      <div className={styles.instrumentData}><span>MARK <b>{item.value}</b></span><span>PNL <b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
-      <div className={styles.instrumentLock}>LOCKED · CLAIM FOLLOWS HOLDER</div>
+      <div className={styles.instrumentBalance}><small>POSITION BALANCE</small><strong>{item.amount}</strong><span>{item.symbol.slice(1)}</span></div>
+      <div className={styles.instrumentReadout}><span><small>MARK</small><b>{item.value}</b></span><span><small>TERM</small><b>{item.term}</b></span><span><small>P/L</small><b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
+      <div className={styles.instrumentRoute}><i /><span>CLAIM MOVES WITH HOLDER</span><b>SEALED</b></div>
     </Link>
   );
 }
@@ -56,11 +56,11 @@ export default function Home() {
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </TextReveal>
         <div className={styles.marketWorld}>
+          <div className={styles.marketLandscapeStrip} aria-hidden="true">
+            <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
+          </div>
           <ScrollReveal className={styles.marketCards}>
             <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
-          </ScrollReveal>
-          <ScrollReveal className={styles.marketLandscapeStrip}>
-            <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
           </ScrollReveal>
         </div>
       </section>

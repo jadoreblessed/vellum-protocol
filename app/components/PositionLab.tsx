@@ -91,12 +91,15 @@ export default function PositionLab() {
             <i className={styles.noteLayerOne} />
             <i className={styles.noteLayerTwo} />
             <div className={styles.miniNote}>
-              <div><b>vellum<span>.</span></b><span>BEARER NOTE · 000421</span></div>
-              <header><TokenLogo symbol="$CASHCAT" color="#147b43" /><span><small>ROBINHOOD CHAIN</small><b>$CASHCAT</b></span><i>VERIFIED</i></header>
-              <main><small>POSITION</small><strong>250,000</strong><p>≈ $30,150 &nbsp; AT MARK</p></main>
-              <footer><span>ENTRY <b>$0.0870</b></span><span>TERM <b>90 DAYS</b></span></footer>
-              <aside>LOCKED UNTIL 04 NOV 2026</aside>
-              <div className={styles.notePulse} />
+              <div className={styles.noteMasthead}><b>vellum<span>.</span></b><span>POSITION / 000421</span></div>
+              <div className={styles.noteIdentity}>
+                <span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span>
+                <div><small>ROBINHOOD CHAIN</small><b>Cash Cat</b><em>$CASHCAT</em></div>
+                <i>VERIFIED</i>
+              </div>
+              <div className={styles.noteBalance}><small>UNDER CUSTODY</small><strong>250,000</strong><span>CASHCAT</span></div>
+              <div className={styles.noteFacts}><span><small>ENTRY MARK</small><b>$0.0870</b></span><span><small>TERM</small><b>90 DAYS</b></span><span><small>EST. VALUE</small><b>$30,150</b></span></div>
+              <div className={styles.noteState}><i /><span>CLAIM ACTIVE · UNLOCKS 04 NOV 2026</span><b>↗</b></div>
             </div>
           </div>
           <div className={styles.labTelemetry} aria-hidden="true">
