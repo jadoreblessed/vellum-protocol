@@ -147,7 +147,7 @@ export default function AppPage() {
                 <div className="wrap-action">
                   <div><div className="label">Days</div><div className="position" style={{ fontSize: 52 }}>90</div></div>
                   <div><div className="label">Entry · 30-min TWAP</div><b style={{ fontFamily: "var(--mono)" }}>—</b></div>
-                  <button className="wrap-submit" onClick={address ? () => setError("Wrap contract is not configured yet") : connectWallet}><span>{address ? "Approve and wrap" : "Connect to wrap"}</span><b>↗</b></button>
+                  <button className="button acid" onClick={address ? () => setError("Wrap contract is not configured yet") : connectWallet}>{address ? "Approve → Wrap" : "Connect → Wrap"}</button>
                 </div>
               </>
             )}
