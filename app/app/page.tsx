@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import TokenLogo from "../components/TokenLogo";
 import TextReveal from "../components/TextReveal";
+import BearerNote from "../components/BearerNote";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -156,19 +157,8 @@ export default function AppPage() {
 
           <section className="preview-card">
             {tab === "wrap" ? (
-              <div className="note-wrap app-note">
-                <article className="note">
-                  <div className="note-top"><strong>vellum<span>.</span></strong><b>W / 421</b></div>
-                  <div className="note-band" style={{ background: token.color }}>
-                    <div className="token-icon"><TokenLogo symbol={token.symbol} color={token.color}/></div>
-                    <div><div className="token-symbol">{token.symbol}</div><div className="token-name">{token.name}</div></div>
-                  </div>
-                  <div className="empty-card deposit-state" style={{ height: 220, margin: "15px 0" }}>
-                    <span className="seal-mark"><i /><i /><b>VLM</b></span>
-                    <strong>{address ? "Ready to seal" : "Connect to seal"}</strong>
-                  </div>
-                  <div className="note-foot"><span>TRANSFERABLE CLAIM</span><b>{term === "NONE" ? "OPEN" : term}</b></div>
-                </article>
+              <div className="app-bearer-wrap">
+                <BearerNote symbol={token.symbol} name={token.name} color={token.color} amount={amount || "250,000"} term={term === "NONE" ? "OPEN" : term} />
               </div>
             ) : <div className="empty-card">NO NOTES YET</div>}
           </section>
