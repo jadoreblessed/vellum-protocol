@@ -55,11 +55,11 @@ export default function Home() {
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </div>
         <div className={styles.marketWorld}>
+          <ScrollReveal className={styles.marketCards}>
+            <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+          </ScrollReveal>
           <ScrollReveal className={styles.marketLandscapeStrip}>
             <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
-          </ScrollReveal>
-          <ScrollReveal>
-            <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
           </ScrollReveal>
         </div>
       </section>
@@ -72,7 +72,7 @@ export default function Home() {
         <div className={styles.flowSteps}>
           <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
           <article><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
-          <article><span>03</span><div className={styles.transferGraphic}><div className={styles.walletTicket}><small>01 / CURRENT HOLDER</small><b>WALLET A</b><em>0x020b...18B4</em></div><div className={styles.claimRelay}><i /><b>THE CLAIM MOVES</b><i /></div><div className={`${styles.walletTicket} ${styles.walletTicketNext}`}><small>02 / NEW HOLDER</small><b>WALLET B</b><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
+          <article><span>03</span><div className={styles.transferGraphic}><div className={styles.transferEndpoint}><small>FROM</small><strong>WALLET A</strong><em>0x020b...18B4</em></div><div className={styles.transferRoute}><span /><em>CLAIM</em><span /></div><div className={styles.transferEndpoint}><small>TO</small><strong>WALLET B</strong><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </div>
       </section>
 
@@ -112,9 +112,9 @@ export default function Home() {
       </section>
 
       <section className={styles.anatomy}>
-        <div className={styles.anatomyHead}><div><span className={styles.anatomyKicker}>The instrument</span><h2>Position anatomy.</h2></div><p>One readable object. Four facts that remain attached through the full lifecycle.</p></div>
+        <div className={styles.anatomyHead}><div><h2>Position anatomy.</h2></div><p>One readable object. Four facts that remain attached through the full lifecycle.</p></div>
         <div className={styles.anatomyBoard}>
-          <div className={styles.anatomyOrb}><i /><i /><Image src="/brand/vellum-logo.png" alt="" width={500} height={500} /></div>
+          <div className={styles.anatomyOrb}><i /><i /><span className={styles.anatomyTicket}><Image src="/brand/vellum-logo.png" alt="" width={500} height={500} /></span></div>
           <div className={styles.anatomyRows}>
             <div><span>01</span><b>Underlying balance</b><em>250,000 CASHCAT</em></div>
             <div><span>02</span><b>Term</b><em>90 days · sealed</em></div>
