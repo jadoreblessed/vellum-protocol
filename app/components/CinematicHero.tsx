@@ -37,6 +37,10 @@ export default function CinematicHero() {
     observer.observe(section);
     const resizer = new ResizeObserver(resize);
     resizer.observe(section);
+    const nav = document.querySelector<HTMLElement>("[data-floating-nav]");
+    const updateNav = () => nav?.toggleAttribute("data-compact", window.scrollY > 32);
+    updateNav();
+    window.addEventListener("scroll", updateNav, { passive: true });
     resize();
 
     const draw = (time: number) => {
@@ -86,6 +90,7 @@ export default function CinematicHero() {
       cancelAnimationFrame(frame);
       observer.disconnect();
       resizer.disconnect();
+      window.removeEventListener("scroll", updateNav);
     };
   }, []);
 

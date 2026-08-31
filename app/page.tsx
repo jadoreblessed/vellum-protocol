@@ -38,7 +38,7 @@ function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; i
 export default function Home() {
   return (
     <main className={styles.page}>
-      <header className={styles.nav}>
+      <header className={styles.nav} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
         <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
@@ -72,7 +72,7 @@ export default function Home() {
         <div className={styles.flowSteps}>
           <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
           <article><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
-          <article><span>03</span><div className={styles.transferGraphic}><i>WALLET A</i><b>→</b><i>WALLET B</i></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
+          <article><span>03</span><div className={styles.transferGraphic}><div className={styles.walletTicket}><small>01 / CURRENT HOLDER</small><b>WALLET A</b><em>0x020b...18B4</em></div><div className={styles.claimRelay}><i /><b>THE CLAIM MOVES</b><i /></div><div className={`${styles.walletTicket} ${styles.walletTicketNext}`}><small>02 / NEW HOLDER</small><b>WALLET B</b><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </div>
       </section>
 
