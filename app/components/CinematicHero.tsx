@@ -107,7 +107,6 @@ export default function CinematicHero() {
       <div className={styles.noise} aria-hidden="true" />
       <div className={styles.content}>
         <div className={styles.copy}>
-          <span className={styles.kicker}><i /> Robinhood Chain · Vellum live</span>
           <h1>Positions that<br /><em>outlive the trade.</em></h1>
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
@@ -124,11 +123,6 @@ export default function CinematicHero() {
             <p className={styles.terminalHint}>A live position becomes a bearer note.</p>
             <Link href="/app" className={styles.terminalCta}>Open Vellum <b>↗</b></Link>
           </div>
-        </div>
-
-        <div className={styles.object} aria-hidden="true">
-          <div className={styles.halo} />
-          <Image className={styles.ticketAsset} src="/brand/vellum-ticket-object-v1.webp" alt="" width={512} height={768} priority />
         </div>
       </div>
       <Image className={styles.nearRidge} src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} priority />
