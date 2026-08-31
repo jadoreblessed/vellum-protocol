@@ -78,6 +78,42 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={styles.sceneStories}>
+        <article className={styles.sceneStory}>
+          <Image className={styles.sceneImage} src="/brand/vellum-fibre-valley-v1.webp" alt="A Vellum fibre landscape" width={1440} height={960} />
+          <div className={styles.sceneStoryCopy}>
+            <span>01 / CUSTODY</span>
+            <h2>Hold the balance.<br /><em>Move the right.</em></h2>
+            <p>The position remains protected in custody while its bearer note travels onchain.</p>
+            <Link href="/ownership">See ownership ↗</Link>
+          </div>
+          <div className={styles.sceneReadout}><span>POSITION</span><b>250,000</b><small>CASHCAT · IN CUSTODY</small></div>
+        </article>
+        <article className={`${styles.sceneStory} ${styles.sceneStoryReverse}`}>
+          <Image className={styles.sceneImage} src="/brand/vellum-paper-vault-v1.webp" alt="A layered paper vault for a Vellum position" width={1440} height={960} />
+          <div className={styles.sceneStoryCopy}>
+            <span>02 / TERM</span>
+            <h2>Keep every<br /><em>fact intact.</em></h2>
+            <p>Amount, term and provenance are bound into the same readable object from day one.</p>
+            <Link href="/how-it-works">Read the lifecycle ↗</Link>
+          </div>
+          <div className={styles.sceneReadout}><span>MATURITY</span><b>90 DAYS</b><small>IMMUTABLE · VERIFIED</small></div>
+        </article>
+      </section>
+
+      <section className={styles.anatomy}>
+        <div className={styles.anatomyHead}><div><span className={styles.anatomyKicker}>The instrument</span><h2>Position anatomy.</h2></div><p>One readable object. Four facts that remain attached through the full lifecycle.</p></div>
+        <div className={styles.anatomyBoard}>
+          <div className={styles.anatomyOrb}><i /><i /><Image src="/brand/vellum-ticket-object-v1.webp" alt="" width={512} height={768} /></div>
+          <div className={styles.anatomyRows}>
+            <div><span>01</span><b>Underlying balance</b><em>250,000 CASHCAT</em></div>
+            <div><span>02</span><b>Term</b><em>90 days · sealed</em></div>
+            <div><span>03</span><b>Bearer ownership</b><em>0x020b...18B4</em></div>
+            <div><span>04</span><b>Claim state</b><em>Unlocks at maturity</em></div>
+          </div>
+        </div>
+      </section>
+
       <ScrollClock />
 
       <section className={styles.docs}>
@@ -92,6 +128,7 @@ export default function Home() {
           <div><span>SOCIAL</span><a href="https://x.com/vellum" target="_blank" rel="noreferrer">X / Twitter ↗</a></div>
         </footer>
         <div className={styles.footerWord}>vellum</div>
+        <div className={styles.footerRidge} aria-hidden="true"><Image src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1536} height={864} /></div>
       </section>
     </main>
   );
