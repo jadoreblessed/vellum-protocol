@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import TokenLogo from "./TokenLogo";
 import TextReveal from "./TextReveal";
+import BearerNote from "./BearerNote";
 import styles from "../home.module.css";
 
 export default function PositionLab() {
@@ -88,19 +89,7 @@ export default function PositionLab() {
           <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
           <div className={styles.assemblyRail} aria-hidden="true"><i /><i /><i /><i /></div>
           <div className={styles.noteStack}>
-            <i className={styles.noteLayerOne} />
-            <i className={styles.noteLayerTwo} />
-            <div className={styles.miniNote}>
-              <div className={styles.noteMasthead}><b>vellum<span>.</span></b><span>POSITION / 000421</span></div>
-              <div className={styles.noteIdentity}>
-                <span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span>
-                <div><small>ROBINHOOD CHAIN</small><b>Cash Cat</b><em>$CASHCAT</em></div>
-                <i>VERIFIED</i>
-              </div>
-              <div className={styles.noteBalance}><small>UNDER CUSTODY</small><strong>250,000</strong><span>CASHCAT</span></div>
-              <div className={styles.noteFacts}><span><small>ENTRY MARK</small><b>$0.0870</b></span><span><small>TERM</small><b>90 DAYS</b></span><span><small>EST. VALUE</small><b>$30,150</b></span></div>
-              <div className={styles.noteState}><i /><span>CLAIM ACTIVE · UNLOCKS 04 NOV 2026</span><b>↗</b></div>
-            </div>
+            <BearerNote />
           </div>
           <div className={styles.labTelemetry} aria-hidden="true">
             <span><i /> VAULT SEALED</span>
