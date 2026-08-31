@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import styles from "../home.module.css";
+import TextReveal from "./TextReveal";
 
 export default function ScrollClock() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,13 +36,13 @@ export default function ScrollClock() {
   return (
     <section className={styles.maturity} ref={sectionRef}>
       <div className={styles.maturitySticky}>
-        <div className={styles.maturityCopy}>
+        <TextReveal className={styles.maturityCopy}>
           <span className={styles.index}>05 / BLOCK CLOCK</span>
           <h2>Time is part<br />of the <em>instrument.</em></h2>
           <p>Maturity cannot be edited, paused or hidden. The state changes when the chain says it does.</p>
           <Link href="/maturity">Inspect maturity ↗</Link>
           <div className={styles.clockStates}><span>LOCKED</span><i /><span>MATURING</span><i /><span>CLAIMABLE</span></div>
-        </div>
+        </TextReveal>
         <div className={styles.clock}>
           <div className={styles.clockRings}><i /><i /><i /></div>
           <div className={styles.clockGhost}>CLAIM</div>

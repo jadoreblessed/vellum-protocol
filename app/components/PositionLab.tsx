@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import TokenLogo from "./TokenLogo";
+import TextReveal from "./TextReveal";
 import styles from "../home.module.css";
 
 export default function PositionLab() {
@@ -57,10 +58,10 @@ export default function PositionLab() {
         <span className={styles.index}>03 / POSITION LAB</span>
         <span><i className={styles.liveDot} /> Live preview</span>
       </div>
-      <div className={styles.labCopy}>
+      <TextReveal className={styles.labCopy}>
         <h2>Pick the facts.<br /><em>Watch the note form.</em></h2>
         <p>A product preview that behaves like the app: token, amount and time converge into one transferable object.</p>
-      </div>
+      </TextReveal>
 
       <div className={styles.builder}>
         <div className={styles.builderProgress} aria-hidden="true"><i /><span>ASSEMBLY / 72%</span></div>

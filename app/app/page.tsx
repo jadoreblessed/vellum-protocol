@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import TokenLogo from "../components/TokenLogo";
+import TextReveal from "../components/TextReveal";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -109,7 +110,7 @@ export default function AppPage() {
         {error && <div className="wallet-error">{error}</div>}
 
         <div className="app-layout">
-          <section className="app-form-panel">
+          <TextReveal as="section" className="app-form-panel">
             <h1 className="app-title">
               {tab === "wrap" ? <>Lock a token,<br/><em>hold the note.</em></> : <>Your notes<br/><em>carry the claim.</em></>}
             </h1>
@@ -151,7 +152,7 @@ export default function AppPage() {
                 </div>
               </>
             )}
-          </section>
+          </TextReveal>
 
           <section className="preview-card">
             {tab === "wrap" ? (
