@@ -115,7 +115,8 @@ export default function Home() {
       <section className={styles.anatomy}>
         <TextReveal className={styles.anatomyHead}><div><h2>Position anatomy.</h2></div><p>One readable object. Four facts that remain attached through the full lifecycle.</p></TextReveal>
         <ScrollReveal className={styles.anatomyBoard}>
-          <div className={styles.anatomyOrb}><i /><i /><span className={styles.anatomyTicket}><Image src="/brand/vellum-logo.png" alt="" width={500} height={500} /></span></div>
+          <div className={styles.anatomyOrb}><i /><i /><span className={styles.anatomyTicket}><Image src="/brand/vellum-anatomy-ticket-v2.webp" alt="A Vellum bearer note" width={1024} height={1536} /></span></div>
+          <div className={styles.anatomySignals} aria-hidden="true"><span>VLM / 000421</span><span>BEARER NOTE · VERIFIED</span></div>
           <div className={styles.anatomyRows}>
             <div><span>01</span><b>Underlying balance</b><em>250,000 CASHCAT</em></div>
             <div><span>02</span><b>Term</b><em>90 days · sealed</em></div>

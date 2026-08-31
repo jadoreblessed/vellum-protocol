@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import styles from "./CinematicHero.module.css";
 
+function HeroLetters({ text, offset = 0 }: { text: string; offset?: number }) {
+  return <>{[...text].map((letter, index) => <span className={styles.heroLetter} style={{ "--letter-delay": `${offset + index * 28}ms` } as React.CSSProperties} aria-hidden="true" key={`${letter}-${index}`}>{letter === " " ? "\u00a0" : letter}</span>)}</>;
+}
+
 export default function CinematicHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -111,7 +115,7 @@ export default function CinematicHero() {
       <div className={styles.noise} aria-hidden="true" />
       <div className={styles.content}>
         <div className={styles.copy}>
-          <h1>Positions that<br /><em>outlive the trade.</em></h1>
+          <h1 aria-label="Positions that outlive the trade."><span className={styles.heroLine}><HeroLetters text="Positions that" /></span><em className={styles.heroLine}><HeroLetters text="outlive the trade." offset={15} /></em></h1>
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
             <Link href="/app" className={styles.primary}>Open Vellum <span>↗</span></Link>
