@@ -42,9 +42,18 @@ export default function CinematicHero() {
     const resizer = new ResizeObserver(resize);
     resizer.observe(section);
     const nav = document.querySelector<HTMLElement>("[data-floating-nav]");
-    const updateNav = () => nav?.toggleAttribute("data-compact", window.scrollY > 32);
+    let navFrame = 0;
+    let compact: boolean | undefined;
+    const updateNav = () => {
+      navFrame = 0;
+      const nextCompact = window.scrollY > 32;
+      if (nextCompact === compact) return;
+      compact = nextCompact;
+      nav?.toggleAttribute("data-compact", nextCompact);
+    };
+    const scheduleNavUpdate = () => { if (!navFrame) navFrame = requestAnimationFrame(updateNav); };
     updateNav();
-    window.addEventListener("scroll", updateNav, { passive: true });
+    window.addEventListener("scroll", scheduleNavUpdate, { passive: true });
     resize();
 
     const draw = (time: number) => {
@@ -94,7 +103,8 @@ export default function CinematicHero() {
       cancelAnimationFrame(frame);
       observer.disconnect();
       resizer.disconnect();
-      window.removeEventListener("scroll", updateNav);
+      window.removeEventListener("scroll", scheduleNavUpdate);
+      cancelAnimationFrame(navFrame);
     };
   }, []);
 
