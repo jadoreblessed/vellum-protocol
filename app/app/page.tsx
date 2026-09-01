@@ -160,7 +160,7 @@ export default function AppPage() {
           <section className={`preview-card ${motion.preview}`}>
             {tab === "wrap" ? (
               <div className="app-bearer-wrap">
-                <BearerNote symbol={token.symbol} name={token.name} color={token.color} amount={amount || "250,000"} term={term === "NONE" ? "OPEN" : term} />
+                <BearerNote className="app-note-enter" symbol={token.symbol} name={token.name} color={token.color} amount={amount || "250,000"} term={term === "NONE" ? "OPEN" : term} />
               </div>
             ) : <div className="empty-card">NO NOTES YET</div>}
           </section>
