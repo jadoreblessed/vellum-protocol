@@ -56,7 +56,7 @@ export default function Home() {
         <div><span className={styles.liveDot} /> Network live</div><div>18,421 block</div><div>$119.2m tracked</div><div>12s finality</div><div>ERC-20 → ERC-721</div>
       </section>
 
-      <section className={styles.market} id="market">
+      <section className={`${styles.market} ${market.root}`} id="market">
         <TextReveal className={styles.sectionIntro}>
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
