@@ -4,3 +4,8 @@
 .site :global([class*="aurora"]),
 .site :global([class*="Beam"]),
 .site :global([class*="beam"]){display:none!important}
+.site :global(.liveDot),
+.site :global(.instrumentRoute i),
+.site :global(.transferRoute span),
+.site :global(.claimRelay i),
+.site :global(.noteState i){box-shadow:none!important}
