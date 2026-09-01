@@ -6,6 +6,7 @@ import TokenLogo from "../components/TokenLogo";
 import TextReveal from "../components/TextReveal";
 import BearerNote from "../components/BearerNote";
 import motion from "../components/AppPreviewMotion.module.css";
+import refinement from "../components/AppVisualRefinement.module.css";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -92,7 +93,7 @@ export default function AppPage() {
   }, []);
 
   return (
-    <main className="app-shell">
+    <main className={`app-shell ${refinement.app}`}>
       <header className="app-nav">
         <Link href="/" className="wordmark">vellum<span>.</span></Link>
         <div className="app-nav-right">
