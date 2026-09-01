@@ -1,3 +1,4 @@
+.root{border:0!important;background:#020402!important}.root::before,.root::after{display:none!important}
 .world{position:relative!important;width:100vw!important;min-height:640px!important;margin-left:calc(50% - 50vw)!important;padding:0!important;overflow:visible!important;border:0!important;border-radius:0!important;outline:0!important;background:#020402!important;box-shadow:none!important;isolation:isolate}
 .world::before,.world::after{display:none!important}
 .landscape{position:absolute!important;z-index:0!important;inset:-144px 0 -64px!important;width:100%!important;height:auto!important;margin:0!important;border:0!important;border-radius:0!important;outline:0!important;overflow:hidden!important;mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 77%,transparent 100%)!important}
@@ -5,12 +6,13 @@
 .landscape img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 65%!important;filter:saturate(1.32) contrast(1.06) brightness(1.18)!important;animation:ridgeDrift 22s ease-in-out infinite alternate!important}
 .cards{position:relative!important;z-index:2!important;margin:0!important;padding:72px clamp(28px,5vw,84px) 118px!important}
 .grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important;min-height:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
-.card{min-height:468px!important;border:1px solid rgba(224,239,224,.34)!important;border-radius:22px!important;background:linear-gradient(160deg,rgba(5,19,10,.77),rgba(2,8,4,.88))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;backdrop-filter:blur(10px)!important;transition:transform .48s cubic-bezier(.2,.78,.2,1),border-color .48s ease,background .48s ease!important}
+.card{min-height:468px!important;border:1px solid rgba(224,239,224,.34)!important;border-radius:22px!important;background:linear-gradient(160deg,rgba(5,19,10,.77),rgba(2,8,4,.88))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)!important;backdrop-filter:blur(10px)!important;transition:transform .48s cubic-bezier(.2,.78,.2,1),border-color .48s ease,background .48s ease!important;animation:marketCardBreathe 8s ease-in-out infinite!important}
 .card:nth-child(2){background:linear-gradient(160deg,rgba(5,20,25,.78),rgba(2,8,5,.88))!important}
 .card:nth-child(3){background:linear-gradient(160deg,rgba(24,17,8,.78),rgba(3,8,4,.88))!important}
-.card::before{display:none!important}
+.card::before{display:none!important}.card::after{content:""!important;display:block!important;position:absolute!important;right:26px!important;bottom:25px!important;left:26px!important;height:1px!important;background:linear-gradient(90deg,transparent,rgba(235,248,233,.66),transparent)!important;transform:scaleX(.18)!important;transform-origin:left!important;animation:marketCardLine 7s ease-in-out infinite!important;pointer-events:none!important}
+.card:nth-child(2){animation-delay:-2.2s!important}.card:nth-child(3){animation-delay:-4.4s!important}
 .card:hover{transform:translateY(-4px)!important;border-color:rgba(238,248,234,.65)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)!important}
-@keyframes ridgeDrift{from{transform:scale(1.025) translate3d(-.45%,0,0)}to{transform:scale(1.07) translate3d(.45%,-.45%,0)}}
+@keyframes ridgeDrift{from{transform:scale(1.025) translate3d(-.45%,0,0)}to{transform:scale(1.07) translate3d(.45%,-.45%,0)}}@keyframes marketCardBreathe{0%,100%{border-color:rgba(224,239,224,.34)}50%{border-color:rgba(235,248,233,.55)}}@keyframes marketCardLine{0%,100%{transform:scaleX(.18);opacity:.38}50%{transform:scaleX(1);opacity:.9}}
 @media(max-width:900px){.world{min-height:0!important}.cards{padding:46px 22px 80px!important}.grid{grid-template-columns:1fr!important}.card{min-height:390px!important}}
 @media(max-width:600px){.landscape{inset:-72px 0 -28px!important}.cards{padding:30px 16px 58px!important}.card{min-height:360px!important;border-radius:18px!important}}
-@media(prefers-reduced-motion:reduce){.landscape img{animation:none!important}.card{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.landscape img,.card,.card::after{animation:none!important}.card{transition:none!important}}
