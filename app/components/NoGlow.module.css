@@ -9,3 +9,9 @@
 .site :global(.transferRoute span),
 .site :global(.claimRelay i),
 .site :global(.noteState i){box-shadow:none!important}
+.site :global(.terminal)::after,
+.site :global(.footerRidge)::before,
+.site :global(.anatomyTicket)::before,
+.site :global(.marketWorld)::after,
+.site :global(.preview-card)::after{display:none!important}
+.site :global(.anatomyOrb i:first-child){box-shadow:none!important}
