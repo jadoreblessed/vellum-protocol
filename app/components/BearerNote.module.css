@@ -22,3 +22,7 @@
 .status{gap:10px;padding:12px 9px;border:1px solid rgba(216,255,118,.68);border-radius:999px;font-size:10px;letter-spacing:.12em}.status b{display:block;font-size:16px;line-height:0}
 @keyframes ringDrift{50%{translate:0 -4px;rotate:7deg}}@keyframes ticketFloat{50%{transform:translateX(-50%) translateY(-4px) rotate(-1deg)}}
 @media(max-width:600px){.note{min-height:530px;padding:20px}.portal{height:185px}.portal i{top:18px;width:140px;height:140px;border-width:6px}.portal i:nth-child(2){width:111px;height:111px;border-width:5px}.portal i:nth-child(3){width:81px;height:81px;border-width:4px}.portalTicket{top:87px;width:112px;height:27px;font-size:7px}.amount strong{font-size:53px}.identity{margin-top:13px}.facts{margin-top:16px}.facts b{font-size:13px}.facts span{padding-inline:6px}.status{font-size:8px}}
+
+/* The confirmed visual is used intact so the note is exactly the supplied design. */
+.note{min-height:0!important;padding:0!important;overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;isolation:isolate}
+.note:before,.note:after,.edge{display:none!important}.referenceImage{display:block;width:100%;height:auto;filter:none}
