@@ -6,6 +6,7 @@ import TokenLogo from "./TokenLogo";
 import TextReveal from "./TextReveal";
 import BearerNote from "./BearerNote";
 import styles from "../home.module.css";
+import refinement from "./PositionLabRefinement.module.css";
 
 export default function PositionLab() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,7 +69,7 @@ export default function PositionLab() {
         <div className={styles.builderProgress} aria-hidden="true"><i /><span>ASSEMBLY / 72%</span></div>
         <div className={styles.builderControls}>
           <div className={styles.controlLabel}><span>UNDERLYING TOKEN</span><b>01</b></div>
-          <div className={styles.tokenChoice}>
+          <div className={`${styles.tokenChoice} ${refinement.tokenChoice}`}>
             <span><TokenLogo symbol="$CASHCAT" color="#147b43" /></span>
             <div><b>$CASHCAT</b><small>Cash Cat</small></div>
             <em>SELECTED</em>
@@ -90,11 +91,6 @@ export default function PositionLab() {
           <div className={styles.assemblyRail} aria-hidden="true"><i /><i /><i /><i /></div>
           <div className={styles.noteStack}>
             <BearerNote />
-          </div>
-          <div className={styles.labTelemetry} aria-hidden="true">
-            <span><i /> VAULT SEALED</span>
-            <span>BLOCK <b>18,421</b></span>
-            <span>ROUTE <b>0.84s</b></span>
           </div>
         </div>
       </div>
