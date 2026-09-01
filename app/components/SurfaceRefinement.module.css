@@ -1,0 +1,1 @@
+.home :global([class*="Glow"]),.home :global([class*="glow"]),.home :global([class*="Aurora"]),.home :global([class*="aurora"]),.home :global([class*="Beam"]){display:none!important}.home :global([class*="marketWorld"])::after{display:none!important}
