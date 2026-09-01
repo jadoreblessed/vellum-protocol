@@ -157,6 +157,7 @@ export default function AppPage() {
           </TextReveal>
 
           <section className={`preview-card ${motion.preview}`}>
+            <div className={motion.livingBackdrop} aria-hidden="true"><i /><i /><i /></div>
             <i className={`${motion.signal} ${motion.signalOne}`} aria-hidden="true" />
             <i className={`${motion.signal} ${motion.signalTwo}`} aria-hidden="true" />
             <span className={motion.telemetry} aria-hidden="true"><i /> VAULT <b>LIVE</b></span>
