@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import TokenLogo from "../components/TokenLogo";
 import TextReveal from "../components/TextReveal";
 import BearerNote from "../components/BearerNote";
+import motion from "../components/AppPreviewMotion.module.css";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -155,7 +156,7 @@ export default function AppPage() {
             )}
           </TextReveal>
 
-          <section className="preview-card">
+          <section className={`preview-card ${motion.preview}`}>
             {tab === "wrap" ? (
               <div className="app-bearer-wrap">
                 <BearerNote symbol={token.symbol} name={token.name} color={token.color} amount={amount || "250,000"} term={term === "NONE" ? "OPEN" : term} />
