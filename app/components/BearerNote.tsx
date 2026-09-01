@@ -33,6 +33,12 @@ export default function BearerNote({
         <i>VERIFIED</i>
       </div>
 
+      <div className={styles.wave} aria-hidden="true">
+        <svg viewBox="0 0 520 150" fill="none" preserveAspectRatio="none">
+          {Array.from({ length: 11 }, (_, index) => <path key={index} d={`M-20 ${30 + index * 9} C 88 ${-14 + index * 7}, 148 ${150 - index * 7}, 258 ${75} S 428 ${-4 + index * 8}, 540 ${80 + index * 4}`} />)}
+        </svg>
+      </div>
+
       <div className={styles.custody}>
         <div className={styles.amount}><small>UNDER CUSTODY</small><strong>{amount}</strong><b>{symbol.replace("$", "")}</b></div>
       </div>
