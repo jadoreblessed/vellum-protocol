@@ -1,5 +1,4 @@
-import type { CSSProperties } from "react";
-import TokenLogo from "./TokenLogo";
+import Image from "next/image";
 import styles from "./BearerNote.module.css";
 
 type BearerNoteProps = {
@@ -21,32 +20,7 @@ export default function BearerNote({
 }: BearerNoteProps) {
   return (
     <article className={`${styles.note} ${className}`} aria-label={`${name} bearer note`}>
-      <div className={styles.edge} />
-      <header className={styles.head}>
-        <strong>vellum<span>.</span></strong>
-        <span>VLM / 000421</span>
-      </header>
-
-      <div className={styles.portal} aria-hidden="true">
-        <i /><i /><i />
-        <span className={styles.portalTicket}><b>000421</b><em>✦</em></span>
-      </div>
-
-      <div className={styles.custody}>
-        <div className={styles.amount}><small>UNDER CUSTODY</small><strong>{amount}</strong><b>{symbol.replace("$", "")}</b></div>
-      </div>
-
-      <div className={styles.identity} style={{ "--token-color": color } as CSSProperties}>
-        <span className={styles.logo}><TokenLogo symbol={symbol} color={color} /></span>
-        <div><small>UNDERLYING</small><b>{symbol}</b><em>{name}</em></div>
-      </div>
-
-      <div className={styles.facts}>
-        <span><small>ENTRY MARK</small><b>$0.0870</b></span>
-        <span><small>TERM</small><b>{term}</b></span>
-        <span><small>CLAIM</small><b>ACTIVE</b></span>
-      </div>
-      <footer className={styles.status}><span>{term} · TRANSFERABLE</span><b>↗</b></footer>
+      <Image className={styles.referenceImage} src="/brand/vellum-bearer-note-reference.png" alt={`${name} bearer note`} width={418} height={850} priority />
     </article>
   );
 }
