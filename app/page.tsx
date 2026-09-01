@@ -10,6 +10,7 @@ import styles from "./home.module.css";
 import readable from "./components/MarketReadability.module.css";
 import header from "./components/HeaderPerformance.module.css";
 import caseType from "./components/CaseTypeFix.module.css";
+import surface from "./components/SurfaceRefinement.module.css";
 
 const instruments = [
   { symbol: "$CASHCAT", name: "Cash Cat", color: "#147b43", amount: "250,000", value: "$30,150", pnl: "+38.6%", term: "90d", number: "000421" },
@@ -41,7 +42,7 @@ function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; i
 
 export default function Home() {
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} ${surface.home}`}>
       <header className={`${styles.nav} ${header.nav}`} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
@@ -74,7 +75,7 @@ export default function Home() {
           <p>The balance stays inside the vault. Its claim becomes a visible instrument you can carry, transfer or redeem.</p><Link href="/how-it-works">Read the full flow ↗</Link>
         </TextReveal>
         <ScrollReveal className={styles.flowSteps}>
-          <article><span>01</span><div className={styles.stepGraphic}><i className={styles.coin} /><i className={styles.coin} /><i className={styles.coin} /></div><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
+          <article><span>01</span><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
           <article><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
           <article><span>03</span><div className={styles.transferGraphic}><div className={styles.transferEndpoint}><small>FROM</small><strong>WALLET A</strong><em>0x020b...18B4</em></div><div className={styles.transferRoute}><span /><em>CLAIM</em><span /></div><div className={styles.transferEndpoint}><small>TO</small><strong>WALLET B</strong><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </ScrollReveal>
