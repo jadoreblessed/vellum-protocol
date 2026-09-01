@@ -1,0 +1,1 @@
+.nav{transform:translate3d(-50%,0,0)!important;backface-visibility:hidden;will-change:transform;background:rgba(4,16,9,.9)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background .18s ease,box-shadow .18s ease!important}.nav[data-compact]{transition:background .18s ease,box-shadow .18s ease!important}
