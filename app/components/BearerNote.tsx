@@ -34,10 +34,6 @@ export default function BearerNote({
       </div>
 
       <div className={styles.custody}>
-        <div className={styles.sealStage} aria-hidden="true">
-          <span className={styles.ringOne} /><span className={styles.ringTwo} />
-          <span className={styles.seal}><i /><i /><b>VLM</b></span>
-        </div>
         <div className={styles.amount}><small>UNDER CUSTODY</small><strong>{amount}</strong><b>{symbol.replace("$", "")}</b></div>
       </div>
 
