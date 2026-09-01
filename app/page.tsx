@@ -8,6 +8,8 @@ import TokenLogo from "./components/TokenLogo";
 import TextReveal from "./components/TextReveal";
 import styles from "./home.module.css";
 import readable from "./components/MarketReadability.module.css";
+import header from "./components/HeaderPerformance.module.css";
+import caseType from "./components/CaseTypeFix.module.css";
 
 const instruments = [
   { symbol: "$CASHCAT", name: "Cash Cat", color: "#147b43", amount: "250,000", value: "$30,150", pnl: "+38.6%", term: "90d", number: "000421" },
@@ -40,7 +42,7 @@ function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; i
 export default function Home() {
   return (
     <main className={styles.page}>
-      <header className={styles.nav} data-floating-nav>
+      <header className={`${styles.nav} ${header.nav}`} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
         <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
@@ -86,7 +88,7 @@ export default function Home() {
           <div className={styles.introSide}><p>One instrument standard, used wherever ownership and liquidity should not be the same thing.</p></div>
         </TextReveal>
         <ScrollReveal className={styles.caseGrid}>
-          {useCases.map(([title, copy, href, image], index) => <Link href={href} key={title} className={styles.case}><Image className={styles.caseImage} src={image} alt="" width={1254} height={1254} /><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore <i>↗</i></b></Link>)}
+          {useCases.map(([title, copy, href, image], index) => <Link href={href} key={title} className={styles.case}><Image className={styles.caseImage} src={image} alt="" width={1254} height={1254} /><span>0{index + 1}</span><h3 className={caseType.title}>{title}</h3><p>{copy}</p><b>Explore <i>↗</i></b></Link>)}
         </ScrollReveal>
       </section>
 
