@@ -7,6 +7,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import TokenLogo from "./components/TokenLogo";
 import TextReveal from "./components/TextReveal";
 import styles from "./home.module.css";
+import readable from "./components/MarketReadability.module.css";
 
 const instruments = [
   { symbol: "$CASHCAT", name: "Cash Cat", color: "#147b43", amount: "250,000", value: "$30,150", pnl: "+38.6%", term: "90d", number: "000421" },
@@ -24,14 +25,14 @@ const useCases = [
 function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
   return (
     <Link href="/app/note" className={styles.instrument} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
-      <div className={styles.instrumentTop}><span>NOTE / {item.number}</span><span>VIEW ↗</span></div>
-      <div className={styles.instrumentIdentity}>
+      <div className={`${styles.instrumentTop} ${readable.top}`}><span>NOTE / {item.number}</span><span>VIEW ↗</span></div>
+      <div className={`${styles.instrumentIdentity} ${readable.identity}`}>
         <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
         <div><small>UNDERLYING</small><b>{item.name}</b><em>{item.symbol}</em></div>
       </div>
-      <div className={styles.instrumentBalance}><small>POSITION BALANCE</small><strong>{item.amount}</strong><span>{item.symbol.slice(1)}</span></div>
-      <div className={styles.instrumentReadout}><span><small>MARK</small><b>{item.value}</b></span><span><small>TERM</small><b>{item.term}</b></span><span><small>P/L</small><b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
-      <div className={styles.instrumentRoute}><i /><span>CLAIM MOVES WITH HOLDER</span><b>SEALED</b></div>
+      <div className={`${styles.instrumentBalance} ${readable.balance}`}><small>POSITION BALANCE</small><strong>{item.amount}</strong><span>{item.symbol.slice(1)}</span></div>
+      <div className={`${styles.instrumentReadout} ${readable.readout}`}><span><small>MARK</small><b>{item.value}</b></span><span><small>TERM</small><b>{item.term}</b></span><span><small>P/L</small><b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
+      <div className={`${styles.instrumentRoute} ${readable.route}`}><i /><span>CLAIM MOVES WITH HOLDER</span><b>SEALED</b></div>
     </Link>
   );
 }
