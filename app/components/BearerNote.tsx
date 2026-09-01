@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import TokenLogo from "./TokenLogo";
 import styles from "./BearerNote.module.css";
@@ -35,9 +34,9 @@ export default function BearerNote({
       </div>
 
       <div className={styles.custody}>
-        <div className={styles.ticketStage} aria-hidden="true">
+        <div className={styles.sealStage} aria-hidden="true">
           <span className={styles.ringOne} /><span className={styles.ringTwo} />
-          <Image src="/brand/vellum-anatomy-ticket-v2.webp" alt="" fill sizes="190px" priority className={styles.ticket} />
+          <span className={styles.seal}><i /><i /><b>VLM</b></span>
         </div>
         <div className={styles.amount}><small>UNDER CUSTODY</small><strong>{amount}</strong><b>{symbol.replace("$", "")}</b></div>
       </div>
