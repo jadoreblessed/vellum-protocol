@@ -11,6 +11,8 @@ import readable from "./components/MarketReadability.module.css";
 import header from "./components/HeaderPerformance.module.css";
 import caseType from "./components/CaseTypeFix.module.css";
 import surface from "./components/SurfaceRefinement.module.css";
+import market from "./components/MarketScene.module.css";
+import flow from "./components/FlowRefinement.module.css";
 
 const instruments = [
   { symbol: "$CASHCAT", name: "Cash Cat", color: "#147b43", amount: "250,000", value: "$30,150", pnl: "+38.6%", term: "90d", number: "000421" },
@@ -27,7 +29,7 @@ const useCases = [
 
 function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
   return (
-    <Link href="/app/note" className={`${styles.instrument} ${readable.card}`} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
+    <Link href="/app/note" className={`${styles.instrument} ${readable.card} ${market.card}`} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
       <div className={`${styles.instrumentTop} ${readable.top}`}><span>NOTE / {item.number}</span><span>VIEW ↗</span></div>
       <div className={`${styles.instrumentIdentity} ${readable.identity}`}>
         <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
@@ -59,12 +61,12 @@ export default function Home() {
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </TextReveal>
-        <div className={styles.marketWorld}>
-          <div className={styles.marketLandscapeStrip} aria-hidden="true">
+        <div className={`${styles.marketWorld} ${market.world}`}>
+          <div className={`${styles.marketLandscapeStrip} ${market.landscape}`} aria-hidden="true">
             <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
           </div>
-          <ScrollReveal className={styles.marketCards}>
-            <div className={styles.instrumentGrid}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
+          <ScrollReveal className={`${styles.marketCards} ${market.cards}`}>
+            <div className={`${styles.instrumentGrid} ${market.grid}`}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
           </ScrollReveal>
         </div>
       </section>
@@ -74,10 +76,10 @@ export default function Home() {
           <span className={styles.index}>02 / THE MECHANISM</span><h2>One deposit.<br />Two things<br /><em>can move.</em></h2>
           <p>The balance stays inside the vault. Its claim becomes a visible instrument you can carry, transfer or redeem.</p><Link href="/how-it-works">Read the full flow ↗</Link>
         </TextReveal>
-        <ScrollReveal className={styles.flowSteps}>
-          <article><span>01</span><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
-          <article><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
-          <article><span>03</span><div className={styles.transferGraphic}><div className={styles.transferEndpoint}><small>FROM</small><strong>WALLET A</strong><em>0x020b...18B4</em></div><div className={styles.transferRoute}><span /><em>CLAIM</em><span /></div><div className={styles.transferEndpoint}><small>TO</small><strong>WALLET B</strong><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
+        <ScrollReveal className={`${styles.flowSteps} ${flow.steps}`}>
+          <article className={flow.card}><span>01</span><h3>Lock</h3><p>Send a supported balance into custody with a term that everyone can read.</p><small>TOKEN · AMOUNT</small></article>
+          <article className={flow.card}><span>02</span><h3>Carry</h3><p>Vellum forms one instrument from the position, maturity and owner route.</p><small>POSITION · TERM</small></article>
+          <article className={flow.card}><span>03</span><div className={styles.transferGraphic}><div className={styles.transferEndpoint}><small>FROM</small><strong>WALLET A</strong><em>0x020b...18B4</em></div><div className={styles.transferRoute}><span /><em>CLAIM</em><span /></div><div className={styles.transferEndpoint}><small>TO</small><strong>WALLET B</strong><em>0x14a8...72C1</em></div></div><h3>Claim</h3><p>Move the note, then unwrap the same position at the agreed maturity.</p><small>NOTE → POSITION</small></article>
         </ScrollReveal>
       </section>
 
