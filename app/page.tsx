@@ -24,7 +24,7 @@ const useCases = [
 
 function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; index: number }) {
   return (
-    <Link href="/app/note" className={styles.instrument} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
+    <Link href="/app/note" className={`${styles.instrument} ${readable.card}`} style={{ "--token": item.color, "--delay": `${index * 120}ms` } as React.CSSProperties}>
       <div className={`${styles.instrumentTop} ${readable.top}`}><span>NOTE / {item.number}</span><span>VIEW ↗</span></div>
       <div className={`${styles.instrumentIdentity} ${readable.identity}`}>
         <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
