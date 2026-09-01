@@ -1,0 +1,9 @@
+.steps{gap:20px!important}
+.card{overflow:hidden!important;border:1px solid rgba(219,234,220,.34)!important;box-shadow:none!important;transition:transform .48s cubic-bezier(.2,.78,.2,1),border-color .48s ease,background .48s ease!important}
+.card::after{content:"";position:absolute;right:24px;bottom:24px;left:24px;height:1px;background:linear-gradient(90deg,rgba(225,242,225,.1),rgba(225,242,225,.52),rgba(225,242,225,.1));transform:scaleX(.22);transform-origin:left;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.card:hover,.card:nth-child(even):hover{transform:translateY(var(--flow-offset))!important;filter:none!important;background:rgba(5,17,9,.72)!important;border-color:rgba(230,244,230,.63)!important}
+.card:hover::after{transform:scaleX(1)}
+.card h3,.card p,.card>small{transition:transform .48s cubic-bezier(.2,.78,.2,1),color .48s ease}
+.card:hover h3,.card:hover p{transform:translateX(5px)}
+.card:hover>small{transform:translateX(3px)}
+@media(max-width:600px){.card:hover,.card:nth-child(even):hover{transform:translateY(0)!important}}
