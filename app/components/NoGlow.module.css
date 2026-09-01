@@ -1,0 +1,6 @@
+.site :global([class*="Glow"]),
+.site :global([class*="glow"]),
+.site :global([class*="Aurora"]),
+.site :global([class*="aurora"]),
+.site :global([class*="Beam"]),
+.site :global([class*="beam"]){display:none!important}
