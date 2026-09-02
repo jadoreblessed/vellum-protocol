@@ -21,7 +21,8 @@ export default function BearerNote({
 }: BearerNoteProps) {
   return (
     <article className={`${styles.note} ${className}`} aria-label={`${name} bearer note`}>
-      <Image className={styles.referenceImage} src="/brand/vellum-bearer-note-reference.png" alt={`${name} bearer note`} width={418} height={850} priority />
+      <Image className={styles.referenceImage} src="/brand/vellum-bearer-note-v2.webp" alt={`${name} bearer note`} width={861} height={1827} priority />
+      <span className={styles.portalLight} aria-hidden="true" />
       <span className={styles.cashcatMark}><TokenLogo symbol={symbol} color={color} /></span>
     </article>
   );
