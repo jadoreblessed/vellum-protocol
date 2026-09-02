@@ -12,11 +12,19 @@ type BearerNoteProps = {
 };
 
 function WaveField() {
-  return <svg className={styles.waveSvg} viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">{Array.from({ length: 13 }, (_, index) => {
-    const y = 5 + index * 4.25;
-    const lift = 15 - Math.abs(6 - index) * 1.2;
-    return <path key={index} d={`M-8 ${y} C 12 ${y + lift}, 25 ${y + lift}, 43 ${y} S 70 ${y - lift}, 108 ${y + 3}`} />;
-  })}</svg>;
+  return <svg className={styles.waveSvg} viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+    <g className={styles.primaryWave}>{Array.from({ length: 13 }, (_, index) => {
+      const y = 5 + index * 4.25;
+      const lift = 15 - Math.abs(6 - index) * 1.2;
+      return <path key={index} d={`M-8 ${y} C 12 ${y + lift}, 25 ${y + lift}, 43 ${y} S 70 ${y - lift}, 108 ${y + 3}`} />;
+    })}</g>
+    <g className={styles.counterWave}>{Array.from({ length: 9 }, (_, index) => {
+      const y = 10 + index * 5;
+      const pull = 9 - Math.abs(4 - index) * .9;
+      return <path key={index} d={`M-8 ${60 - y} C 17 ${60 - y - pull}, 35 ${30 - (y - 30) * .22}, 50 30 S 78 ${y + pull}, 108 ${y}`} />;
+    })}</g>
+    <circle className={styles.coreDot} cx="50" cy="30" r="1.35" />
+  </svg>;
 }
 
 export default function BearerNote({
