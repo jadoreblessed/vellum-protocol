@@ -6,6 +6,6 @@
 .app :global(.preview-card){min-height:0!important;padding:0!important;overflow:visible!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .app :global(.preview-card)::before,.app :global(.preview-card)::after{display:none!important}
 .app :global(.app-bearer-wrap){display:grid;place-items:center}
-.app :global(.app-note-enter){width:min(100%,590px)!important;animation:appCardEnter .95s cubic-bezier(.2,.82,.2,1) both,appCardDrift 8s 1s ease-in-out infinite!important}
-@keyframes appCardEnter{from{opacity:0;clip-path:inset(8% 48% 8% 48% round 18px);transform:translate3d(0,62px,0) scale(.86) rotateY(-18deg) rotate(-5deg);filter:brightness(1.7) blur(12px)}48%{opacity:1;clip-path:inset(2% 10% 2% 10% round 12px);filter:brightness(1.32) blur(2px)}to{opacity:1;clip-path:inset(0 round 0);transform:rotate(-.55deg);filter:none}}@keyframes appCardDrift{50%{translate:0 -7px}}
+.app :global(.app-note-enter){width:min(100%,515px)!important;animation:appCardEnter .7s cubic-bezier(.2,.82,.2,1) both,appCardDrift 8s 1s ease-in-out infinite!important}
+@keyframes appCardEnter{from{opacity:0;transform:translate3d(0,30px,0) scale(.95) rotate(-2deg);filter:blur(7px)}to{opacity:1;transform:rotate(-.55deg);filter:none}}@keyframes appCardDrift{50%{translate:0 -7px}}
 @media(prefers-reduced-motion:reduce){.app :global(.app-note-enter){animation:none!important}}
