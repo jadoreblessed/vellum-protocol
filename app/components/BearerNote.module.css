@@ -43,3 +43,7 @@
 @keyframes portalLinesDrift{from{background-position:0 0;opacity:.34}45%{opacity:.86}to{background-position:0 142%;opacity:.34}}@keyframes cashcatSettleV3{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(1.4deg)}}
 @media(max-width:600px){.portalLines{left:27%;top:18%;width:47%;height:45%}.cashcatMark{left:20.5%;top:74.3%;width:12.5%}}
 @media(prefers-reduced-motion:reduce){.portalLines{animation:none!important}}
+
+/* Crop the render tightly to the card; the card no longer carries a black rectangular canvas. */
+.referenceImage{transform:none!important}.note:after{display:none!important}.portalLight{left:20%;top:18%;width:61%;height:45%}.portalLines{left:20%;top:18%;width:61%;height:45%}.cashcatMark{left:8.8%;top:75%;width:17%;aspect-ratio:1;border:0!important;border-radius:7px;background:#fff!important;box-shadow:none!important}.cashcatMark :global(.token-logo){background:#fff!important}.cashcatMark :global(.token-logo-image){object-fit:cover!important}
+@media(max-width:600px){.referenceImage{transform:none!important}.portalLight,.portalLines{left:20%;top:18%;width:61%;height:45%}.cashcatMark{left:8.8%;top:75%;width:17%}}
