@@ -34,6 +34,7 @@ export default function BearerNote({
 
   return (
     <article className={`${styles.note} ${variant === "compact" ? styles.compact : ""} ${className}`} aria-label={`${name} bearer note`}>
+      <span className={styles.edgeGlow} aria-hidden="true" />
       <header className={styles.header}><b>vellum<span>.</span></b><small>VLM / 000421</small></header>
       <div className={styles.identity}><div><small>{symbol}</small><b>{name}</b><em>BEARER POSITION</em></div><span className={styles.logo}><TokenLogo symbol={symbol} color={color} /></span></div>
       <div className={styles.wave}><WaveField /></div>
