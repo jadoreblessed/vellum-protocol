@@ -1,4 +1,7 @@
 .app{background:#030603!important}
+.app :global(.app-main){padding-top:34px!important}
+.app :global(.app-layout){align-items:start!important}
+.app :global(.app-form-panel){padding-top:0!important}
 .app :global(.app-nav){border-bottom-color:rgba(232,244,232,.18)!important;background:rgba(3,6,3,.94)!important;backdrop-filter:none!important}
 .app :global(.wallet){min-height:44px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:#d8ff76!important;color:#071008!important;box-shadow:none!important;font:650 12px var(--font-body),sans-serif!important;letter-spacing:-.02em!important;text-transform:none!important;transition:transform .24s ease,background .24s ease!important}
 .app :global(.wallet::after){content:"↗";margin-left:28px;font-size:16px}.app :global(.wallet:hover){transform:translateY(-2px)!important;border-color:transparent!important;background:#ecffb9!important;color:#071008!important;box-shadow:none!important}
@@ -12,5 +15,5 @@
 .app :global(.app-note-enter)>:not(:first-child){animation:appCardContents .7s .2s cubic-bezier(.2,.82,.2,1) both}
 @keyframes appCardEnter{0%{opacity:0;transform:perspective(1200px) translate3d(0,34px,0) rotateX(8deg) rotateY(-6deg) rotateZ(-1.5deg) scale(.96);filter:blur(6px) brightness(1.16)}58%{opacity:1;transform:perspective(1200px) translate3d(0,-6px,0) rotateX(-1.4deg) rotateY(1deg) rotateZ(.2deg) scale(1.006);filter:blur(0) brightness(1.04)}100%{opacity:1;transform:perspective(1200px) rotateX(0) rotateY(0) rotateZ(-.35deg) scale(1);filter:none}}@keyframes appCardContents{from{opacity:0;transform:translateY(9px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}@keyframes appEdgeWake{from{opacity:0;filter:brightness(2.1) drop-shadow(0 0 20px rgba(214,255,94,.95))}to{opacity:1;filter:brightness(1) drop-shadow(0 0 7px rgba(214,255,94,.54))}}@keyframes appEdgeBreathe{50%{opacity:.72;filter:brightness(1.28) drop-shadow(0 0 11px rgba(190,255,88,.72))}}@keyframes appCardDrift{50%{translate:0 -6px}}
 @media(max-width:1200px){.app :global(.app-note-enter){width:min(100%,550px)!important}}
-@media(max-width:650px){.app :global(.app-bearer-wrap){padding:10px 0}.app :global(.app-note-enter){width:min(100%,430px)!important}}
+@media(max-width:650px){.app :global(.app-main){padding-top:24px!important}.app :global(.app-bearer-wrap){padding:10px 0}.app :global(.app-note-enter){width:min(100%,430px)!important}}
 @media(prefers-reduced-motion:reduce){.app :global(.app-bearer-wrap)::before,.app :global(.app-note-enter),.app :global(.app-note-enter)>:not(:first-child){animation:none!important}}
