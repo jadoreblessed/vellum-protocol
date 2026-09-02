@@ -37,7 +37,7 @@ function InstrumentCard({ item, index }: { item: (typeof instruments)[number]; i
       </div>
       <div className={`${styles.instrumentBalance} ${readable.balance}`}><small>POSITION BALANCE</small><strong>{item.amount}</strong><span>{item.symbol.slice(1)}</span></div>
       <div className={`${styles.instrumentReadout} ${readable.readout}`}><span><small>MARK</small><b>{item.value}</b></span><span><small>TERM</small><b>{item.term}</b></span><span><small>P/L</small><b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
-      <div className={`${styles.instrumentRoute} ${readable.route}`}><i /><span>CLAIM MOVES WITH HOLDER</span><b>SEALED</b></div>
+      <div className={`${styles.instrumentRoute} ${readable.route}`}><span>CLAIM MOVES WITH HOLDER</span><b>SEALED</b></div>
     </Link>
   );
 }
@@ -48,7 +48,7 @@ export default function Home() {
       <header className={`${styles.nav} ${header.nav}`} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
-        <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
+        <Link href="/app" className={styles.launch}>Open app</Link>
       </header>
       <CinematicHero />
 
@@ -63,7 +63,7 @@ export default function Home() {
         </TextReveal>
         <div className={`${styles.marketWorld} ${market.world}`}>
           <div className={`${styles.marketLandscapeStrip} ${market.landscape}`} aria-hidden="true">
-            <Image src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1672} height={941} quality={95} sizes="100vw" priority />
+            <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
           </div>
           <ScrollReveal className={`${styles.marketCards} ${market.cards}`}>
             <div className={`${styles.instrumentGrid} ${market.grid}`}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
