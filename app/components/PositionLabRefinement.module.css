@@ -1,3 +1,6 @@
 .tokenChoice{background:transparent!important;border-color:rgba(222,239,222,.32)!important;box-shadow:none!important}
 .tokenChoice::before,.tokenChoice::after{display:none!important}
 .tokenChoice:hover{background:rgba(255,255,255,.025)!important;border-color:rgba(236,247,236,.56)!important}
+.labNote{width:270px!important;max-width:270px!important;animation:labNoteArrival .85s cubic-bezier(.2,.82,.2,1) both,labNoteDrift 8s 1s ease-in-out infinite!important}
+@keyframes labNoteArrival{from{opacity:0;transform:translateY(18px) scale(.92);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}@keyframes labNoteDrift{50%{translate:0 -5px}}
+@media(max-width:900px){.labNote{width:248px!important;max-width:248px!important}}@media(max-width:600px){.labNote{width:222px!important;max-width:222px!important}}@media(prefers-reduced-motion:reduce){.labNote{animation:none!important}}
