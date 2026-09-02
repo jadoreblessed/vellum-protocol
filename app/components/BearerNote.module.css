@@ -7,22 +7,17 @@
   box-sizing: border-box;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(211, 244, 78, .76);
+  border: 0;
   border-radius: 38px 38px 54px 38px;
   background:
     radial-gradient(circle at 17% 7%, rgba(255, 255, 255, .09), transparent 27%),
     radial-gradient(circle at 83% 76%, rgba(195, 218, 67, .055), transparent 35%),
-    repeating-linear-gradient(116deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(24deg, rgba(196, 224, 178, .012) 0 1px, transparent 1px 12px),
     linear-gradient(145deg, #2a2a25 0%, #151713 38%, #080a07 100%);
   color: #f5f1e5;
   box-shadow:
     inset 0 0 0 3px #151713,
     inset 0 0 0 4px rgba(239, 237, 220, .27),
     inset 0 0 64px rgba(255, 255, 255, .045),
-    0 0 0 1px rgba(208, 244, 76, .28),
-    0 0 12px rgba(202, 238, 72, .28),
-    0 0 34px rgba(164, 236, 85, .17),
     0 38px 90px rgba(0, 0, 0, .58);
   isolation: isolate;
   container-type: inline-size;
@@ -34,12 +29,9 @@
   position: absolute;
   z-index: -1;
   inset: 10px;
-  border: 1px solid rgba(239, 236, 218, .27);
+  border: 0;
   border-radius: 29px 29px 45px 29px;
-  background:
-    radial-gradient(ellipse at 42% 0%, rgba(255, 255, 255, .065), transparent 40%),
-    radial-gradient(rgba(240, 238, 218, .11) .45px, transparent .8px);
-  background-size: auto, 8px 9px;
+  background: radial-gradient(ellipse at 42% 0%, rgba(255, 255, 255, .065), transparent 40%);
   opacity: .78;
   pointer-events: none;
 }
@@ -61,10 +53,10 @@
   inset: 7px;
   width: auto;
   border-radius: 31px 31px 47px 31px;
-  border: 1px solid rgba(217, 255, 86, .68);
-  box-shadow: inset 0 0 9px rgba(205, 255, 73, .12), 0 0 7px rgba(211, 255, 77, .55), 0 0 20px rgba(169, 255, 92, .22);
-  opacity: .92;
-  animation: edgeCurrent 3.8s ease-in-out infinite;
+  border: 0;
+  box-shadow: none;
+  opacity: 1;
+  animation: none;
   pointer-events: none;
 }
 
@@ -328,7 +320,6 @@
 
 @keyframes noteDrift { 50% { translate: 0 -7px; rotate: .28deg; } }
 @keyframes surfaceSweep { 0%, 68%, 100% { transform: translateX(-105%); opacity: 0; } 79% { opacity: .7; } 94% { transform: translateX(105%); opacity: 0; } }
-@keyframes edgeCurrent { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
 @keyframes edgeRunX { from { transform: translateX(0) scaleX(.68); opacity: .45; } to { transform: translateX(292%) scaleX(1.14); opacity: 1; } }
 @keyframes edgeRunY { from { transform: translateY(0) scaleY(.68); opacity: .48; } to { transform: translateY(350%) scaleY(1.18); opacity: 1; } }
 @keyframes waveMove { 0%, 100% { transform: translateX(-1.5%) scaleY(.94); } 50% { transform: translateX(1.8%) scaleY(1.08); } }
