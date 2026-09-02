@@ -4,7 +4,7 @@
 .app :global(.app-form-panel){padding-top:0!important}
 .app :global(.app-nav){border-bottom-color:rgba(232,244,232,.18)!important;background:rgba(3,6,3,.94)!important;backdrop-filter:none!important}
 .app :global(.wallet){min-height:44px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:#d8ff76!important;color:#071008!important;box-shadow:none!important;font:650 12px var(--font-body),sans-serif!important;letter-spacing:-.02em!important;text-transform:none!important;transition:transform .24s ease,background .24s ease!important}
-.app :global(.wallet::after){content:"↗";margin-left:28px;font-size:16px}.app :global(.wallet:hover){transform:translateY(-2px)!important;border-color:transparent!important;background:#ecffb9!important;color:#071008!important;box-shadow:none!important}
+.app :global(.wallet:hover){transform:translateY(-2px)!important;border-color:transparent!important;background:#ecffb9!important;color:#071008!important;box-shadow:none!important}
 .app :global(.wallet small){color:rgba(234,247,234,.62)!important}
 .app :global(.preview-card){width:100%!important;min-width:0!important;min-height:0!important;padding:0!important;overflow:visible!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .app :global(.preview-card)::before,.app :global(.preview-card)::after{display:none!important}
