@@ -54,32 +54,29 @@
   pointer-events: none;
 }
 
-.edgeGlow {
-  position: absolute;
-  z-index: 5;
-  top: 54px;
-  right: 10px;
-  bottom: 74px;
-  width: 2px;
-  border-radius: 99px;
-  background: linear-gradient(180deg, transparent, #ddff56 13%, #aeea3f 72%, transparent);
-  box-shadow: 0 0 7px #d9ff52, 0 0 18px rgba(205, 255, 68, .52);
-  opacity: .9;
-  animation: edgeCurrent 5.8s ease-in-out infinite;
-  pointer-events: none;
+@property --edge-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
-.edgeGlow::after {
-  content: "";
+.edgeGlow {
+  --edge-angle: 0deg;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 128px;
-  height: 2px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, transparent, #dfff56);
-  box-shadow: 0 0 9px rgba(215, 255, 78, .72);
-  transform-origin: right;
+  z-index: 5;
+  inset: 7px;
+  width: auto;
+  padding: 1.5px;
+  border-radius: 31px 31px 47px 31px;
+  background: conic-gradient(from var(--edge-angle), transparent 0 17%, rgba(216, 255, 79, .34) 23%, #e5ff68 28%, transparent 36% 58%, rgba(157, 255, 115, .25) 65%, #bfff59 70%, transparent 78% 100%);
+  filter: drop-shadow(0 0 5px rgba(211, 255, 78, .64)) drop-shadow(0 0 13px rgba(172, 255, 93, .28));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .9;
+  animation: edgeOrbit 6.2s linear infinite, edgeCurrent 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .header {
@@ -283,15 +280,14 @@
 }
 
 .compact {
-  width: 248px !important;
-  min-height: 510px;
+  width: 285px !important;
+  min-height: 550px;
   padding: 16px;
   border-radius: 23px 23px 34px 23px;
 }
 
 .compact::before { inset: 7px; border-radius: 17px 17px 27px 17px; }
-.compact .edgeGlow { top: 36px; right: 7px; bottom: 48px; }
-.compact .edgeGlow::after { width: 64px; }
+.compact .edgeGlow { inset: 6px; border-radius: 17px 17px 28px 17px; }
 .compact .header { padding-bottom: 13px; }
 .compact .header small { font-size: 6px; }
 .compact .identity { grid-template-columns: minmax(0, 1fr) 48px; gap: 10px; padding: 14px 1px; }
@@ -312,7 +308,8 @@
 
 @keyframes noteDrift { 50% { translate: 0 -7px; rotate: .28deg; } }
 @keyframes surfaceSweep { 0%, 68%, 100% { transform: translateX(-105%); opacity: 0; } 79% { opacity: .7; } 94% { transform: translateX(105%); opacity: 0; } }
-@keyframes edgeCurrent { 0%, 100% { opacity: .48; filter: brightness(.88); } 50% { opacity: 1; filter: brightness(1.25); } }
+@keyframes edgeOrbit { to { --edge-angle: 360deg; } }
+@keyframes edgeCurrent { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
 @keyframes waveMove { 0%, 100% { transform: translateX(-1.5%) scaleY(.94); } 50% { transform: translateX(1.8%) scaleY(1.08); } }
 @keyframes waveBreath { 50% { transform: scale(1.14); opacity: .64; } }
 @keyframes portalScan { 0%, 12% { transform: translateX(0); opacity: 0; } 30% { opacity: .7; } 78% { opacity: .42; } 100% { transform: translateX(560%); opacity: 0; } }
@@ -326,7 +323,7 @@
   .identity { grid-template-columns: minmax(0, 1fr) 74px; gap: 16px; }
   .identity b { font-size: 34px; }
   .balance strong { font-size: clamp(48px, 14cqw, 60px); }
-  .compact { width: 214px !important; min-height: 450px; padding: 13px; }
+  .compact { width: 232px !important; min-height: 475px; padding: 13px; }
   .compact .wave { height: 126px; }
   .compact .balance strong { font-size: 29px; }
   .compact .facts b { font-size: 9px; }
