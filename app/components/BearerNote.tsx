@@ -1,5 +1,4 @@
 import Image from "next/image";
-import TokenLogo from "./TokenLogo";
 import styles from "./BearerNote.module.css";
 
 type BearerNoteProps = {
@@ -24,7 +23,6 @@ export default function BearerNote({
       <Image className={styles.referenceImage} src="/brand/vellum-bearer-note-v3.webp" alt={`${name} bearer note`} width={665} height={1740} priority />
       <span className={styles.portalLight} aria-hidden="true" />
       <span className={styles.portalLines} aria-hidden="true" />
-      <span className={styles.cashcatMark}><TokenLogo symbol={symbol} color={color} /></span>
     </article>
   );
 }
