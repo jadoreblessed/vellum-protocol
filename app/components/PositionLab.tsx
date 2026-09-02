@@ -89,7 +89,7 @@ export default function PositionLab() {
           <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
           <div className={styles.assemblyRail} aria-hidden="true"><i /><i /><i /><i /></div>
           <div className={styles.noteStack}>
-            <BearerNote className={refinement.labNote} />
+            <BearerNote variant="compact" />
           </div>
         </div>
       </div>
