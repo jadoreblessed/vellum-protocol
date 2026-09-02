@@ -48,7 +48,7 @@ export default function BearerNote({
       <div className={styles.wave}><WaveField /></div>
       <div className={styles.balance}><small>BALANCE</small><strong>{displayAmount}</strong><b>{symbol.replace("$", "")}</b></div>
       <div className={styles.facts}><span><small>ENTRY MARK</small><b>$0.0870</b></span><span><small>TERM</small><b>{displayTerm}</b></span><span><small>CLAIM</small><b>ACTIVE</b></span></div>
-      <footer className={styles.status}><i /> TRANSFERABLE CLAIM</footer>
+      <footer className={styles.status}>TRANSFERABLE CLAIM</footer>
     </article>
   );
 }
