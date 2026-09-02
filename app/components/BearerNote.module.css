@@ -7,7 +7,7 @@
   box-sizing: border-box;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(232, 231, 219, .64);
+  border: 1px solid rgba(211, 244, 78, .76);
   border-radius: 38px 38px 54px 38px;
   background:
     radial-gradient(circle at 17% 7%, rgba(255, 255, 255, .09), transparent 27%),
@@ -20,8 +20,9 @@
     inset 0 0 0 3px #151713,
     inset 0 0 0 4px rgba(239, 237, 220, .27),
     inset 0 0 64px rgba(255, 255, 255, .045),
-    0 0 0 1px rgba(208, 234, 78, .12),
-    0 0 28px rgba(202, 229, 72, .12),
+    0 0 0 1px rgba(208, 244, 76, .28),
+    0 0 12px rgba(202, 238, 72, .28),
+    0 0 34px rgba(164, 236, 85, .17),
     0 38px 90px rgba(0, 0, 0, .58);
   isolation: isolate;
   container-type: inline-size;
@@ -54,29 +55,42 @@
   pointer-events: none;
 }
 
-@property --edge-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
 .edgeGlow {
-  --edge-angle: 0deg;
   position: absolute;
   z-index: 5;
   inset: 7px;
   width: auto;
-  padding: 1.5px;
   border-radius: 31px 31px 47px 31px;
-  background: conic-gradient(from var(--edge-angle), transparent 0 17%, rgba(216, 255, 79, .34) 23%, #e5ff68 28%, transparent 36% 58%, rgba(157, 255, 115, .25) 65%, #bfff59 70%, transparent 78% 100%);
-  filter: drop-shadow(0 0 5px rgba(211, 255, 78, .64)) drop-shadow(0 0 13px rgba(172, 255, 93, .28));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: .9;
-  animation: edgeOrbit 6.2s linear infinite, edgeCurrent 3.8s ease-in-out infinite;
+  border: 1px solid rgba(217, 255, 86, .68);
+  box-shadow: inset 0 0 9px rgba(205, 255, 73, .12), 0 0 7px rgba(211, 255, 77, .55), 0 0 20px rgba(169, 255, 92, .22);
+  opacity: .92;
+  animation: edgeCurrent 3.8s ease-in-out infinite;
   pointer-events: none;
+}
+
+.edgeGlow::before,
+.edgeGlow::after {
+  content: "";
+  position: absolute;
+  border-radius: 99px;
+  background: #efff9b;
+  box-shadow: 0 0 7px #e6ff70, 0 0 16px rgba(195, 255, 79, .94), 0 0 28px rgba(139, 255, 104, .58);
+}
+
+.edgeGlow::before {
+  top: -2px;
+  left: 5%;
+  width: 24%;
+  height: 3px;
+  animation: edgeRunX 4.8s cubic-bezier(.45, .04, .55, .96) infinite alternate;
+}
+
+.edgeGlow::after {
+  top: 7%;
+  right: -2px;
+  width: 3px;
+  height: 21%;
+  animation: edgeRunY 5.4s .4s cubic-bezier(.45, .04, .55, .96) infinite alternate;
 }
 
 .header {
@@ -161,7 +175,8 @@
   border-radius: 23px;
   background:
     linear-gradient(90deg, transparent 49.8%, rgba(220, 235, 130, .11) 50%, transparent 50.2%),
-    radial-gradient(ellipse at 50% 50%, rgba(133, 161, 42, .12), transparent 58%),
+    radial-gradient(circle at 50% 50%, rgba(218, 244, 91, .19), transparent 8%),
+    radial-gradient(ellipse at 50% 50%, rgba(133, 161, 42, .15), transparent 58%),
     linear-gradient(145deg, #010201, #090b08);
   box-shadow: inset 0 0 0 5px #151713, inset 0 0 0 6px rgba(241, 238, 220, .16), inset 0 0 36px rgba(200, 224, 78, .055), 0 12px 28px rgba(0, 0, 0, .28);
 }
@@ -202,6 +217,11 @@
 .waveSvg path { fill: none; stroke: #e2dec9; stroke-width: .42; opacity: .74; }
 .waveSvg path:nth-child(2n) { stroke: #f7f3de; opacity: .48; }
 .waveSvg path:nth-child(3n) { stroke: #d1e342; stroke-width: .58; opacity: .9; }
+.primaryWave { animation: primaryCurrent 7.5s ease-in-out infinite; }
+.counterWave { animation: counterCurrent 8.5s ease-in-out infinite; }
+.counterWave path { stroke: #9ff276; stroke-width: .34; stroke-dasharray: 2.4 1.8; opacity: .34; animation: filamentRun 5.6s linear infinite; }
+.counterWave path:nth-child(2n) { stroke: #e8ff86; opacity: .48; animation-direction: reverse; }
+.coreDot { fill: #edff7f; filter: drop-shadow(0 0 3px #e7ff68) drop-shadow(0 0 9px #a8ff64); transform-box: fill-box; transform-origin: center; animation: corePulse 2.8s ease-in-out infinite; }
 
 .balance {
   display: grid;
@@ -280,9 +300,9 @@
 }
 
 .compact {
-  width: 285px !important;
-  min-height: 550px;
-  padding: 16px;
+  width: 322px !important;
+  min-height: 600px;
+  padding: 20px;
   border-radius: 23px 23px 34px 23px;
 }
 
@@ -290,27 +310,32 @@
 .compact .edgeGlow { inset: 6px; border-radius: 17px 17px 28px 17px; }
 .compact .header { padding-bottom: 13px; }
 .compact .header small { font-size: 6px; }
-.compact .identity { grid-template-columns: minmax(0, 1fr) 48px; gap: 10px; padding: 14px 1px; }
-.compact .identity small { font-size: 7px; }
-.compact .identity b { font-size: 20px; }
-.compact .identity em { font-size: 6px; }
+.compact .identity { grid-template-columns: minmax(0, 1fr) 56px; gap: 12px; padding: 16px 1px; }
+.compact .identity small { font-size: 8px; }
+.compact .identity b { font-size: 24px; }
+.compact .identity em { font-size: 7px; }
 .compact .logo { border-radius: 13px 13px 18px 13px; }
-.compact .wave { height: 150px; margin-bottom: 14px; border-radius: 14px; }
+.compact .wave { height: 184px; margin-bottom: 18px; border-radius: 16px; }
 .compact .balance { gap: 5px; padding-bottom: 14px; }
 .compact .balance small { font-size: 6px; }
-.compact .balance strong { font-size: 34px; }
-.compact .balance > b { padding-bottom: 3px; font-size: 7px; }
+.compact .balance strong { font-size: 41px; }
+.compact .balance > b { padding-bottom: 3px; font-size: 8px; }
 .compact .facts { margin-top: 16px; }
 .compact .facts span { gap: 5px; padding-inline: 6px; }
-.compact .facts small { font-size: 5px; }
-.compact .facts b { font-size: 10px; }
-.compact .status { padding-top: 15px; font-size: 6px; }
+.compact .facts small { font-size: 6px; }
+.compact .facts b { font-size: 11px; }
+.compact .status { padding-top: 17px; font-size: 7px; }
 
 @keyframes noteDrift { 50% { translate: 0 -7px; rotate: .28deg; } }
 @keyframes surfaceSweep { 0%, 68%, 100% { transform: translateX(-105%); opacity: 0; } 79% { opacity: .7; } 94% { transform: translateX(105%); opacity: 0; } }
-@keyframes edgeOrbit { to { --edge-angle: 360deg; } }
 @keyframes edgeCurrent { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
+@keyframes edgeRunX { from { transform: translateX(0) scaleX(.68); opacity: .45; } to { transform: translateX(292%) scaleX(1.14); opacity: 1; } }
+@keyframes edgeRunY { from { transform: translateY(0) scaleY(.68); opacity: .48; } to { transform: translateY(350%) scaleY(1.18); opacity: 1; } }
 @keyframes waveMove { 0%, 100% { transform: translateX(-1.5%) scaleY(.94); } 50% { transform: translateX(1.8%) scaleY(1.08); } }
+@keyframes primaryCurrent { 50% { transform: translateX(1.2%) scaleY(1.025); } }
+@keyframes counterCurrent { 50% { transform: translateX(-1.4%) scaleY(.96); } }
+@keyframes filamentRun { to { stroke-dashoffset: -12; } }
+@keyframes corePulse { 50% { transform: scale(1.8); opacity: .68; } }
 @keyframes waveBreath { 50% { transform: scale(1.14); opacity: .64; } }
 @keyframes portalScan { 0%, 12% { transform: translateX(0); opacity: 0; } 30% { opacity: .7; } 78% { opacity: .42; } 100% { transform: translateX(560%); opacity: 0; } }
 @keyframes statusPulse { 50% { box-shadow: 0 0 0 5px rgba(214, 234, 75, .07), 0 0 18px rgba(214, 234, 75, .95); } }
@@ -323,9 +348,9 @@
   .identity { grid-template-columns: minmax(0, 1fr) 74px; gap: 16px; }
   .identity b { font-size: 34px; }
   .balance strong { font-size: clamp(48px, 14cqw, 60px); }
-  .compact { width: 232px !important; min-height: 475px; padding: 13px; }
-  .compact .wave { height: 126px; }
-  .compact .balance strong { font-size: 29px; }
+  .compact { width: 258px !important; min-height: 510px; padding: 14px; }
+  .compact .wave { height: 145px; }
+  .compact .balance strong { font-size: 32px; }
   .compact .facts b { font-size: 9px; }
 }
 
