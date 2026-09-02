@@ -66,7 +66,6 @@ export default function PositionLab() {
       </TextReveal>
 
       <div className={styles.builder}>
-        <div className={styles.builderProgress} aria-hidden="true"><i /><span>ASSEMBLY / 72%</span></div>
         <div className={styles.builderControls}>
           <div className={styles.controlLabel}><span>UNDERLYING TOKEN</span><b>01</b></div>
           <div className={`${styles.tokenChoice} ${refinement.tokenChoice}`}>
@@ -90,7 +89,7 @@ export default function PositionLab() {
           <div className={styles.builderOrbit} /><div className={styles.builderOrbit} />
           <div className={styles.assemblyRail} aria-hidden="true"><i /><i /><i /><i /></div>
           <div className={styles.noteStack}>
-            <BearerNote />
+            <BearerNote className={refinement.labNote} />
           </div>
         </div>
       </div>
