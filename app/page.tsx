@@ -63,7 +63,7 @@ export default function Home() {
         </TextReveal>
         <div className={`${styles.marketWorld} ${market.world}`}>
           <div className={`${styles.marketLandscapeStrip} ${market.landscape}`} aria-hidden="true">
-            <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
+            <Image src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1672} height={941} quality={95} sizes="100vw" priority />
           </div>
           <ScrollReveal className={`${styles.marketCards} ${market.cards}`}>
             <div className={`${styles.instrumentGrid} ${market.grid}`}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
