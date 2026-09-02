@@ -321,3 +321,8 @@
 .marketCards .instrument:hover:before{opacity:.9;transform:scale(1.1)}
 .marketCards .instrument:hover:after{transform:translateX(120%) rotate(9deg)!important}
 @media(max-width:600px){.marketCards .instrument:hover{transform:scale(1.006)!important}}
+
+/* Keep the market cards fully readable against the restored landscape. */
+.page .launch{justify-content:center;gap:0}
+.marketWorld>.scroll-reveal.marketCards:last-child{padding-top:74px!important;overflow:visible!important}
+.marketCards .instrumentGrid{overflow:visible!important}
