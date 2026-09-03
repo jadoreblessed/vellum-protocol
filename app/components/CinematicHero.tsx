@@ -8,6 +8,7 @@ import styles from "./CinematicHero.module.css";
 const contractAddress = process.env.NEXT_PUBLIC_VELLUM_CONTRACT_ADDRESS?.trim()
   ?? process.env.NEXT_PUBLIC_VELLUM_TEST_VAULT_ADDRESS?.trim()
   ?? "";
+const shortContractAddress = contractAddress ? `${contractAddress.slice(0, 5)}...${contractAddress.slice(-4)}` : "CA COMING SOON";
 
 function HeroLetters({ text, offset = 0 }: { text: string; offset?: number }) {
   return <>{[...text].map((letter, index) => <span className={styles.heroLetter} style={{ "--letter-delay": `${offset + index * 28}ms` } as React.CSSProperties} aria-hidden="true" key={`${letter}-${index}`}>{letter === " " ? "\u00a0" : letter}</span>)}</>;
@@ -48,15 +49,13 @@ export default function CinematicHero() {
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
             <Link href="/app" className={styles.primary}>Open Vellum <span>↗</span></Link>
-            <div className={styles.contractPanel}>
-              <div>
-                <small>CONTRACT ADDRESS</small>
-                <code>{contractAddress || "CA TO BE ANNOUNCED"}</code>
-              </div>
-              <button type="button" onClick={copyContractAddress} disabled={!contractAddress} aria-label="Copy contract address">
-                {copied ? "COPIED" : "COPY CA"}
-              </button>
-            </div>
+            <button type="button" className={styles.contractPanel} onClick={copyContractAddress} disabled={!contractAddress} aria-label="Copy Vellum contract address">
+              <span className={styles.contractLogo}><Image src="/brand/vellum-logo.png" alt="" fill sizes="48px" /></span>
+              <span className={styles.contractMeta}>
+                <b>VELLUM</b>
+                <code>{copied ? "COPIED TO CLIPBOARD" : shortContractAddress}</code>
+              </span>
+            </button>
           </div>
         </div>
       </div>
