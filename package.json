@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/compile-test-vault.mjs",
+    "verify:vault": "node scripts/verify-vellum-vault.mjs",
+    "deploy:vault": "node scripts/deploy-vellum-vault.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

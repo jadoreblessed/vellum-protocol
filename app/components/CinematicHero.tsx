@@ -42,13 +42,13 @@ export default function CinematicHero() {
 
   return (
     <section className={styles.hero}>
-      <Image className={styles.image} src="/brand/vellum-hero-landscape.webp" alt="" fill priority quality={100} sizes="100vw" />
+      <Image className={styles.image} src="/brand/vellum-hero-landscape.png" alt="" fill priority quality={100} sizes="100vw" />
       <div className={styles.content}>
         <div className={styles.copy}>
           <h1 aria-label="Positions that outlive the trade."><span className={styles.heroLine}><HeroLetters text="Positions that" /></span><em className={styles.heroLine}><HeroLetters text="outlive the trade." offset={15} /></em></h1>
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
-            <Link href="/app" className={styles.primary}>Open Vellum <span>↗</span></Link>
+            <Link href="/app" className={styles.primary}>Open Vellum</Link>
             <button type="button" className={styles.contractPanel} onClick={copyContractAddress} disabled={!contractAddress} aria-label="Copy Vellum contract address">
               <span className={styles.contractLogo}><Image src="/brand/instrument-tag.png" alt="" fill sizes="48px" /></span>
               <span className={styles.contractMeta}>

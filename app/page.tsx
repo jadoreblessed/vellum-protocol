@@ -49,7 +49,7 @@ export default function Home() {
       <header className={`${styles.nav} ${header.nav}`} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
-        <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
+        <Link href="/app" className={styles.launch}>Open app</Link>
       </header>
       <CinematicHero />
 

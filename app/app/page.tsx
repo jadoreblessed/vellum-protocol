@@ -8,7 +8,7 @@ import BearerNote from "../components/BearerNote";
 import motion from "../components/AppPreviewMotion.module.css";
 import refinement from "../components/AppVisualRefinement.module.css";
 import { createPublicClient, createWalletClient, custom, erc20Abi, formatEther, http, isAddress, parseUnits, type Address } from "viem";
-import { VELLUM_TEST_VAULT_ABI, VELLUM_TEST_VAULT_BYTECODE } from "../lib/vellumTestVaultArtifact";
+import { VELLUM_VAULT_ABI, VELLUM_VAULT_BYTECODE } from "../lib/vellumVaultArtifact";
 import { configuredVaultFor, DEFAULT_NETWORK_ID, getVellumNetwork, VELLUM_NETWORKS, vaultStorageKey, type VellumNetwork, type VellumToken } from "../lib/vellumNetworks";
 
 type EthereumProvider = {
@@ -201,8 +201,9 @@ export default function AppPage() {
       await ensureNetwork();
       const hash = await walletClient().deployContract({
         account: address as Address,
-        abi: VELLUM_TEST_VAULT_ABI,
-        bytecode: VELLUM_TEST_VAULT_BYTECODE,
+        abi: VELLUM_VAULT_ABI,
+        bytecode: VELLUM_VAULT_BYTECODE,
+        args: [address as Address],
       });
       setTransaction(hash);
       const receipt = await publicClientFor(network).waitForTransactionReceipt({ hash });
@@ -245,7 +246,7 @@ export default function AppPage() {
       if (parsedAmount <= BigInt(0)) throw new Error("Amount must be greater than zero");
       const [allowance, nextId] = await Promise.all([
         publicClientFor(network).readContract({ address: tokenContract, abi: erc20Abi, functionName: "allowance", args: [address as Address, vault] }),
-        publicClientFor(network).readContract({ address: vault, abi: VELLUM_TEST_VAULT_ABI, functionName: "nextTokenId" }),
+        publicClientFor(network).readContract({ address: vault, abi: VELLUM_VAULT_ABI, functionName: "nextTokenId" }),
       ]);
       if (allowance < parsedAmount) {
         const approveHash = await walletClient().writeContract({
@@ -261,7 +262,7 @@ export default function AppPage() {
       const wrapHash = await walletClient().writeContract({
         account: address as Address,
         address: vault,
-        abi: VELLUM_TEST_VAULT_ABI,
+        abi: VELLUM_VAULT_ABI,
         functionName: "wrap",
         args: [tokenContract, parsedAmount, BigInt(selectedTerm)],
       });
@@ -293,7 +294,7 @@ export default function AppPage() {
       const hash = await walletClient().writeContract({
         account: address as Address,
         address: vaultAddress as Address,
-        abi: VELLUM_TEST_VAULT_ABI,
+        abi: VELLUM_VAULT_ABI,
         functionName: "claim",
         args: [BigInt(noteId)],
       });
