@@ -7,6 +7,9 @@ import TextReveal from "../components/TextReveal";
 import BearerNote from "../components/BearerNote";
 import motion from "../components/AppPreviewMotion.module.css";
 import refinement from "../components/AppVisualRefinement.module.css";
+import { baseSepolia } from "viem/chains";
+import { createPublicClient, createWalletClient, custom, decodeEventLog, erc20Abi, http, isAddress, parseUnits, type Address } from "viem";
+import { VELLUM_TEST_VAULT_ABI, VELLUM_TEST_VAULT_BYTECODE } from "../lib/vellumTestVaultArtifact";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -23,21 +26,58 @@ const tokens = [
   { symbol: "$PONS", name: "Pons", color: "#2f5be8" },
   { symbol: "$IF", name: "What IF", color: "#c7432c" },
 ];
-const terms = ["NONE", "30D", "90D", "180D", "1Y", "CUSTOM"];
+const terms = ["30D", "90D", "180D", "1Y"];
 const shorten = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 const hexToChain = (hex: string) => Number.parseInt(hex, 16).toString();
+const publicClient = createPublicClient({ chain: baseSepolia, transport: http() });
+const configuredVault = process.env.NEXT_PUBLIC_VELLUM_TEST_VAULT_ADDRESS?.trim() ?? "";
+const termSeconds: Record<string, number> = { "30D": 30 * 86400, "90D": 90 * 86400, "180D": 180 * 86400, "1Y": 365 * 86400 };
+const messageFrom = (error: unknown) => error instanceof Error ? (error as Error & { shortMessage?: string }).shortMessage || error.message : "Transaction failed";
 
 export default function AppPage() {
   const [tab, setTab] = useState<"notes" | "wrap">("wrap");
   const [token, setToken] = useState(tokens[0]);
   const [term, setTerm] = useState("90D");
-  const [network, setNetwork] = useState("Robinhood Chain");
   const [amount, setAmount] = useState("250000");
+  const [tokenAddress, setTokenAddress] = useState("");
+  const [tokenDecimals, setTokenDecimals] = useState(18);
+  const [vaultAddress, setVaultAddress] = useState(configuredVault);
+  const [noteId, setNoteId] = useState("");
+  const [transaction, setTransaction] = useState("");
+  const [working, setWorking] = useState(false);
   const [address, setAddress] = useState("");
   const [chain, setChain] = useState("");
   const [balance, setBalance] = useState("");
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
+
+  function walletClient() {
+    if (!window.ethereum) throw new Error("Install MetaMask, Rabby, or Coinbase Wallet");
+    return createWalletClient({ chain: baseSepolia, transport: custom(window.ethereum as never) });
+  }
+
+  async function ensureBaseSepolia() {
+    if (!window.ethereum) throw new Error("Wallet not found");
+    const target = `0x${baseSepolia.id.toString(16)}`;
+    const current = await window.ethereum.request({ method: "eth_chainId" }) as string;
+    if (current === target) return;
+    try {
+      await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: target }] });
+    } catch (switchError) {
+      const code = (switchError as { code?: number }).code;
+      if (code !== 4902) throw switchError;
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+          chainId: target,
+          chainName: baseSepolia.name,
+          nativeCurrency: baseSepolia.nativeCurrency,
+          rpcUrls: [...baseSepolia.rpcUrls.default.http],
+          blockExplorerUrls: [baseSepolia.blockExplorers.default.url],
+        }],
+      });
+    }
+  }
 
   async function readWallet(nextAddress?: string) {
     const provider = window.ethereum;
@@ -76,6 +116,8 @@ export default function AppPage() {
   }
 
   useEffect(() => {
+    const rememberedVault = window.localStorage.getItem("vellum-test-vault");
+    if (!configuredVault && rememberedVault && isAddress(rememberedVault)) setVaultAddress(rememberedVault);
     if (!window.ethereum) return;
     void readWallet();
     const accountsChanged = (...args: unknown[]) => {
@@ -91,6 +133,143 @@ export default function AppPage() {
       window.ethereum?.removeListener?.("chainChanged", chainChanged);
     };
   }, []);
+
+  async function readTokenMetadata() {
+    setError("");
+    if (!isAddress(tokenAddress)) {
+      setError("Enter a valid Base Sepolia ERC-20 contract address");
+      return;
+    }
+    try {
+      const addressToRead = tokenAddress as Address;
+      const [name, symbol, decimals] = await Promise.all([
+        publicClient.readContract({ address: addressToRead, abi: erc20Abi, functionName: "name" }),
+        publicClient.readContract({ address: addressToRead, abi: erc20Abi, functionName: "symbol" }),
+        publicClient.readContract({ address: addressToRead, abi: erc20Abi, functionName: "decimals" }),
+      ]);
+      setToken({ symbol: `$${symbol}`, name, color: "#218547" });
+      setTokenDecimals(Number(decimals));
+    } catch (readError) {
+      setError(`Couldn't read this token: ${messageFrom(readError)}`);
+    }
+  }
+
+  async function deployTestVault() {
+    if (!address || !isAddress(address)) {
+      await connectWallet();
+      return;
+    }
+    setWorking(true);
+    setError("");
+    setTransaction("");
+    try {
+      await ensureBaseSepolia();
+      const hash = await walletClient().deployContract({
+        account: address as Address,
+        abi: VELLUM_TEST_VAULT_ABI,
+        bytecode: VELLUM_TEST_VAULT_BYTECODE,
+      });
+      setTransaction(hash);
+      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      if (!receipt.contractAddress) throw new Error("Deployment did not return a contract address");
+      setVaultAddress(receipt.contractAddress);
+      window.localStorage.setItem("vellum-test-vault", receipt.contractAddress);
+    } catch (deployError) {
+      setError(messageFrom(deployError));
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  async function wrapPosition() {
+    if (!address || !isAddress(address)) {
+      await connectWallet();
+      return;
+    }
+    if (!vaultAddress || !isAddress(vaultAddress)) {
+      setError("Deploy the Vellum test vault first");
+      return;
+    }
+    if (!isAddress(tokenAddress)) {
+      setError("Enter a valid Base Sepolia ERC-20 contract address");
+      return;
+    }
+    const selectedTerm = termSeconds[term];
+    if (!selectedTerm) {
+      setError("Choose a fixed term from 30D, 90D, 180D, or 1Y");
+      return;
+    }
+    setWorking(true);
+    setError("");
+    setTransaction("");
+    try {
+      await ensureBaseSepolia();
+      const tokenContract = tokenAddress as Address;
+      const vault = vaultAddress as Address;
+      const parsedAmount = parseUnits(amount, tokenDecimals);
+      if (parsedAmount <= BigInt(0)) throw new Error("Amount must be greater than zero");
+      const [allowance, nextId] = await Promise.all([
+        publicClient.readContract({ address: tokenContract, abi: erc20Abi, functionName: "allowance", args: [address as Address, vault] }),
+        publicClient.readContract({ address: vault, abi: VELLUM_TEST_VAULT_ABI, functionName: "nextTokenId" }),
+      ]);
+      if (allowance < parsedAmount) {
+        const approveHash = await walletClient().writeContract({
+          account: address as Address,
+          address: tokenContract,
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [vault, parsedAmount],
+        });
+        setTransaction(approveHash);
+        await publicClient.waitForTransactionReceipt({ hash: approveHash });
+      }
+      const wrapHash = await walletClient().writeContract({
+        account: address as Address,
+        address: vault,
+        abi: VELLUM_TEST_VAULT_ABI,
+        functionName: "wrap",
+        args: [tokenContract, parsedAmount, BigInt(selectedTerm)],
+      });
+      setTransaction(wrapHash);
+      await publicClient.waitForTransactionReceipt({ hash: wrapHash });
+      setNoteId(nextId.toString());
+      setTab("notes");
+    } catch (wrapError) {
+      setError(messageFrom(wrapError));
+    } finally {
+      setWorking(false);
+    }
+  }
+
+  async function claimPosition() {
+    if (!address || !isAddress(address)) {
+      await connectWallet();
+      return;
+    }
+    if (!vaultAddress || !isAddress(vaultAddress) || !noteId.trim()) {
+      setError("Enter a deployed vault and note ID");
+      return;
+    }
+    setWorking(true);
+    setError("");
+    setTransaction("");
+    try {
+      await ensureBaseSepolia();
+      const hash = await walletClient().writeContract({
+        account: address as Address,
+        address: vaultAddress as Address,
+        abi: VELLUM_TEST_VAULT_ABI,
+        functionName: "claim",
+        args: [BigInt(noteId)],
+      });
+      setTransaction(hash);
+      await publicClient.waitForTransactionReceipt({ hash });
+    } catch (claimError) {
+      setError(messageFrom(claimError));
+    } finally {
+      setWorking(false);
+    }
+  }
 
   return (
     <main className={`app-shell ${refinement.app}`}>
@@ -123,17 +302,23 @@ export default function AppPage() {
             </div>
 
             {tab === "notes" ? (
-              <div className="notice">{address ? "No active notes found for this wallet yet. Connect the deployed contract to load onchain notes." : "No active notes in this wallet. Connect a wallet to continue."}</div>
+              <>
+                <label className="form-label mono"><span>Note ID</span><span>BASE SEPOLIA</span></label>
+                <input className="field" value={noteId} onChange={(event) => setNoteId(event.target.value)} placeholder="Enter Vellum note ID" inputMode="numeric" />
+                <div className="notice">{vaultAddress ? `Vault ${shorten(vaultAddress)} · claim is available after maturity` : "Deploy the Vellum test vault in Wrap first."}</div>
+                <div className="wrap-action">
+                  <div><div className="label">Network</div><div className="position" style={{ fontSize: 30 }}>Base Sepolia</div></div>
+                  <button className="wrap-submit" onClick={claimPosition} disabled={working}><span>{working ? "Confirming..." : "Claim note"}</span><b>↗</b></button>
+                </div>
+              </>
             ) : (
               <>
                 <div className="network-fields">
                   <label className="form-label mono"><span>Network</span><span>CHAIN</span></label>
-                  <select className="field network-select" value={network} onChange={(event) => setNetwork(event.target.value)}>
-                    <option>Robinhood Chain</option><option>Ethereum</option><option>Base</option><option>Polygon</option>
-                  </select>
+                  <div className="field network-select">Base Sepolia · testnet</div>
                   <label className="form-label mono"><span>Token address</span><span>ERC-20 STANDARD</span></label>
                 </div>
-                <input className="field" placeholder="Paste the ERC-20 contract address" />
+                <input className="field" value={tokenAddress} onChange={(event) => setTokenAddress(event.target.value)} onBlur={() => void readTokenMetadata()} placeholder="Paste the Base Sepolia ERC-20 contract address" />
                 <div className="token-pills">
                   {tokens.map((item) => (
                     <button key={item.symbol} className={`pill token-pill ${token.symbol === item.symbol ? "active" : ""}`} onClick={() => setToken(item)}>
@@ -147,11 +332,13 @@ export default function AppPage() {
                 <div className="term-pills">
                   {terms.map((item) => <button key={item} className={`pill ${term === item ? "active" : ""}`} onClick={() => setTerm(item)}>{item}</button>)}
                 </div>
-                <div className="notice">{network} · {token.name} uses the ERC-20 token standard · unlocks 04 NOV 2026</div>
+                <div className="notice">Base Sepolia only · connect a test ERC-20 · this test vault is not for real funds</div>
+                {!vaultAddress && <button className="wrap-submit" onClick={deployTestVault} disabled={working}><span>{working ? "Deploying..." : "Deploy Vellum test vault"}</span><b>↗</b></button>}
+                {vaultAddress && <div className="notice">Test vault ready · {shorten(vaultAddress)}</div>}
                 <div className="wrap-action">
-                  <div><div className="label">Days</div><div className="position" style={{ fontSize: 52 }}>90</div></div>
-                  <div><div className="label">Entry · 30-min TWAP</div><b style={{ fontFamily: "var(--mono)" }}>—</b></div>
-                  <button className="wrap-submit" onClick={address ? () => setError("Wrap contract is not configured yet") : connectWallet}><span>{address ? "Approve and wrap" : "Connect to wrap"}</span><b>↗</b></button>
+                  <div><div className="label">Term</div><div className="position" style={{ fontSize: 38 }}>{term}</div></div>
+                  <div><div className="label">Token</div><b style={{ fontFamily: "var(--mono)" }}>{token.symbol}</b></div>
+                  <button className="wrap-submit" onClick={wrapPosition} disabled={working}><span>{working ? "Confirming..." : address ? "Approve and wrap" : "Connect to wrap"}</span><b>↗</b></button>
                 </div>
               </>
             )}
@@ -166,6 +353,7 @@ export default function AppPage() {
           </section>
         </div>
       </div>
+      {transaction && <a className="wallet-error" href={`${baseSepolia.blockExplorers.default.url}/tx/${transaction}`} target="_blank" rel="noreferrer">View transaction on Base Sepolia ↗</a>}
     </main>
   );
 }
