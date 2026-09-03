@@ -50,7 +50,7 @@ export default function CinematicHero() {
           <div className={styles.actions}>
             <Link href="/app" className={styles.primary}>Open Vellum <span>↗</span></Link>
             <button type="button" className={styles.contractPanel} onClick={copyContractAddress} disabled={!contractAddress} aria-label="Copy Vellum contract address">
-              <span className={styles.contractLogo}><Image src="/brand/vellum-logo.png" alt="" fill sizes="48px" /></span>
+              <span className={styles.contractLogo}><Image src="/brand/instrument-tag.png" alt="" fill sizes="48px" /></span>
               <span className={styles.contractMeta}>
                 <b>VELLUM</b>
                 <code>{copied ? "COPIED TO CLIPBOARD" : shortContractAddress}</code>
