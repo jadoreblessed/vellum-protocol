@@ -28,7 +28,7 @@ export default function CinematicHero() {
 
   return (
     <section className={styles.hero}>
-      <Image className={styles.image} src="/brand/terminal-fibreworld.png" alt="" fill priority quality={100} sizes="100vw" />
+      <Image className={styles.image} src="/brand/vellum-fibre-valley-v1.webp" alt="" fill priority quality={100} sizes="100vw" />
       <div className={styles.content}>
         <div className={styles.copy}>
           <h1 aria-label="Positions that outlive the trade."><span className={styles.heroLine}><HeroLetters text="Positions that" /></span><em className={styles.heroLine}><HeroLetters text="outlive the trade." offset={15} /></em></h1>
