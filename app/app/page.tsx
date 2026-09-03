@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TokenLogo from "../components/TokenLogo";
 import TextReveal from "../components/TextReveal";
 import BearerNote from "../components/BearerNote";
@@ -22,9 +22,9 @@ declare global {
 }
 
 const tokens = [
-  { symbol: "$CASHCAT", name: "Cash Cat", color: "#218547" },
-  { symbol: "$PONS", name: "Pons", color: "#2f5be8" },
-  { symbol: "$IF", name: "What IF", color: "#c7432c" },
+  { symbol: "$CASHCAT", name: "Cash Cat", color: "#218547", accent: "#d8ef61", mark: "$0.0870" },
+  { symbol: "$PONS", name: "Pons", color: "#2f5be8", accent: "#a9b8ff", mark: "$0.0365" },
+  { symbol: "$IF", name: "What IF", color: "#c7432c", accent: "#ffb36d", mark: "$0.0114" },
 ];
 const terms = ["30D", "90D", "180D", "1Y"];
 const shorten = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -50,6 +50,17 @@ export default function AppPage() {
   const [balance, setBalance] = useState("");
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
+  const [previewRevision, setPreviewRevision] = useState(0);
+  const hasPreviewMounted = useRef(false);
+
+  useEffect(() => {
+    if (!hasPreviewMounted.current) {
+      hasPreviewMounted.current = true;
+      return;
+    }
+    const revealTimer = window.setTimeout(() => setPreviewRevision((revision) => revision + 1), 180);
+    return () => window.clearTimeout(revealTimer);
+  }, [token.symbol, amount, term, chain]);
 
   function walletClient() {
     if (!window.ethereum) throw new Error("Install MetaMask, Rabby, or Coinbase Wallet");
@@ -147,7 +158,7 @@ export default function AppPage() {
         publicClient.readContract({ address: addressToRead, abi: erc20Abi, functionName: "symbol" }),
         publicClient.readContract({ address: addressToRead, abi: erc20Abi, functionName: "decimals" }),
       ]);
-      setToken({ symbol: `$${symbol}`, name, color: "#218547" });
+      setToken({ symbol: `$${symbol}`, name, color: "#218547", accent: "#d8ef61", mark: "$—" });
       setTokenDecimals(Number(decimals));
     } catch (readError) {
       setError(`Couldn't read this token: ${messageFrom(readError)}`);
@@ -347,7 +358,19 @@ export default function AppPage() {
           <section className={`preview-card ${motion.preview}`}>
             {tab === "wrap" ? (
               <div className="app-bearer-wrap">
-                <BearerNote className="app-note-enter" symbol={token.symbol} name={token.name} color={token.color} amount={amount || "250,000"} term={term === "NONE" ? "OPEN" : term} />
+                <BearerNote
+                  key={previewRevision}
+                  className="app-note-enter"
+                  symbol={token.symbol}
+                  name={token.name}
+                  color={token.color}
+                  accent={token.accent}
+                  amount={amount || "250,000"}
+                  term={term === "NONE" ? "OPEN" : term}
+                  mark={token.mark}
+                  network={chain === String(baseSepolia.id) ? "BASE SEPOLIA" : "BASE SEPOLIA TESTNET"}
+                  signalOnView={false}
+                />
               </div>
             ) : <div className="empty-card">NO NOTES YET</div>}
           </section>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import CinematicHero from "./components/CinematicHero";
+import MarketParallax from "./components/MarketParallax";
 import PositionLab from "./components/PositionLab";
 import ScrollClock from "./components/ScrollClock";
 import ScrollReveal from "./components/ScrollReveal";
@@ -48,7 +49,7 @@ export default function Home() {
       <header className={`${styles.nav} ${header.nav}`} data-floating-nav>
         <Link href="/" className={styles.wordmark}>vellum<span>.</span></Link>
         <nav><Link href="#market">Market</Link><Link href="#how">How it works</Link><Link href="/protocol">Protocol</Link><Link href="/docs">Docs</Link></nav>
-        <Link href="/app" className={styles.launch}>Open app</Link>
+        <Link href="/app" className={styles.launch}>Open app <span>↗</span></Link>
       </header>
       <CinematicHero />
 
@@ -61,14 +62,14 @@ export default function Home() {
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Every note is a readable onchain object with its amount, mark, maturity and current bearer attached.</p><Link href="/notes">Browse all notes ↗</Link></div>
         </TextReveal>
-        <div className={`${styles.marketWorld} ${market.world}`}>
+        <MarketParallax className={`${styles.marketWorld} ${market.world}`}>
           <div className={`${styles.marketLandscapeStrip} ${market.landscape}`} aria-hidden="true">
             <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority />
           </div>
           <ScrollReveal className={`${styles.marketCards} ${market.cards}`}>
             <div className={`${styles.instrumentGrid} ${market.grid}`}>{instruments.map((item, index) => <InstrumentCard item={item} index={index} key={item.symbol} />)}</div>
           </ScrollReveal>
-        </div>
+        </MarketParallax>
       </section>
 
       <section className={styles.flow} id="how">

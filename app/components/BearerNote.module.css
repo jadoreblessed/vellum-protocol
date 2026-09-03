@@ -7,21 +7,26 @@
   box-sizing: border-box;
   flex-direction: column;
   overflow: hidden;
-  border: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, #f4f1e5);
   border-radius: 38px 38px 54px 38px;
   background:
     radial-gradient(circle at 17% 7%, rgba(255, 255, 255, .09), transparent 27%),
-    radial-gradient(circle at 83% 76%, rgba(195, 218, 67, .055), transparent 35%),
+    radial-gradient(circle at 83% 76%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 35%),
+    repeating-linear-gradient(116deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(24deg, rgba(196, 224, 178, .012) 0 1px, transparent 1px 12px),
     linear-gradient(145deg, #2a2a25 0%, #151713 38%, #080a07 100%);
   color: #f5f1e5;
   box-shadow:
     inset 0 0 0 3px #151713,
     inset 0 0 0 4px rgba(239, 237, 220, .27),
     inset 0 0 64px rgba(255, 255, 255, .045),
+    0 0 0 1px color-mix(in srgb, var(--accent) 26%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent) 24%, transparent),
+    0 0 34px color-mix(in srgb, var(--accent) 14%, transparent),
     0 38px 90px rgba(0, 0, 0, .58);
   isolation: isolate;
   container-type: inline-size;
-  animation: noteDrift 9s ease-in-out infinite;
+  animation: none;
 }
 
 .note::before {
@@ -29,23 +34,17 @@
   position: absolute;
   z-index: -1;
   inset: 10px;
-  border: 0;
+  border: 1px solid rgba(239, 236, 218, .27);
   border-radius: 29px 29px 45px 29px;
-  background: radial-gradient(ellipse at 42% 0%, rgba(255, 255, 255, .065), transparent 40%);
+  background:
+    radial-gradient(ellipse at 42% 0%, rgba(255, 255, 255, .065), transparent 40%),
+    radial-gradient(rgba(240, 238, 218, .11) .45px, transparent .8px);
+  background-size: auto, 8px 9px;
   opacity: .78;
   pointer-events: none;
 }
 
-.note::after {
-  content: "";
-  position: absolute;
-  z-index: 6;
-  inset: 0;
-  background: linear-gradient(108deg, transparent 39%, rgba(255, 252, 226, .12) 48%, transparent 57%);
-  transform: translateX(-105%);
-  animation: surfaceSweep 9s ease-in-out infinite;
-  pointer-events: none;
-}
+.note::after { display: none; }
 
 .edgeGlow {
   position: absolute;
@@ -53,10 +52,10 @@
   inset: 7px;
   width: auto;
   border-radius: 31px 31px 47px 31px;
-  border: 0;
-  box-shadow: none;
-  opacity: 1;
-  animation: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 68%, #f7f4df);
+  box-shadow: inset 0 0 9px color-mix(in srgb, var(--accent) 13%, transparent), 0 0 7px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 20px color-mix(in srgb, var(--accent) 17%, transparent);
+  opacity: .92;
+  animation: edgeCurrent 3.8s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -65,8 +64,8 @@
   content: "";
   position: absolute;
   border-radius: 99px;
-  background: #efff9b;
-  box-shadow: 0 0 7px #e6ff70, 0 0 16px rgba(195, 255, 79, .94), 0 0 28px rgba(139, 255, 104, .58);
+  background: var(--accent);
+  box-shadow: 0 0 7px var(--accent), 0 0 16px color-mix(in srgb, var(--accent) 80%, transparent), 0 0 28px color-mix(in srgb, var(--accent) 48%, transparent);
 }
 
 .edgeGlow::before {
@@ -97,7 +96,7 @@
   letter-spacing: -.055em;
 }
 
-.header b span { color: #d7e84f; }
+.header b span { color: var(--accent); }
 
 .header small {
   color: rgba(245, 241, 227, .78);
@@ -125,7 +124,7 @@
 .identity small,
 .balance small,
 .facts small {
-  color: #d4e751;
+  color: var(--accent);
   font: 700 clamp(10px, 1.75cqw, 13px) var(--font-mono), monospace;
   letter-spacing: .12em;
 }
@@ -167,8 +166,8 @@
   border-radius: 23px;
   background:
     linear-gradient(90deg, transparent 49.8%, rgba(220, 235, 130, .11) 50%, transparent 50.2%),
-    radial-gradient(circle at 50% 50%, rgba(218, 244, 91, .19), transparent 8%),
-    radial-gradient(ellipse at 50% 50%, rgba(133, 161, 42, .15), transparent 58%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 8%),
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--accent) 17%, transparent), transparent 58%),
     linear-gradient(145deg, #010201, #090b08);
   box-shadow: inset 0 0 0 5px #151713, inset 0 0 0 6px rgba(241, 238, 220, .16), inset 0 0 36px rgba(200, 224, 78, .055), 0 12px 28px rgba(0, 0, 0, .28);
 }
@@ -177,9 +176,9 @@
   content: "";
   position: absolute;
   inset: 8%;
-  background: radial-gradient(ellipse at 50% 53%, rgba(208, 231, 76, .2), transparent 55%);
+  background: radial-gradient(ellipse at 50% 53%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%);
   filter: blur(15px);
-  animation: waveBreath 6s ease-in-out infinite;
+  opacity: .68;
 }
 
 .wave::after {
@@ -190,10 +189,13 @@
   bottom: 10%;
   left: -20%;
   width: 28%;
-  background: linear-gradient(90deg, transparent, rgba(234, 255, 132, .14), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 66%, #fff) 48%, transparent);
   filter: blur(4px);
-  animation: portalScan 6.8s ease-in-out infinite;
+  opacity: 0;
+  pointer-events: none;
 }
+
+.signalPlayed .wave::after { animation: claimSignalSweep 1.18s cubic-bezier(.22,.76,.24,1) .15s both; }
 
 .waveSvg {
   position: absolute;
@@ -202,18 +204,14 @@
   width: 114%;
   height: 86%;
   overflow: visible;
-  filter: drop-shadow(0 0 5px rgba(214, 231, 104, .24));
-  animation: waveMove 7.5s cubic-bezier(.45, .04, .55, .96) infinite;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 24%, transparent));
 }
 
 .waveSvg path { fill: none; stroke: #e2dec9; stroke-width: .42; opacity: .74; }
 .waveSvg path:nth-child(2n) { stroke: #f7f3de; opacity: .48; }
-.waveSvg path:nth-child(3n) { stroke: #d1e342; stroke-width: .58; opacity: .9; }
-.primaryWave { animation: primaryCurrent 7.5s ease-in-out infinite; }
-.counterWave { animation: counterCurrent 8.5s ease-in-out infinite; }
-.counterWave path { stroke: #9ff276; stroke-width: .34; stroke-dasharray: 2.4 1.8; opacity: .34; animation: filamentRun 5.6s linear infinite; }
-.counterWave path:nth-child(2n) { stroke: #e8ff86; opacity: .48; animation-direction: reverse; }
-.coreDot { fill: #edff7f; filter: drop-shadow(0 0 3px #e7ff68) drop-shadow(0 0 9px #a8ff64); transform-box: fill-box; transform-origin: center; animation: corePulse 2.8s ease-in-out infinite; }
+.waveSvg path:nth-child(3n) { stroke: var(--accent); stroke-width: .58; opacity: .9; }
+.counterWave path { stroke: color-mix(in srgb, var(--accent) 82%, #e9f4e2); stroke-width: .34; stroke-dasharray: 2.4 1.8; opacity: .34; }
+.counterWave path:nth-child(2n) { stroke: color-mix(in srgb, var(--accent) 62%, #f7f3de); opacity: .48; }
 
 .balance {
   display: grid;
@@ -239,7 +237,7 @@
 
 .balance > b {
   padding-bottom: 7px;
-  color: #d7e94f;
+  color: var(--accent);
   font: 700 clamp(10px, 1.9cqw, 14px) var(--font-mono), monospace;
   letter-spacing: .09em;
   white-space: nowrap;
@@ -268,27 +266,16 @@
   white-space: nowrap;
 }
 
-.facts span:last-child b { color: #dced56; }
+.facts span:last-child b { color: var(--accent); }
 
 .status {
   display: flex;
   align-items: center;
-  gap: 10px;
   margin-top: auto;
   padding: clamp(22px, 4cqw, 30px) 3px 0;
   color: rgba(239, 236, 220, .68);
   font: 700 clamp(9px, 1.65cqw, 12px) var(--font-mono), monospace;
   letter-spacing: .12em;
-}
-
-.status i {
-  width: 8px;
-  aspect-ratio: 1;
-  flex: none;
-  border-radius: 50%;
-  background: #d8e94f;
-  box-shadow: 0 0 14px rgba(214, 234, 75, .8);
-  animation: statusPulse 3s ease-in-out infinite;
 }
 
 .compact {
@@ -318,18 +305,10 @@
 .compact .facts b { font-size: 11px; }
 .compact .status { padding-top: 17px; font-size: 7px; }
 
-@keyframes noteDrift { 50% { translate: 0 -7px; rotate: .28deg; } }
-@keyframes surfaceSweep { 0%, 68%, 100% { transform: translateX(-105%); opacity: 0; } 79% { opacity: .7; } 94% { transform: translateX(105%); opacity: 0; } }
+@keyframes claimSignalSweep { from { transform: translateX(0); opacity: 0; } 16% { opacity: .65; } 74% { opacity: .42; } to { transform: translateX(530%); opacity: 0; } }
+@keyframes edgeCurrent { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
 @keyframes edgeRunX { from { transform: translateX(0) scaleX(.68); opacity: .45; } to { transform: translateX(292%) scaleX(1.14); opacity: 1; } }
 @keyframes edgeRunY { from { transform: translateY(0) scaleY(.68); opacity: .48; } to { transform: translateY(350%) scaleY(1.18); opacity: 1; } }
-@keyframes waveMove { 0%, 100% { transform: translateX(-1.5%) scaleY(.94); } 50% { transform: translateX(1.8%) scaleY(1.08); } }
-@keyframes primaryCurrent { 50% { transform: translateX(1.2%) scaleY(1.025); } }
-@keyframes counterCurrent { 50% { transform: translateX(-1.4%) scaleY(.96); } }
-@keyframes filamentRun { to { stroke-dashoffset: -12; } }
-@keyframes corePulse { 50% { transform: scale(1.8); opacity: .68; } }
-@keyframes waveBreath { 50% { transform: scale(1.14); opacity: .64; } }
-@keyframes portalScan { 0%, 12% { transform: translateX(0); opacity: 0; } 30% { opacity: .7; } 78% { opacity: .42; } 100% { transform: translateX(560%); opacity: 0; } }
-@keyframes statusPulse { 50% { box-shadow: 0 0 0 5px rgba(214, 234, 75, .07), 0 0 18px rgba(214, 234, 75, .95); } }
 
 @media (max-width: 650px) {
   .note { min-height: 680px; padding: 24px; border-radius: 30px 30px 43px 30px; }
@@ -347,10 +326,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .note,
-  .note::after,
   .edgeGlow,
   .wave::before,
   .wave::after,
-  .waveSvg,
-  .status i { animation: none !important; }
+  .signalPlayed .wave::after { animation: none !important; }
 }
