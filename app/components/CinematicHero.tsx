@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./CinematicHero.module.css";
 
-const contractAddress = process.env.NEXT_PUBLIC_VELLUM_CONTRACT_ADDRESS?.trim() ?? "";
+const contractAddress = process.env.NEXT_PUBLIC_VELLUM_CONTRACT_ADDRESS?.trim()
+  ?? process.env.NEXT_PUBLIC_VELLUM_TEST_VAULT_ADDRESS?.trim()
+  ?? "";
 
 function HeroLetters({ text, offset = 0 }: { text: string; offset?: number }) {
   return <>{[...text].map((letter, index) => <span className={styles.heroLetter} style={{ "--letter-delay": `${offset + index * 28}ms` } as React.CSSProperties} aria-hidden="true" key={`${letter}-${index}`}>{letter === " " ? "\u00a0" : letter}</span>)}</>;
