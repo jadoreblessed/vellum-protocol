@@ -379,3 +379,10 @@ body{font-family:var(--font-body),Arial,sans-serif}
 @keyframes appSealCopy{0%,100%{opacity:.8}50%{opacity:1;text-shadow:0 0 18px rgba(207,255,98,.22)}}
 @media(max-width:650px){.app-shell .app-note .note{min-height:520px;padding:14px;border-radius:21px 21px 38px 21px}.app-shell .app-note .note-band{margin-top:12px;padding:12px}.app-shell .deposit-state{height:218px!important;margin:15px 3px!important}.app-shell .seal-mark{width:74px;height:74px}.app-shell .seal-mark i{width:50px;height:50px}.app-shell .seal-mark i:nth-child(2){width:31px;height:31px}.app-shell .deposit-state>strong{font-size:17px!important}}
 @media(prefers-reduced-motion:reduce){.app-shell .app-note.note-wrap,.app-shell .app-note .note-band,.app-shell .seal-mark,.app-shell .deposit-state>strong{animation:none!important}}
+
+/* Keep every navigation mark and primary call-to-action on the same visual system. */
+.button{border-radius:999px}
+.doc-shell .nav .wordmark:after,.app-shell .app-nav .wordmark:after{display:none}
+.doc-shell .nav .wordmark span{color:#cfff62}
+.doc-shell .doc-hero .button{display:inline-flex;align-items:center;gap:12px;margin-top:30px;padding:14px 20px;border:0;border-radius:999px;background:#d2ff54;color:#071008;font:650 13px var(--font-body),sans-serif;letter-spacing:-.02em;text-transform:none}
+.doc-shell .doc-hero .button:hover{background:#edffc0;color:#071008;transform:translateY(-2px)}
