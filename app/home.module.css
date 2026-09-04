@@ -402,3 +402,9 @@
 .page .footerOnly{padding-top:96px}
 .page .footerOnly .footer{margin-top:0}
 @media(max-width:620px){.page .footerOnly{padding-top:76px}}
+
+/* The landscape and the ticket provide the colour; surrounding surfaces stay neutral. */
+.page .market,.page .flow,.page .useCases,.page .anatomy,.page .docs{background:#020402!important}
+.page .useCases{background-image:none!important}
+.page .anatomyOriginal{background:#050b07!important}
+.page .anatomyOriginal .anatomyTicket:before{display:none!important}

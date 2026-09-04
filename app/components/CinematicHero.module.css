@@ -1,6 +1,6 @@
 .hero{position:relative;min-height:max(900px,100svh);overflow:hidden;isolation:isolate;background:#020402;color:#f4fbf2}
 .image{position:absolute!important;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:brightness(.91) saturate(1.22) contrast(1.11)}
-.hero:before{content:"";position:absolute;z-index:1;inset:0;background:radial-gradient(circle at 12% 10%,rgba(121,255,151,.08),transparent 27%),linear-gradient(180deg,rgba(1,7,4,.35) 0%,rgba(1,5,3,.08) 38%,rgba(1,5,3,.3) 69%,#010704 100%)}
+.hero:before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(1,7,4,.42) 0%,rgba(1,5,3,.12) 38%,rgba(1,5,3,.34) 69%,#010704 100%)}
 .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:min(1000px,calc(100% - 56px));min-height:inherit;margin:auto;padding:188px 0 106px;text-align:center}
 .copy{max-width:940px;animation:copyIn .9s .12s cubic-bezier(.2,.8,.2,1) both}
 .copy h1{margin:0;color:#f3fbf1;font:650 clamp(64px,7vw,116px)/.9 var(--font-display),Arial,sans-serif;letter-spacing:-.09em;text-wrap:balance}

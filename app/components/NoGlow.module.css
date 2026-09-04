@@ -15,3 +15,10 @@
 .site :global(.marketWorld)::after,
 .site :global(.preview-card)::after{display:none!important}
 .site :global(.anatomyOrb i:first-child){box-shadow:none!important}
+.site :global(.app-shell),.site :global(.doc-shell){background:#030603!important}
+.site :global(.app-shell .preview-card){background:#060b07!important;box-shadow:0 38px 90px rgba(0,0,0,.3)!important}
+.site :global(.app-shell .preview-card)::before{display:none!important}
+.site :global(.app-shell .app-form-panel)::before{display:none!important}
+.site :global(.app-shell .deposit-state){background:linear-gradient(145deg,#061109,#0b1d11)!important}
+.site :global(.app-shell .seal-mark){box-shadow:inset 0 0 24px rgba(0,0,0,.14),0 14px 34px rgba(0,0,0,.2)!important}
+.site :global(.doc-shell .doc-hero){background:#030603!important}
