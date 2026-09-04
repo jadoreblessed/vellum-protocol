@@ -28,10 +28,8 @@ export default function CinematicHero() {
       const travel = Math.max(1, bounds.height * 0.78);
       const progress = Math.min(1, Math.max(0, -bounds.top / travel));
 
-      hero.style.setProperty("--hero-image-y", `${Math.round(progress * -72)}px`);
-      hero.style.setProperty("--hero-image-scale", (1 + progress * 0.105).toFixed(3));
-      hero.style.setProperty("--hero-copy-y", `${Math.round(progress * -54)}px`);
-      hero.style.setProperty("--hero-copy-opacity", (1 - progress * 0.34).toFixed(3));
+      hero.style.setProperty("--hero-copy-y", `${Math.round(progress * -60)}px`);
+      hero.style.setProperty("--hero-copy-opacity", (1 - progress).toFixed(3));
     };
 
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
