@@ -2,15 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { shortenVellumVaultAddress, useVellumVaultAddress } from "../lib/vellumVaultAddress";
+import { useEffect, useRef } from "react";
 import styles from "./CinematicHero.module.css";
 
 export default function CinematicHero() {
-  const [copied, setCopied] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
-  const contractAddress = useVellumVaultAddress();
-  const shortContractAddress = shortenVellumVaultAddress(contractAddress);
 
   useEffect(() => {
     const nav = document.querySelector<HTMLElement>("[data-floating-nav]");
@@ -44,13 +40,6 @@ export default function CinematicHero() {
     };
   }, []);
 
-  async function copyContractAddress() {
-    if (!contractAddress) return;
-    await navigator.clipboard.writeText(contractAddress);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  }
-
   return (
     <section ref={heroRef} className={styles.hero}>
       <Image className={styles.image} src="/brand/vellum-hero-forest-pool.webp" alt="" fill priority quality={100} sizes="100vw" />
@@ -65,12 +54,11 @@ export default function CinematicHero() {
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
             <Link href="/app" className={styles.primary}>Open Vellum</Link>
-            <button type="button" className={styles.contractPanel} onClick={copyContractAddress} aria-label={contractAddress ? "Copy Vellum contract address" : "Vellum contract address is not available yet"} disabled={!contractAddress}>
+            <button type="button" className={styles.contractPanel} aria-label="Vellum contract address coming soon" disabled>
               <span className={styles.contractLogo}><Image src="/brand/instrument-tag.png" alt="" fill sizes="48px" /></span>
               <span className={styles.contractMeta}>
-                <code>{copied ? "COPIED TO CLIPBOARD" : contractAddress ? shortContractAddress : "SET AFTER DEPLOY"}</code>
+                <code>CA COMING SOON</code>
               </span>
-              <span className={styles.contractCopy} aria-hidden="true">{copied ? "COPIED" : contractAddress ? "COPY" : "PENDING"}</span>
             </button>
           </div>
           <a className={styles.socialLink} href="https://x.com/VellumRH" target="_blank" rel="noreferrer" aria-label="VellumRH on X"><span>X</span><b>VellumRH</b></a>
