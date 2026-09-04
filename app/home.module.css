@@ -409,4 +409,5 @@
 .page .anatomyOriginal{background:#050b07!important}
 .page .anatomyOriginal .anatomyTicket:before{display:none!important}
 .page .footerRidge{background:#020402!important}
-.page .footerRidge img{opacity:.22!important;filter:grayscale(1) brightness(.46)!important}
+.page .footerRidge::before{display:none!important}
+.page .footerRidge img{opacity:1!important;filter:saturate(.82) brightness(.98) contrast(1.04)!important}
