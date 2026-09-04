@@ -13,3 +13,15 @@
 @media(max-width:1200px){.app :global(.app-note-enter){width:min(100%,550px)!important}}
 @media(max-width:650px){.app :global(.app-bearer-wrap){padding:10px 0}.app :global(.app-note-enter){width:min(100%,430px)!important}}
 @media(prefers-reduced-motion:reduce){.app :global(.app-bearer-wrap)::before,.app :global(.app-note-enter),.app :global(.app-note-enter)>:not(:first-child){animation:none!important}}
+
+/* Keep the working surface direct: controls and preview start on the same top edge. */
+.app :global(.app-layout){align-items:start!important}
+.app :global(.app-form-panel){padding-top:0!important}
+.app :global(.preview-card){align-self:start!important}
+.app :global(.app-bearer-wrap){padding-top:0!important}
+.app :global(.wrap-submit){display:inline-flex!important;min-height:48px!important;padding:0 20px!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:999px!important;background:#d8ff76!important;color:#071008!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.42)!important;font:650 12px var(--font-body),sans-serif!important;letter-spacing:-.01em!important;text-transform:none!important;transition:transform .22s ease,background .22s ease!important}
+.app :global(.wrap-submit:hover:not(:disabled)){gap:18px!important;transform:translateY(-2px)!important;background:#ecffb9!important;color:#071008!important}
+.app :global(.wrap-submit:disabled){cursor:not-allowed!important;opacity:.62!important}
+.app :global(.vault-required){border:1px solid rgba(216,255,118,.34)!important;background:rgba(216,255,118,.12)!important;color:#dfff9b!important;box-shadow:none!important}
+.app :global(.notes-action){display:flex!important;justify-content:flex-end!important}
+@media(min-width:1001px){.app :global(.preview-card){position:sticky!important;top:96px!important}}

@@ -79,12 +79,12 @@ export default function BearerNote({
       aria-label={`${name} bearer note`}
     >
       <span className={styles.edgeGlow} aria-hidden="true" />
-      <header className={styles.header}><b>vellum<span>.</span></b><small>{network} / 000421</small></header>
+      <header className={styles.header}><b>vellum<span>.</span></b><small>{network ? `${network} / ` : ""}000421</small></header>
       <div className={styles.identity}><div><small>{symbol}</small><b>{name}</b><em>BEARER POSITION</em></div><span className={styles.logo}><TokenLogo symbol={symbol} color={color} /></span></div>
       <div className={styles.wave}><WaveField seed={symbol} /></div>
       <div className={styles.balance}><small>BALANCE</small><strong>{displayAmount}</strong><b>{symbol.replace("$", "")}</b></div>
       <div className={styles.facts}><span><small>ENTRY MARK</small><b>{mark}</b></span><span><small>TERM</small><b>{displayTerm}</b></span><span><small>CLAIM</small><b>ACTIVE</b></span></div>
-      <footer className={styles.status}>TRANSFERABLE · {network}</footer>
+      <footer className={styles.status}>TRANSFERABLE{network ? ` · ${network}` : ""}</footer>
     </article>
   );
 }

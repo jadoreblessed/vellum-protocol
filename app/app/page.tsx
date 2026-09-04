@@ -8,8 +8,9 @@ import BearerNote from "../components/BearerNote";
 import motion from "../components/AppPreviewMotion.module.css";
 import refinement from "../components/AppVisualRefinement.module.css";
 import { createPublicClient, createWalletClient, custom, erc20Abi, formatEther, http, isAddress, parseUnits, type Address } from "viem";
-import { VELLUM_VAULT_ABI, VELLUM_VAULT_BYTECODE } from "../lib/vellumVaultArtifact";
-import { configuredVaultFor, DEFAULT_NETWORK_ID, getVellumNetwork, VELLUM_NETWORKS, vaultStorageKey, type VellumNetwork, type VellumToken } from "../lib/vellumNetworks";
+import { VELLUM_VAULT_ABI } from "../lib/vellumVaultArtifact";
+import { DEFAULT_NETWORK_ID, getVellumNetwork, VELLUM_NETWORKS, type VellumNetwork, type VellumToken } from "../lib/vellumNetworks";
+import { useVellumVaultAddress } from "../lib/vellumVaultAddress";
 
 type EthereumProvider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -29,19 +30,17 @@ const publicClientFor = (network: VellumNetwork) => createPublicClient({ chain: 
 
 export default function AppPage() {
   const [tab, setTab] = useState<"notes" | "wrap">("wrap");
-  const [networkId, setNetworkId] = useState<number>(DEFAULT_NETWORK_ID);
-  const network = getVellumNetwork(networkId) ?? VELLUM_NETWORKS[0];
+  const network = getVellumNetwork(DEFAULT_NETWORK_ID) ?? VELLUM_NETWORKS[0];
   const [token, setToken] = useState<VellumToken>(network.tokens[0]);
   const [term, setTerm] = useState("90D");
   const [amount, setAmount] = useState("250000");
   const [tokenAddress, setTokenAddress] = useState("");
   const [tokenDecimals, setTokenDecimals] = useState(18);
-  const [vaultAddress, setVaultAddress] = useState(() => configuredVaultFor(DEFAULT_NETWORK_ID));
+  const vaultAddress = useVellumVaultAddress();
   const [noteId, setNoteId] = useState("");
   const [transaction, setTransaction] = useState("");
   const [working, setWorking] = useState(false);
   const [address, setAddress] = useState("");
-  const [chain, setChain] = useState("");
   const [balance, setBalance] = useState("");
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
@@ -55,23 +54,15 @@ export default function AppPage() {
     }
     const revealTimer = window.setTimeout(() => setPreviewRevision((revision) => revision + 1), 180);
     return () => window.clearTimeout(revealTimer);
-  }, [token.symbol, amount, term, networkId]);
+  }, [token.symbol, amount, term]);
 
   useEffect(() => {
-    const configuredVault = configuredVaultFor(network.chain.id);
-    const rememberedVault = network.production ? "" : window.localStorage.getItem(vaultStorageKey(network.chain.id)) ?? "";
-    setVaultAddress(isAddress(configuredVault) ? configuredVault : isAddress(rememberedVault) ? rememberedVault : "");
     setToken(network.tokens[0]);
     setTokenAddress(network.tokens[0].address ?? "");
     setTokenDecimals(18);
     setNoteId("");
     setTransaction("");
-  }, [network.chain.id, network.production, network.tokens]);
-
-  function selectNetwork(nextNetworkId: number) {
-    setError("");
-    setNetworkId(nextNetworkId);
-  }
+  }, [network.tokens]);
 
   function selectToken(nextToken: VellumToken) {
     setToken(nextToken);
@@ -117,8 +108,6 @@ export default function AppPage() {
     const chainId = await provider.request({ method: "eth_chainId" }) as string;
     const numericChainId = Number.parseInt(chainId, 16);
     const connectedNetwork = getVellumNetwork(numericChainId);
-    setChain(numericChainId.toString());
-    if (connectedNetwork) setNetworkId(connectedNetwork.chain.id);
     if (current) {
       const raw = await provider.request({ method: "eth_getBalance", params: [current, "latest"] }) as string;
       const unit = connectedNetwork?.chain.nativeCurrency.symbol ?? "ETH";
@@ -168,7 +157,7 @@ export default function AppPage() {
   async function readTokenMetadata() {
     setError("");
     if (!isAddress(tokenAddress)) {
-      setError(`Enter a valid ${network.label} ERC-20 contract address`);
+      setError("Enter a valid ERC-20 contract address");
       return;
     }
     try {
@@ -185,38 +174,6 @@ export default function AppPage() {
     }
   }
 
-  async function deployTestVault() {
-    if (!address || !isAddress(address)) {
-      await connectWallet();
-      return;
-    }
-    if (network.production) {
-      setError(`${network.label} needs a verified Vellum Vault address before real funds can be wrapped.`);
-      return;
-    }
-    setWorking(true);
-    setError("");
-    setTransaction("");
-    try {
-      await ensureNetwork();
-      const hash = await walletClient().deployContract({
-        account: address as Address,
-        abi: VELLUM_VAULT_ABI,
-        bytecode: VELLUM_VAULT_BYTECODE,
-        args: [address as Address],
-      });
-      setTransaction(hash);
-      const receipt = await publicClientFor(network).waitForTransactionReceipt({ hash });
-      if (!receipt.contractAddress) throw new Error("Deployment did not return a contract address");
-      setVaultAddress(receipt.contractAddress);
-      window.localStorage.setItem(vaultStorageKey(network.chain.id), receipt.contractAddress);
-    } catch (deployError) {
-      setError(messageFrom(deployError));
-    } finally {
-      setWorking(false);
-    }
-  }
-
   async function wrapPosition() {
     if (!address || !isAddress(address)) {
       await connectWallet();
@@ -227,7 +184,7 @@ export default function AppPage() {
       return;
     }
     if (!isAddress(tokenAddress)) {
-      setError(`Enter a valid ${network.label} ERC-20 contract address`);
+      setError("Enter a valid ERC-20 contract address");
       return;
     }
     const selectedTerm = termSeconds[term];
@@ -312,11 +269,9 @@ export default function AppPage() {
       <header className="app-nav">
         <Link href="/" className="wordmark">vellum<span>.</span></Link>
         <div className="app-nav-right">
-          <button className="button" onClick={() => setTab("notes")}>Notes</button>
-          <button className="button" onClick={() => setTab("wrap")}>Wrap</button>
           {address ? (
             <button className="wallet wallet-connected" onClick={disconnectWallet}>
-              <span className="wallet-dot" />{shorten(address)} <small>CHAIN {chain}</small>
+              <span className="wallet-dot" />{shorten(address)}
             </button>
           ) : (
             <button className="wallet" onClick={connectWallet}>{connecting ? "Connecting..." : "Connect wallet"}</button>
@@ -333,35 +288,22 @@ export default function AppPage() {
               {tab === "wrap" ? <>Lock a token,<br/><em>hold the note.</em></> : <>Your notes<br/><em>carry the claim.</em></>}
             </h1>
             <div className="tabs">
-              <button className={`tab ${tab === "notes" ? "active" : ""}`} onClick={() => setTab("notes")}>Notes</button>
               <button className={`tab ${tab === "wrap" ? "active" : ""}`} onClick={() => setTab("wrap")}>Wrap</button>
+              <button className={`tab ${tab === "notes" ? "active" : ""}`} onClick={() => setTab("notes")}>Notes</button>
             </div>
 
             {tab === "notes" ? (
               <>
-                <label className="form-label mono"><span>Note ID</span><span>{network.shortLabel}</span></label>
+                <label className="form-label mono"><span>Note ID</span></label>
                 <input className="field" value={noteId} onChange={(event) => setNoteId(event.target.value)} placeholder="Enter Vellum note ID" inputMode="numeric" />
-                <div className="notice">{vaultAddress ? `Vault ${shorten(vaultAddress)} · claim is available after maturity` : network.production ? `A verified ${network.label} vault is being configured.` : "Deploy the Vellum test vault in Wrap first."}</div>
-                <div className="wrap-action">
-                  <div><div className="label">Network</div><div className="position" style={{ fontSize: 30 }}>{network.label}</div></div>
-                  <button className="wrap-submit" onClick={claimPosition} disabled={working || !vaultAddress}><span>{working ? "Confirming..." : "Claim note"}</span><b>↗</b></button>
+                <div className="wrap-action notes-action">
+                  <button className="wrap-submit" onClick={claimPosition} disabled={working || !vaultAddress}><span>{working ? "Confirming..." : "Claim note"}</span></button>
                 </div>
               </>
             ) : (
               <>
-                <div className="network-fields">
-                  <label className="form-label mono"><span>Network</span><span>CHAIN</span></label>
-                  <select className="field network-select" value={network.chain.id} onChange={(event) => selectNetwork(Number(event.target.value))} aria-label="Select Vellum network">
-                    <optgroup label="Mainnet">
-                      {VELLUM_NETWORKS.filter((item) => item.production).map((item) => <option key={item.chain.id} value={item.chain.id}>{item.label}</option>)}
-                    </optgroup>
-                    <optgroup label="Testnet">
-                      {VELLUM_NETWORKS.filter((item) => !item.production).map((item) => <option key={item.chain.id} value={item.chain.id}>{item.label}</option>)}
-                    </optgroup>
-                  </select>
-                  <label className="form-label mono"><span>Token address</span><span>ERC-20 STANDARD</span></label>
-                </div>
-                <input className="field" value={tokenAddress} onChange={(event) => setTokenAddress(event.target.value)} onBlur={() => void readTokenMetadata()} placeholder={`Paste a ${network.label} ERC-20 contract address`} />
+                <label className="form-label mono"><span>Token address</span><span>ERC-20</span></label>
+                <input className="field" value={tokenAddress} onChange={(event) => setTokenAddress(event.target.value)} onBlur={() => void readTokenMetadata()} placeholder="Paste ERC-20 contract address" />
                 <div className="token-pills">
                   {network.tokens.map((item) => (
                     <button key={item.symbol} className={`pill token-pill ${token.symbol === item.symbol ? "active" : ""}`} onClick={() => selectToken(item)}>
@@ -375,14 +317,10 @@ export default function AppPage() {
                 <div className="term-pills">
                   {terms.map((item) => <button key={item} className={`pill ${term === item ? "active" : ""}`} onClick={() => setTerm(item)}>{item}</button>)}
                 </div>
-                <div className="notice">{network.production ? `${network.label} · only use a verified Vellum Vault configured for this network.` : `${network.label} · connect a test ERC-20 · this test vault is not for real funds.`}</div>
-                {!vaultAddress && !network.production && <button className="wrap-submit" onClick={deployTestVault} disabled={working}><span>{working ? "Deploying..." : `Deploy ${network.shortLabel} test vault`}</span><b>↗</b></button>}
-                {!vaultAddress && network.production && <div className="notice">Mainnet wrapping unlocks when the verified Vellum Vault address is configured.</div>}
-                {vaultAddress && <div className="notice">{network.production ? "Verified vault ready" : "Test vault ready"} · {shorten(vaultAddress)}</div>}
                 <div className="wrap-action">
                   <div><div className="label">Term</div><div className="position" style={{ fontSize: 38 }}>{term}</div></div>
                   <div><div className="label">Token</div><b style={{ fontFamily: "var(--mono)" }}>{token.symbol}</b></div>
-                  <button className="wrap-submit" onClick={wrapPosition} disabled={working || (Boolean(address) && !vaultAddress)}><span>{working ? "Confirming..." : !vaultAddress ? "Vault required" : address ? "Approve and wrap" : "Connect to wrap"}</span><b>↗</b></button>
+                  <button className={`wrap-submit ${!vaultAddress ? "vault-required" : ""}`} onClick={wrapPosition} disabled={working || (Boolean(address) && !vaultAddress)}><span>{working ? "Confirming..." : !vaultAddress ? "Vault required" : address ? "Approve and wrap" : "Connect to wrap"}</span></button>
                 </div>
               </>
             )}
@@ -401,7 +339,7 @@ export default function AppPage() {
                   amount={amount || "250,000"}
                   term={term === "NONE" ? "OPEN" : term}
                   mark={token.mark}
-                  network={network.shortLabel}
+                  network=""
                   signalOnView={false}
                 />
               </div>
@@ -409,7 +347,7 @@ export default function AppPage() {
           </section>
         </div>
       </div>
-      {transaction && network.chain.blockExplorers?.default.url && <a className="wallet-error" href={`${network.chain.blockExplorers.default.url}/tx/${transaction}`} target="_blank" rel="noreferrer">View transaction on {network.label} ↗</a>}
+      {transaction && network.chain.blockExplorers?.default.url && <a className="wallet-error" href={`${network.chain.blockExplorers.default.url}/tx/${transaction}`} target="_blank" rel="noreferrer">View transaction</a>}
     </main>
   );
 }

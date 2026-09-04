@@ -314,3 +314,91 @@
 
 /* Header CTA no longer reserves space for an arrow icon. */
 .page .launch{justify-content:center;gap:0}
+
+/* Quiet pass: preserve the original assets while removing perpetual motion and glow. */
+.page,.page *,.page *:before,.page *:after{animation:none!important}
+.page .instrument,.page .flowSteps article,.page .case,.page .sceneImage,.page .anatomyTicket img,.page .footerWord{transform:none!important}
+.page .instrument:hover,.page .flowSteps article:hover,.page .flowSteps article:nth-child(even):hover{transform:translateY(-3px)!important}
+.page .marketLandscapeStrip img{transform:none!important;transition:none!important}
+.page .anatomyOrb:before,.page .anatomyOrb:after,.page .anatomyOrb>i,.page .anatomySignals,.page .instrumentRoute,.page .sceneReadout{display:none!important}
+.page .anatomyTicket img{animation:none!important;transform:none!important}
+.page .docsLinks a b,.page .case>b{display:none!important}
+
+/* A quieter protocol narrative: typography and data replace the image gallery. */
+.page .flow{padding-top:132px;padding-bottom:132px;background:#020402;border-top:1px solid rgba(224,250,229,.12)}
+.page .flowSticky{display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:72px;max-width:none;align-items:end}
+.page .flowSticky>.index{grid-column:1/-1;margin-bottom:24px}
+.page .flowSticky h2{grid-column:1;margin:0;font-size:clamp(58px,6vw,94px)}
+.page .flowSticky p{grid-column:2;grid-row:2;margin:0 0 16px;max-width:340px;font-size:17px;line-height:1.55}
+.page .flowSticky>a{grid-column:2;margin-top:20px;width:max-content}
+.page .mechanismSteps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:76px;border-top:1px solid rgba(224,250,229,.2);border-bottom:1px solid rgba(224,250,229,.2)}
+.page .mechanismSteps article,.page .mechanismSteps article:nth-child(even){display:flex;min-height:300px;padding:30px 32px 34px;flex-direction:column;border:0!important;border-right:1px solid rgba(224,250,229,.16)!important;border-radius:0;background:transparent!important;box-shadow:none;isolation:auto;transform:none!important}
+.page .mechanismSteps article:last-child{border-right:0!important}
+.page .mechanismSteps article:before,.page .mechanismSteps article:after{content:none!important;display:none!important}
+.page .mechanismSteps article>span{position:static;color:rgba(220,255,152,.76);font-size:12px}
+.page .mechanismSteps article h3{position:static;margin:auto 0 14px;color:#f3f9f0;font-size:clamp(38px,4vw,56px);line-height:.95}
+.page .mechanismSteps article p{position:static;margin:0;max-width:290px;color:rgba(235,246,236,.7);font-size:16px;line-height:1.5}
+.page .mechanismSteps article:hover{background:rgba(215,255,117,.035)!important;transform:none!important}
+
+.page .useCases{padding-top:132px;padding-bottom:132px;background:#050906;border-top:1px solid rgba(224,250,229,.12)}
+.page .useCases:after{display:none}
+.page .caseList{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(224,250,229,.2);border-left:1px solid rgba(224,250,229,.2)}
+.page .caseList .case{display:grid;grid-template-columns:52px 1fr auto;grid-template-rows:auto auto;column-gap:24px;align-items:start;min-height:230px;padding:32px;border:0!important;border-right:1px solid rgba(224,250,229,.2)!important;border-bottom:1px solid rgba(224,250,229,.2)!important;border-radius:0;background:#050906!important;box-shadow:none;overflow:hidden;transform:none!important}
+.page .caseList .case:before,.page .caseList .case:after,.page .caseList .caseImage{content:none!important;display:none!important}
+.page .caseList .case>span{position:static;grid-column:1;grid-row:1/3;color:rgba(220,255,152,.72);font-size:12px}
+.page .caseList .case h3{position:static;grid-column:2;grid-row:1;margin:0;color:#f3f9f0;font-size:clamp(32px,3vw,46px);line-height:1}
+.page .caseList .case p{position:static;grid-column:2;grid-row:2;margin:26px 0 0;max-width:340px;color:rgba(235,246,236,.68);font-size:16px;line-height:1.5}
+.page .caseList .case>b{position:static;display:inline-flex!important;grid-column:3;grid-row:1;margin:2px 0 0;padding:0;border:0;color:rgba(225,255,170,.74);font:600 12px var(--font-mono),monospace;letter-spacing:.08em;text-transform:uppercase}
+.page .caseList .case:hover{background:#09140d!important;transform:none!important}
+
+.page .anatomy{padding-top:132px;padding-bottom:150px;background:#020402}
+.page .anatomyHead{margin-bottom:48px}
+.page .anatomyBoard{display:grid;grid-template-columns:minmax(360px,.9fr) minmax(0,1.1fr);min-height:520px;border:1px solid rgba(224,250,229,.2);border-radius:24px;background:#071008;overflow:hidden}
+.page .noteRecord{display:flex;margin:38px;padding:30px;flex-direction:column;border-radius:20px;background:#d8ff70;color:#081008}
+.page .noteRecord header{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;border-bottom:1px solid rgba(8,16,8,.24)}
+.page .noteRecord header span,.page .noteRecord header b,.page .noteRecord small,.page .noteRecord footer{font:650 12px var(--font-mono),monospace;letter-spacing:.08em}
+.page .noteRecord header b{font-size:13px}
+.page .noteRecord>div{display:grid;grid-template-columns:1fr auto;align-items:end;margin:auto 0;padding:44px 0}
+.page .noteRecord small{grid-column:1/-1;margin-bottom:14px;color:rgba(8,16,8,.62)}
+.page .noteRecord strong{font:650 clamp(52px,5vw,76px)/.86 var(--font-display),sans-serif;letter-spacing:-.08em}
+.page .noteRecord em{padding-bottom:5px;font:700 13px var(--font-mono),monospace;font-style:normal;letter-spacing:.05em}
+.page .noteRecord footer{display:flex;justify-content:space-between;gap:18px;padding-top:20px;border-top:1px solid rgba(8,16,8,.24);font-size:11px}
+.page .anatomyRows{padding:38px 48px;border-left:1px solid rgba(224,250,229,.16)}
+.page .anatomyRows div{display:grid;grid-template-columns:42px 1fr auto;gap:18px;align-items:center;padding:26px 0;border-bottom:1px solid rgba(224,250,229,.14);background:transparent!important}
+.page .anatomyRows div:after{display:none!important}
+.page .anatomyRows span{color:rgba(220,255,152,.72);font-size:12px;text-shadow:none}
+.page .anatomyRows b{font-size:20px}
+.page .anatomyRows em{font-size:15px}
+
+@media(max-width:900px){.page .flowSticky{grid-template-columns:1fr}.page .flowSticky h2,.page .flowSticky p,.page .flowSticky>a{grid-column:1;grid-row:auto}.page .flowSticky p{margin-top:28px}.page .mechanismSteps{grid-template-columns:1fr}.page .mechanismSteps article,.page .mechanismSteps article:nth-child(even){min-height:230px;border-right:0!important;border-bottom:1px solid rgba(224,250,229,.16)!important}.page .mechanismSteps article:last-child{border-bottom:0!important}.page .caseList{grid-template-columns:1fr}.page .anatomyBoard{grid-template-columns:1fr}.page .noteRecord{min-height:390px}.page .anatomyRows{border-top:1px solid rgba(224,250,229,.16);border-left:0}}
+@media(max-width:600px){.page .flow,.page .useCases,.page .anatomy{padding-top:96px;padding-bottom:104px}.page .mechanismSteps{margin-top:54px}.page .mechanismSteps article,.page .mechanismSteps article:nth-child(even){min-height:210px;padding:25px 22px}.page .caseList .case{grid-template-columns:38px 1fr;min-height:205px;padding:26px 22px;column-gap:12px}.page .caseList .case>b{display:none!important}.page .anatomyHead{display:block}.page .anatomyHead p{margin-top:22px}.page .anatomyBoard{border-radius:18px}.page .noteRecord{min-height:330px;margin:16px;padding:22px;border-radius:15px}.page .noteRecord header span,.page .noteRecord header b,.page .noteRecord small,.page .noteRecord footer{font-size:10px}.page .noteRecord strong{font-size:54px}.page .noteRecord footer{flex-direction:column;gap:8px}.page .anatomyRows{padding:22px}.page .anatomyRows div{grid-template-columns:34px 1fr;gap:10px;padding:22px 0}.page .anatomyRows em{grid-column:2;margin-top:-4px}}
+
+/* Restore the original Position anatomy ticket composition. */
+.page .anatomyOriginal{grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr);min-height:560px;background:radial-gradient(circle at 22% 50%,rgba(57,212,124,.14),transparent 35%),#050b07}
+.page .anatomyOriginal .anatomyOrb{position:relative;display:grid;min-height:560px;place-items:center;overflow:hidden}
+.page .anatomyOriginal .anatomyTicket{position:relative;display:grid;width:min(306px,72%);height:426px;place-items:center}
+.page .anatomyOriginal .anatomyTicket:before{content:"";position:absolute;inset:14% -5%;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(216,255,109,.18),rgba(43,230,112,.05) 42%,transparent 70%);filter:blur(14px)}
+.page .anatomyOriginal .anatomyTicket:after{display:none}
+.page .anatomyOriginal .anatomyTicket img{position:relative;z-index:1;width:100%!important;height:100%!important;object-fit:contain;filter:drop-shadow(0 24px 30px rgba(0,0,0,.6)) drop-shadow(0 0 14px rgba(214,255,111,.1));animation:none!important;transform:none!important}
+.page .anatomyOriginal .anatomyRows{padding:35px 54px;border-top:0;border-left:1px solid rgba(224,250,229,.16)}
+@media(max-width:900px){.page .anatomyOriginal{grid-template-columns:1fr}.page .anatomyOriginal .anatomyOrb{min-height:480px}.page .anatomyOriginal .anatomyRows{border-top:1px solid rgba(224,250,229,.16);border-left:0}}
+@media(max-width:600px){.page .anatomyOriginal .anatomyOrb{min-height:390px}.page .anatomyOriginal .anatomyTicket{width:210px;height:300px}.page .anatomyOriginal .anatomyRows{padding:22px}}
+
+/* Higher-chroma material grade across the Vellum world. */
+.page{--white:#f6fff0;--ink:#f7fff3;--muted:rgba(229,247,232,.72);--line:rgba(217,255,226,.2);--green:#20e889;--lime:#d8ff52;background:#010704;color:var(--ink)}
+.page .market{background:radial-gradient(circle at 78% 18%,rgba(29,190,105,.11),transparent 31%),#010704}
+.page .marketLandscapeStrip img{filter:saturate(1.34) contrast(1.12) brightness(1.02) hue-rotate(-3deg)}
+.page .marketLandscapeStrip:after{background:linear-gradient(180deg,rgba(1,8,4,.2),rgba(1,8,4,.02) 34%,rgba(1,7,4,.2) 62%,#010704 100%)}
+.page .useCases{background:linear-gradient(180deg,#010704,#062015 52%,#010704)}
+.page .caseList .case{background:rgba(3,16,9,.72)!important}
+.page .caseList .case:hover{background:#092719!important}
+.page .anatomy{background:radial-gradient(circle at 18% 56%,rgba(31,223,124,.1),transparent 32%),#010704}
+.page .anatomyOriginal{background:radial-gradient(circle at 22% 50%,rgba(77,255,148,.18),transparent 36%),#03110a}
+.page .docs{background:linear-gradient(180deg,#010704,#020d08)}
+.page .footerRidge img{filter:saturate(1.32) contrast(1.12) brightness(1.04)}
+.page .sectionIntro h2,.page .anatomy h2{font-weight:650;letter-spacing:-.085em}
+.page .sectionIntro h2 em{font-style:normal;font-weight:650}
+.page .caseList .case h3,.page .anatomyRows b,.page .instrumentIdentity b,.page .instrumentBalance strong{font-weight:620}
+.page .footerOnly{padding-top:96px}
+.page .footerOnly .footer{margin-top:0}
+@media(max-width:620px){.page .footerOnly{padding-top:76px}}
