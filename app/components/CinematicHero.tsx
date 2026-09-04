@@ -53,19 +53,24 @@ export default function CinematicHero() {
 
   return (
     <section ref={heroRef} className={styles.hero}>
-      <Image className={styles.image} src="/brand/vellum-hero-garden.webp" alt="" fill priority quality={100} sizes="100vw" />
+      <Image className={styles.image} src="/brand/vellum-hero-forest-pool.webp" alt="" fill priority quality={100} sizes="100vw" />
+      <div className={styles.waterMist} aria-hidden="true">
+        <span className={styles.mistNear} />
+        <span className={styles.mistMiddle} />
+        <span className={styles.mistFar} />
+      </div>
       <div className={styles.content}>
         <div className={styles.copy}>
           <h1><span className={styles.heroLine}>Positions that</span><em className={styles.heroLine}>outlive the trade.</em></h1>
           <p>Lock a real balance. Carry its claim as one clear, transferable instrument.</p>
           <div className={styles.actions}>
             <Link href="/app" className={styles.primary}>Open Vellum</Link>
-            <button type="button" className={styles.contractPanel} onClick={copyContractAddress} aria-label={contractAddress ? "Copy Vellum contract address" : "Vellum contract address coming soon"} disabled={!contractAddress}>
+            <button type="button" className={styles.contractPanel} onClick={copyContractAddress} aria-label={contractAddress ? "Copy Vellum contract address" : "Vellum contract address is not available yet"} disabled={!contractAddress}>
               <span className={styles.contractLogo}><Image src="/brand/instrument-tag.png" alt="" fill sizes="48px" /></span>
               <span className={styles.contractMeta}>
-                <b>CONTRACT ADDRESS</b>
-                <code>{copied ? "COPIED TO CLIPBOARD" : shortContractAddress}</code>
+                <code>{copied ? "COPIED TO CLIPBOARD" : contractAddress ? shortContractAddress : "SET AFTER DEPLOY"}</code>
               </span>
+              <span className={styles.contractCopy} aria-hidden="true">{copied ? "COPIED" : contractAddress ? "COPY" : "PENDING"}</span>
             </button>
           </div>
           <a className={styles.socialLink} href="https://x.com/VellumRH" target="_blank" rel="noreferrer" aria-label="VellumRH on X"><span>X</span><b>VellumRH</b></a>
