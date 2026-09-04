@@ -408,3 +408,5 @@
 .page .useCases{background-image:none!important}
 .page .anatomyOriginal{background:#050b07!important}
 .page .anatomyOriginal .anatomyTicket:before{display:none!important}
+.page .footerRidge{background:#020402!important}
+.page .footerRidge img{opacity:.22!important;filter:grayscale(1) brightness(.46)!important}
