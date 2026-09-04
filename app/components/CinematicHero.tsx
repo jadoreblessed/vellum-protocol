@@ -2,27 +2,46 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { shortenVellumVaultAddress, useVellumVaultAddress } from "../lib/vellumVaultAddress";
 import styles from "./CinematicHero.module.css";
 
 export default function CinematicHero() {
   const [copied, setCopied] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
   const contractAddress = useVellumVaultAddress();
   const shortContractAddress = shortenVellumVaultAddress(contractAddress);
 
   useEffect(() => {
     const nav = document.querySelector<HTMLElement>("[data-floating-nav]");
+    const hero = heroRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let frame = 0;
+
     const update = () => {
       frame = 0;
       nav?.toggleAttribute("data-compact", window.scrollY > 32);
+
+      if (!hero || reduceMotion) return;
+
+      const bounds = hero.getBoundingClientRect();
+      const travel = Math.max(1, bounds.height * 0.78);
+      const progress = Math.min(1, Math.max(0, -bounds.top / travel));
+
+      hero.style.setProperty("--hero-image-y", `${Math.round(progress * -72)}px`);
+      hero.style.setProperty("--hero-image-scale", (1 + progress * 0.105).toFixed(3));
+      hero.style.setProperty("--hero-copy-y", `${Math.round(progress * -54)}px`);
+      hero.style.setProperty("--hero-copy-opacity", (1 - progress * 0.34).toFixed(3));
     };
+
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
     window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
     return () => {
       window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
       cancelAnimationFrame(frame);
     };
   }, []);
@@ -35,8 +54,8 @@ export default function CinematicHero() {
   }
 
   return (
-    <section className={styles.hero}>
-      <Image className={styles.image} src="/brand/vellum-hero-landscape.webp" alt="" fill priority quality={100} sizes="100vw" />
+    <section ref={heroRef} className={styles.hero}>
+      <Image className={styles.image} src="/brand/vellum-hero-garden.webp" alt="" fill priority quality={100} sizes="100vw" />
       <div className={styles.content}>
         <div className={styles.copy}>
           <h1><span className={styles.heroLine}>Positions that</span><em className={styles.heroLine}>outlive the trade.</em></h1>
