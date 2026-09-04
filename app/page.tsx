@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import CinematicHero from "./components/CinematicHero";
+import MarketParallax from "./components/MarketParallax";
+import ScrollReveal from "./components/ScrollReveal";
 import TokenLogo from "./components/TokenLogo";
 import styles from "./home.module.css";
 import readable from "./components/MarketReadability.module.css";
@@ -46,32 +48,32 @@ export default function Home() {
       <CinematicHero />
 
       <section className={`${styles.market} ${market.root}`} id="market">
-        <div className={styles.sectionIntro}>
+        <ScrollReveal className={styles.sectionIntro}>
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Amount, mark, maturity and bearer stay attached to every note.</p><Link href="/notes">Browse notes</Link></div>
-        </div>
-        <div className={`${styles.marketWorld} ${market.world}`}>
+        </ScrollReveal>
+        <MarketParallax className={`${styles.marketWorld} ${market.world}`}>
           <div className={`${styles.marketLandscapeStrip} ${market.landscape}`} aria-hidden="true">
             <Image src="/brand/vellum-fibre-valley-v1.webp" alt="" width={1440} height={960} priority quality={100} sizes="(max-width: 900px) 100vw, 1220px" />
           </div>
-          <div className={`${styles.marketCards} ${market.cards}`}>
+          <ScrollReveal className={`${styles.marketCards} ${market.cards}`}>
             <div className={`${styles.instrumentGrid} ${market.grid}`}>{instruments.map((item) => <InstrumentCard item={item} key={item.symbol} />)}</div>
-          </div>
-        </div>
+          </ScrollReveal>
+        </MarketParallax>
       </section>
 
       <section className={styles.useCases}>
-        <div className={styles.sectionIntro}>
+        <ScrollReveal className={styles.sectionIntro}>
           <div><span className={styles.index}>02 / USE CASES</span><h2>Built to carry<br /><em>real intent.</em></h2></div>
-        </div>
-        <div className={`${styles.caseGrid} ${styles.caseList}`}>
+        </ScrollReveal>
+        <ScrollReveal className={`${styles.caseGrid} ${styles.caseList}`}>
           {useCases.map(([title, copy, href], index) => <Link href={href} key={title} className={styles.case}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore</b></Link>)}
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className={styles.anatomy}>
-        <div className={styles.anatomyHead}><div><h2>Position anatomy.</h2></div><p>Four facts stay attached through the full lifecycle.</p></div>
-        <div className={`${styles.anatomyBoard} ${styles.anatomyOriginal}`}>
+        <ScrollReveal className={styles.anatomyHead}><div><h2>Position anatomy.</h2></div><p>Four facts stay attached through the full lifecycle.</p></ScrollReveal>
+        <ScrollReveal className={`${styles.anatomyBoard} ${styles.anatomyOriginal}`}>
           <div className={styles.anatomyOrb}><span className={styles.anatomyTicket}><Image src="/brand/vellum-anatomy-ticket-v2.webp" alt="A Vellum bearer note" width={1024} height={1536} /></span></div>
           <div className={styles.anatomyRows}>
             <div><span>01</span><b>Underlying</b><em>250,000 CASHCAT</em></div>
@@ -79,15 +81,17 @@ export default function Home() {
             <div><span>03</span><b>Bearer</b><em>0x020b...18B4</em></div>
             <div><span>04</span><b>State</b><em>Claimable at maturity</em></div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className={`${styles.docs} ${styles.footerOnly}`}>
-        <footer className={styles.footer}>
-          <div><Link href="/" className={styles.wordmark}>vellum<span>.</span></Link><p>Portable positions for Robinhood Chain.</p></div>
-          <div><span>PRODUCT</span><Link href="/app">App</Link><Link href="/notes">Notes</Link><Link href="/protocol">Protocol</Link></div>
-          <div><span>LEARN</span><Link href="/how-it-works">How it works</Link><Link href="/docs">Docs</Link><Link href="/faq">FAQ</Link></div>
-          <div><span>SOCIAL</span><a href="https://x.com/VellumRH" target="_blank" rel="noreferrer">X / VellumRH</a></div>
+        <footer>
+          <ScrollReveal className={styles.footer}>
+            <div><Link href="/" className={styles.wordmark}>vellum<span>.</span></Link><p>Portable positions for Robinhood Chain.</p></div>
+            <div><span>PRODUCT</span><Link href="/app">App</Link><Link href="/notes">Notes</Link><Link href="/protocol">Protocol</Link></div>
+            <div><span>LEARN</span><Link href="/how-it-works">How it works</Link><Link href="/docs">Docs</Link><Link href="/faq">FAQ</Link></div>
+            <div><span>SOCIAL</span><a href="https://x.com/VellumRH" target="_blank" rel="noreferrer">X / VellumRH</a></div>
+          </ScrollReveal>
         </footer>
         <div className={styles.footerWord}>vellum</div>
         <div className={styles.footerRidge} aria-hidden="true"><Image src="/brand/terminal-fibre-ridge-v2.webp" alt="" width={1672} height={941} quality={100} sizes="100vw" /></div>
