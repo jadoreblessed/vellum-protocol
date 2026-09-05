@@ -1,0 +1,33 @@
+.documents.documents,.application.application{--font-display:var(--font-vellum);--font-body:var(--font-vellum);--acid:#c9e3d8;--green:#9cccb6;--lime:#c9e3d8;--paper:#efefeb;--ink:#efefeb;--muted:#969c96;background:#080908!important;color:#efefeb;font-family:var(--font-vellum),Arial,sans-serif}
+.documents.documents :global(.nav),.application.application :global(.app-nav){background:#0e100fee!important;border-color:#2a302c!important;box-shadow:none!important;backdrop-filter:blur(16px)!important}
+.documents.documents :global(.wordmark),.application.application :global(.wordmark){font-family:var(--font-vellum),Arial,sans-serif!important;letter-spacing:-.055em!important;font-weight:550!important}
+.documents.documents :global(.wordmark span),.application.application :global(.wordmark span){color:#b8dbca!important}
+.documents.documents :global(.wordmark)::after,.application.application :global(.wordmark)::after{display:none!important}
+.documents.documents :global(.button),.application.application :global(.wallet),.application.application :global(.wrap-submit){border-radius:99px!important;min-height:48px;box-shadow:none!important;font:500 14px var(--font-vellum),Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;transition:background .25s,color .25s!important}
+.documents.documents :global(.button.acid),.application.application :global(.wallet),.application.application :global(.wrap-submit){background:#eceee9!important;color:#121714!important;border-color:#eceee9!important}
+.documents.documents :global(.button:hover),.application.application :global(.wallet:hover),.application.application :global(.wrap-submit:hover:not(:disabled)){background:#c9e3d8!important;color:#121714!important;transform:none!important}
+.application.application :global(.wallet)::after{display:none!important}
+.application.application :global(.vault-required){background:#1a231e!important;color:#bfd7c8!important;border:1px solid #405448!important}
+.application.application :global(.app-title){font-weight:500!important;letter-spacing:-.062em!important;line-height:1.03!important;font-size:clamp(44px,4.2vw,68px)!important}
+.application.application :global(.app-title em){color:#a1bcb0!important;font-style:normal!important}
+.application.application :global(.app-main){padding-top:64px!important}
+.application.application :global(.app-form-panel){background:transparent!important;border-color:#303832!important}
+.application.application :global(.field){background:#111713!important;border:1px solid #3d4b42!important;border-radius:12px!important;color:#eee!important;padding:17px!important;font-size:18px!important;box-shadow:none!important}
+.application.application :global(.field:focus){outline:2px solid #90b9a5!important;outline-offset:2px!important}
+.application.application :global(.pill){border-radius:99px!important;background:#101713!important;border-color:#35473c!important;color:#b1c1b6!important;box-shadow:none!important}
+.application.application :global(.pill.active){background:#c9dfd2!important;border-color:#c9dfd2!important;color:#0d2114!important}
+.application.application :global(.tab){font-size:16px!important;color:#89968d!important}.application.application :global(.tab.active){color:#e7eee8!important;border-color:#b5d4c1!important}
+.application.application :global(.preview-card){background:transparent!important;box-shadow:none!important}
+.application.application :global(.app-note-enter){border-color:#3a5446!important;background:linear-gradient(140deg,#14271d,#0b1711)!important;box-shadow:0 26px 70px #0003!important}
+.documents.documents :global(.doc-hero){padding-top:110px!important;padding-bottom:70px!important;background:#080908!important;min-height:0!important}
+.documents.documents :global(.doc-title){font-family:var(--font-vellum),Arial,sans-serif!important;font-size:clamp(55px,7.6vw,118px)!important;font-weight:500!important;letter-spacing:-.065em!important;line-height:1!important}
+.documents.documents :global(.doc-title em){font-style:normal!important;color:#a7c6b6!important}
+.documents.documents :global(.doc-hero-copy>p){font-size:18px!important;line-height:1.6!important;color:#a2aca4!important}
+.documents.documents :global(.doc-index){background:#111b15!important;border-color:#344d3e!important;color:#aac6b4!important;border-radius:22px!important}
+.documents.documents :global(.doc-facts){border-color:#303b33!important;border-radius:22px!important;overflow:hidden;background:#111713!important}
+.documents.documents :global(.doc-fact){border-color:#303b33!important;background:transparent!important;padding:28px!important}
+.documents.documents :global(.doc-fact strong){font-weight:500!important;font-family:var(--font-vellum),sans-serif!important;letter-spacing:-.045em!important;color:#dae8df!important}
+.documents.documents :global(.doc-step){border-color:#303b33!important}.documents.documents :global(.doc-step h2){font-size:30px!important;font-weight:500!important;letter-spacing:-.035em!important}
+.documents.documents :global(.doc-step p){color:#a3aea6!important;font-size:17px!important;line-height:1.65!important}
+.documents.documents :global(.doc-footer){border-color:#303b33!important;color:#9db1a4!important;padding-block:40px!important}
+@media(max-width:650px){.application.application :global(.app-main){padding-top:37px!important}.documents.documents :global(.doc-hero){padding-top:72px!important}.documents.documents :global(.doc-title){font-size:clamp(46px,11vw,64px)!important}.documents.documents :global(.doc-hero-copy>p){font-size:16px!important}.documents.documents :global(.button),.application.application :global(.wallet){font-size:13px!important}}

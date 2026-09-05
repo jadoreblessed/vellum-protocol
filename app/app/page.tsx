@@ -7,6 +7,7 @@ import TextReveal from "../components/TextReveal";
 import BearerNote from "../components/BearerNote";
 import motion from "../components/AppPreviewMotion.module.css";
 import refinement from "../components/AppVisualRefinement.module.css";
+import theme from "../components/ExperienceTheme.module.css";
 import { createPublicClient, createWalletClient, custom, erc20Abi, formatEther, http, isAddress, parseUnits, type Address } from "viem";
 import { VELLUM_VAULT_ABI } from "../lib/vellumVaultArtifact";
 import { DEFAULT_NETWORK_ID, getVellumNetwork, VELLUM_NETWORKS, type VellumNetwork, type VellumToken } from "../lib/vellumNetworks";
@@ -265,7 +266,7 @@ export default function AppPage() {
   }
 
   return (
-    <main className={`app-shell ${refinement.app}`}>
+    <main className={`app-shell ${refinement.app} ${theme.application}`}>
       <header className="app-nav">
         <Link href="/" className="wordmark">vellum<span>.</span></Link>
         <div className="app-nav-right">

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope, Syne } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import noGlow from "./components/NoGlow.module.css";
 
-const display = Syne({ subsets: ["latin"], variable: "--font-display", weight: ["500", "600", "700", "800"] });
-const body = Manrope({ subsets: ["latin"], variable: "--font-body", weight: ["400", "500", "600", "700"] });
-const mono = IBM_Plex_Mono({ subsets: ["latin"], variable: "--font-mono", weight: ["400", "500", "600"] });
+const display = localFont({ src: "./fonts/Syne-Latin.woff2", variable: "--font-display", weight: "500 800", display: "swap" });
+const body = localFont({ src: "./fonts/Manrope-Latin.woff2", variable: "--font-body", weight: "400 700", display: "swap" });
+const mono = localFont({ src: [
+  { path: "./fonts/IBMPlexMono-Regular.woff2", weight: "400" },
+  { path: "./fonts/IBMPlexMono-Medium.woff2", weight: "500" },
+  { path: "./fonts/IBMPlexMono-SemiBold.woff2", weight: "600" },
+], variable: "--font-mono", display: "swap" });
+const experienceFont = localFont({ src: "./fonts/Geist-Latin.woff2", variable: "--font-vellum", weight: "100 900", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Vellum — positions that can move",
@@ -13,5 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${display.variable} ${body.variable} ${mono.variable} ${noGlow.site}`}>{children}</body></html>;
+  return <html lang="en"><body className={`${display.variable} ${body.variable} ${mono.variable} ${experienceFont.variable} ${noGlow.site}`}>{children}</body></html>;
 }
