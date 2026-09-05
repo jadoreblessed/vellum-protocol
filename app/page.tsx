@@ -26,14 +26,13 @@ const useCases = [
 function InstrumentCard({ item }: { item: (typeof instruments)[number] }) {
   return (
     <Link href="/app/note" className={`${styles.instrument} ${readable.card} ${market.card}`} style={{ "--token": item.color } as React.CSSProperties}>
-      <div className={`${styles.instrumentTop} ${readable.top}`}><span>ARCHIVE / {item.number}</span><span>{item.term} NOTE</span></div>
+      <div className={`${styles.instrumentTop} ${readable.top}`}><span>NOTE / {item.number}</span></div>
       <div className={`${styles.instrumentIdentity} ${readable.identity}`}>
         <span className={styles.instrumentLogo}><TokenLogo symbol={item.symbol} color={item.color} /></span>
         <div><small>UNDERLYING</small><b>{item.name}</b><em>{item.symbol}</em></div>
       </div>
       <div className={`${styles.instrumentBalance} ${readable.balance}`}><small>POSITION BALANCE</small><strong>{item.amount}</strong><span>{item.symbol.slice(1)}</span></div>
       <div className={`${styles.instrumentReadout} ${readable.readout}`}><span><small>MARK</small><b>{item.value}</b></span><span><small>TERM</small><b>{item.term}</b></span><span><small>P/L</small><b className={item.pnl.startsWith("+") ? styles.up : styles.down}>{item.pnl}</b></span></div>
-      <div className={styles.instrumentTrace} aria-hidden="true"><i /><i /><i /></div>
     </Link>
   );
 }
@@ -49,7 +48,6 @@ export default function Home() {
       <CinematicHero />
 
       <section className={`${styles.market} ${market.root}`} id="market">
-        <div className={styles.fibreField} aria-hidden="true"><i /><i /><i /><i /></div>
         <ScrollReveal className={styles.sectionIntro}>
           <div><span className={styles.index}>01 / LIVE NOTES</span><h2>A market of positions,<br /><em>not promises.</em></h2></div>
           <div className={styles.introSide}><p>Amount, mark, maturity and bearer stay attached to every note.</p><Link href="/notes">Browse notes</Link></div>
@@ -65,38 +63,28 @@ export default function Home() {
       </section>
 
       <section className={styles.useCases}>
-        <div className={styles.fibreField} aria-hidden="true"><i /><i /><i /><i /></div>
         <ScrollReveal className={styles.sectionIntro}>
           <div><span className={styles.index}>02 / USE CASES</span><h2>Built to carry<br /><em>real intent.</em></h2></div>
         </ScrollReveal>
         <ScrollReveal className={`${styles.caseGrid} ${styles.caseList}`}>
-          {useCases.map(([title, copy, href], index) => <Link href={href} key={title} className={styles.case}><span>0{index + 1}</span><i className={styles.caseObject} aria-hidden="true">{title.slice(0, 1)}</i><h3>{title}</h3><p>{copy}</p><b>Explore</b></Link>)}
+          {useCases.map(([title, copy, href], index) => <Link href={href} key={title} className={styles.case}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Explore</b></Link>)}
         </ScrollReveal>
       </section>
 
       <section className={styles.anatomy}>
-        <div className={styles.fibreField} aria-hidden="true"><i /><i /><i /><i /></div>
-        <ScrollReveal className={styles.anatomyHead}><div><span className={styles.anatomyKicker}>Archive specimen / 000421</span><h2>Position anatomy.</h2></div><p>Four facts stay attached through the full lifecycle.</p></ScrollReveal>
+        <ScrollReveal className={styles.anatomyHead}><div><h2>Position anatomy.</h2></div><p>Four facts stay attached through the full lifecycle.</p></ScrollReveal>
         <ScrollReveal className={`${styles.anatomyBoard} ${styles.anatomyOriginal}`}>
-          <div className={styles.anatomyOrb}>
-            <span className={styles.coordinate}>X 43.120 / Y 08.421</span>
-            <span className={styles.anatomyTicket}><Image src="/brand/vellum-anatomy-ticket-v2.webp" alt="A Vellum bearer note" width={1024} height={1536} /></span>
-            <span className={styles.specimenLabel}>BEARER NOTE<br />ROBINHOOD CHAIN</span>
-            <span className={styles.traceLine} aria-hidden="true"><i /><i /><i /></span>
-          </div>
+          <div className={styles.anatomyOrb}><span className={styles.anatomyTicket}><Image src="/brand/vellum-anatomy-ticket-v2.webp" alt="A Vellum bearer note" width={1024} height={1536} /></span></div>
           <div className={styles.anatomyRows}>
-            <header><span>PROOF TRACE</span><b>4 / 4 facts verified</b></header>
             <div><span>01</span><b>Underlying</b><em>250,000 CASHCAT</em></div>
             <div><span>02</span><b>Term</b><em>90 days</em></div>
             <div><span>03</span><b>Bearer</b><em>0x020b...18B4</em></div>
             <div><span>04</span><b>State</b><em>Claimable at maturity</em></div>
-            <footer><span>TRACE / RH-18421-0421</span><b>Verified onchain</b></footer>
           </div>
         </ScrollReveal>
       </section>
 
       <section className={`${styles.docs} ${styles.footerOnly}`}>
-        <div className={styles.fibreField} aria-hidden="true"><i /><i /><i /><i /></div>
         <footer>
           <ScrollReveal className={styles.footer}>
             <div><Link href="/" className={styles.wordmark}>vellum<span>.</span></Link><p>Portable positions for Robinhood Chain.</p></div>
