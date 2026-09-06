@@ -55,3 +55,21 @@
 @media(prefers-reduced-motion:reduce){.useCaseIntro h3,.useCaseIntro p,.useCaseIntro .glassButton{animation:none}.processLine>span{transform:none}.processLine::after{top:calc(100% - 8px)}.process .step{opacity:1;transform:none;filter:none}}
 
 .noteVisual>img{object-fit:cover;filter:none!important;transform:scale(1.015);transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .55s}.note:hover .noteVisual>img{transform:scale(1.06);filter:saturate(1.08)!important}.heroPoster,.heroVideo{transform:none!important}
+
+/* Footer: saturated sky, reference-scale logo tile, and a clean three-column rhythm. */
+.footerScene{min-height:800px;background:#073957}
+.footerScene>img{object-position:center 42%;filter:saturate(1.12) brightness(.74) contrast(1.03)}
+.footerShade{background:linear-gradient(180deg,#031c2c1f 0%,#031b2a54 48%,#020b11c7 100%)}
+.footerColumns{position:relative;z-index:3;box-sizing:border-box;display:grid;grid-template-columns:minmax(210px,1.15fr) .72fr .72fr;align-items:start;gap:7vw;width:100%;margin:0;padding:76px 6.5% 340px;color:#f5f7f4}
+.footerColumns nav{font-weight:480;text-shadow:0 1px 18px #00162280}
+.footerColumns nav>span{color:#d4e9e9b5}
+.footerBrandCard{position:relative;width:clamp(176px,13vw,218px);aspect-ratio:1;border:1px solid #ffffff3d;border-radius:28px;overflow:hidden;background:#168ac1;box-shadow:0 28px 70px #00131f70}
+.footerBrandSky{object-fit:cover;object-position:62% 42%;filter:saturate(1.2) brightness(.96)}
+.footerBrandCard::after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#ffffff25,transparent 45%,#003c6252)}
+.footerBrandGlyph{position:absolute;z-index:2;inset:0;display:grid;place-items:center}
+.footerBrandGlyph img{width:50%;height:50%;object-fit:contain;filter:drop-shadow(0 14px 24px #00324d8c)}
+.footerMarquee{z-index:3;color:#edf8f5}
+.footerMarquee span{-webkit-text-stroke-color:#eaf7f0d1}
+
+@media(max-width:760px){.footerScene{min-height:720px}.footerScene>img{object-position:58% 42%}.footerColumns{grid-template-columns:132px 1fr;padding:38px 24px 250px;gap:26px}.footerBrandCard{width:132px;border-radius:21px}.footerColumns nav:last-child{grid-column:2}.footerMarquee span{font-size:150px}}
+@media(max-width:390px){.footerColumns{grid-template-columns:108px 1fr;gap:20px}.footerBrandCard{width:108px;border-radius:18px}.footerMarquee span{font-size:125px}}
