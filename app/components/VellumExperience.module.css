@@ -84,3 +84,5 @@
 .ownershipBackdrop{filter:brightness(1.32) saturate(1.14) contrast(.96)}
 .ownershipShade{background:linear-gradient(180deg,#061c2912 0%,#06283752 46%,#03141fb8 100%)}
 @media(max-width:760px){.ownershipBackdrop{object-position:63% center;filter:brightness(1.62) saturate(1.18) contrast(.94)}.ownershipShade{background:linear-gradient(180deg,#072b3b08 0%,#06293838 45%,#03151f9e 100%)}}
+
+.note:nth-child(2) .noteVisual>img,.note:nth-child(3) .noteVisual>img{filter:none}
