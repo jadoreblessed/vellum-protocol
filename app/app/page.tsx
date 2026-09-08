@@ -23,17 +23,32 @@ declare global {
   interface Window { ethereum?: EthereumProvider }
 }
 
-const terms = ["30D", "90D", "180D", "1Y"];
+type TermOption = "INSTANT" | "30D" | "90D" | "180D" | "1Y" | "CUSTOM";
+
+const terms: TermOption[] = ["INSTANT", "30D", "90D", "180D", "1Y", "CUSTOM"];
+const MAX_TERM_DAYS = 3650;
 const shorten = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
-const termSeconds: Record<string, number> = { "30D": 30 * 86400, "90D": 90 * 86400, "180D": 180 * 86400, "1Y": 365 * 86400 };
+const presetTermSeconds: Partial<Record<TermOption, number>> = { "30D": 30 * 86400, "90D": 90 * 86400, "180D": 180 * 86400, "1Y": 365 * 86400 };
 const messageFrom = (error: unknown) => error instanceof Error ? (error as Error & { shortMessage?: string }).shortMessage || error.message : "Transaction failed";
 const publicClientFor = (network: VellumNetwork) => createPublicClient({ chain: network.chain, transport: http(network.chain.rpcUrls.default.http[0]) });
+
+function resolveTermSeconds(term: TermOption, customDays: string) {
+  if (term === "INSTANT") return 0;
+  if (term !== "CUSTOM") return presetTermSeconds[term] ?? null;
+  const days = Number(customDays);
+  return Number.isInteger(days) && days >= 1 && days <= MAX_TERM_DAYS ? days * 86400 : null;
+}
+
+function displayTerm(term: TermOption, customDays: string) {
+  return term === "CUSTOM" ? `${customDays || "—"}D` : term;
+}
 
 export default function AppPage() {
   const [tab, setTab] = useState<"notes" | "wrap">("wrap");
   const network = getVellumNetwork(DEFAULT_NETWORK_ID) ?? VELLUM_NETWORKS[0];
   const [token, setToken] = useState<VellumToken>(network.tokens[0]);
-  const [term, setTerm] = useState("90D");
+  const [term, setTerm] = useState<TermOption>("90D");
+  const [customDays, setCustomDays] = useState("14");
   const [amount, setAmount] = useState("250000");
   const [tokenAddress, setTokenAddress] = useState("");
   const [tokenDecimals, setTokenDecimals] = useState(18);
@@ -55,7 +70,7 @@ export default function AppPage() {
     }
     const revealTimer = window.setTimeout(() => setPreviewRevision((revision) => revision + 1), 180);
     return () => window.clearTimeout(revealTimer);
-  }, [token.symbol, amount, term]);
+  }, [token.symbol, amount, term, customDays]);
 
   useEffect(() => {
     setToken(network.tokens[0]);
@@ -188,9 +203,9 @@ export default function AppPage() {
       setError("Enter a valid ERC-20 contract address");
       return;
     }
-    const selectedTerm = termSeconds[term];
-    if (!selectedTerm) {
-      setError("Choose a fixed term from 30D, 90D, 180D, or 1Y");
+    const selectedTerm = resolveTermSeconds(term, customDays);
+    if (selectedTerm === null) {
+      setError(`Choose Instant, a preset, or enter 1–${MAX_TERM_DAYS} custom days`);
       return;
     }
     setWorking(true);
@@ -319,8 +334,23 @@ export default function AppPage() {
                 <div className="term-pills">
                   {terms.map((item) => <button key={item} className={`pill ${term === item ? "active" : ""}`} onClick={() => setTerm(item)}>{item}</button>)}
                 </div>
+                {term === "CUSTOM" && (
+                  <div className="custom-term">
+                    <input
+                      className="field custom-term-input"
+                      type="number"
+                      min="1"
+                      max={MAX_TERM_DAYS}
+                      step="1"
+                      value={customDays}
+                      onChange={(event) => setCustomDays(event.target.value)}
+                      aria-label="Custom term in days"
+                    />
+                    <span className="mono">DAYS / MAX 3650</span>
+                  </div>
+                )}
                 <div className="wrap-action">
-                  <div><div className="label">Term</div><div className="position" style={{ fontSize: 38 }}>{term}</div></div>
+                  <div><div className="label">Term</div><div className="position" style={{ fontSize: 38 }}>{displayTerm(term, customDays)}</div></div>
                   <div><div className="label">Token</div><b style={{ fontFamily: "var(--mono)" }}>{token.symbol}</b></div>
                   <button className={`wrap-submit ${!vaultAddress ? "vault-required" : ""}`} onClick={wrapPosition} disabled={working || (Boolean(address) && !vaultAddress)}><span>{working ? "Confirming..." : !vaultAddress ? "Vault required" : address ? "Approve and wrap" : "Connect to wrap"}</span></button>
                 </div>
@@ -339,10 +369,9 @@ export default function AppPage() {
                   color={token.color}
                   accent={token.accent}
                   amount={amount || "250,000"}
-                  term={term === "NONE" ? "OPEN" : term}
+                  term={displayTerm(term, customDays)}
                   mark={token.mark}
                   network=""
-                  signalOnView={false}
                 />
               </div>
             ) : <div className="empty-card">NO NOTES YET</div>}

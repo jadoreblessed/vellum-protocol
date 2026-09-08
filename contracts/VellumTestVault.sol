@@ -80,7 +80,7 @@ contract VellumTestVault {
     function wrap(address token, uint128 amount, uint64 termSeconds) external nonReentrant returns (uint256 tokenId) {
         require(token != address(0), "Vellum: token required");
         require(amount > 0, "Vellum: amount required");
-        require(termSeconds >= 60, "Vellum: term too short");
+        require(termSeconds == 0 || (termSeconds >= 60 && termSeconds <= 3650 days), "Vellum: invalid term");
         require(IERC20Test(token).transferFrom(msg.sender, address(this), amount), "Vellum: deposit failed");
 
         tokenId = nextTokenId++;

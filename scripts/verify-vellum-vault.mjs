@@ -23,5 +23,6 @@ for (const forbidden of ["selfdestruct", "delegatecall", "upgradeTo", "withdraw"
 if (!source.includes("received == amount")) throw new Error("Exact-balance accounting guard is missing.");
 if (!source.includes("function claim") || !source.includes("_safeTransfer(token, owner, amount)")) throw new Error("Claim payout path is missing.");
 if (source.includes('require(block.timestamp >= position.maturity')) throw new Error("Claim is still gated by maturity.");
+if (!source.includes("termSeconds == 0")) throw new Error("Instant-note term is missing.");
 
 console.log("VellumVault compile and interface checks passed.");

@@ -115,7 +115,7 @@ contract VellumVault {
         require(!wrapsPaused, "Vellum: wraps paused");
         require(token != address(0), "Vellum: token required");
         require(amount != 0, "Vellum: amount required");
-        require(termSeconds >= MIN_TERM && termSeconds <= MAX_TERM, "Vellum: invalid term");
+        require(termSeconds == 0 || (termSeconds >= MIN_TERM && termSeconds <= MAX_TERM), "Vellum: invalid term");
 
         uint256 balanceBefore = IERC20Vellum(token).balanceOf(address(this));
         _safeTransferFrom(token, msg.sender, address(this), amount);

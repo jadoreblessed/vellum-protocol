@@ -7,7 +7,7 @@ import { Check, Menu, X } from "lucide-react";
 import s from "./VellumExperience.module.css";
 
 const notes = [
-  { name: "Cash Cat", ticker: "CASHCAT", amount: "250,000", term: "90 days", image: "/tokens/cashcat.png", art: "/brand/vellum-card-cashcat.webp", color: "#9edab1", number: "001" },
+  { name: "Cash Cat", ticker: "CASHCAT", amount: "250,000", term: "Instant", image: "/tokens/cashcat.png", art: "/brand/vellum-card-cashcat.webp", color: "#9edab1", number: "001" },
   { name: "Wrapped Ether", ticker: "WETH", amount: "12.50", term: "30 days", image: "/tokens/weth.png", art: "/brand/vellum-card-weth.webp", color: "#91b9e8", number: "002" },
   { name: "Global Dollar", ticker: "USDG", amount: "10,000", term: "180 days", image: "/tokens/usdg.png", art: "/brand/vellum-card-usdg.webp", color: "#edc184", number: "003" },
 ];
@@ -89,7 +89,15 @@ export default function VellumExperience() {
       {menuOpen && <nav id="vellum-menu" className={s.menuPanel} aria-label="Site navigation"><a href="#about" onClick={() => setMenuOpen(false)}>About Vellum</a><a href="#positions" onClick={() => setMenuOpen(false)}>Positions</a><a href="#how" onClick={() => setMenuOpen(false)}>How it works</a><Link href="/docs">Documentation</Link><a href="https://x.com/VellumRH" target="_blank" rel="noreferrer">X / Twitter</a><Link href="/app" className={s.menuCta}>Open app</Link></nav>}
     </header>
     <section className={s.hero} aria-labelledby="hero-title">
-      <Image className={s.heroPoster} src="/brand/vellum-sky-hero.webp" alt="Translucent amber and emerald Vellum tickets suspended in a blue sky" fill priority sizes="100vw" quality={90} />
+      <Image className={s.heroPoster} src="/brand/vellum-wind-sky.webp" alt="Sunlit clouds in a deep blue sky" fill preload sizes="100vw" quality={90} />
+      <div className={s.windField} aria-hidden="true">
+        <span className={`${s.windTicket} ${s.ticketEmerald}`}><Image src="/brand/vellum-ticket-emerald.webp" alt="" fill sizes="(max-width: 760px) 92vw, 47vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketAmber}`}><Image src="/brand/vellum-ticket-amber.webp" alt="" fill sizes="(max-width: 760px) 74vw, 38vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketCyan}`}><Image src="/brand/vellum-ticket-cyan.webp" alt="" fill sizes="(max-width: 760px) 42vw, 23vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintA}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="18vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintB}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="15vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintC}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="12vw" /></span>
+      </div>
       <div className={s.heroShade} />
       <div className={s.heroCopy}><h1 id="hero-title">Hold the position.<br />Move the possibility.</h1><p>Your tokens. A visible term. One active note<br className={s.desktopBreak} /> you can hold, transfer or claim immediately.</p><div className={s.actions}><Link href="/app" className={s.primaryButton}>Open Vellum</Link><span className={`${s.glassButton} ${s.comingSoon}`}>CA COMING SOON</span></div></div>
       <div className={s.heroWord} aria-label="Vellum">VELLUM<sup>®</sup></div>
@@ -111,7 +119,7 @@ export default function VellumExperience() {
     </section>
     <section className={s.principles}>
       <Chapter>In the details</Chapter><div className={s.sectionHeading} data-reveal><h2>Nothing<br />lost in transit.</h2><p>The useful part of a position<br />is the information it carries.</p></div>
-      <div className={s.principleGrid}><article data-reveal style={{"--delay":"0ms"} as CSSProperties}><span className={s.eyebrow}>(01 — THE BALANCE)</span><h3>Same asset.<br />Same amount.</h3><p>The underlying tokens stay in the vault until the note is claimed.</p><div className={s.largeFact}>1:1</div><footer><Check size={15} /> One note represents one position</footer></article><article data-reveal style={{"--delay":"110ms"} as CSSProperties}><span className={s.eyebrow}>(02 — THE TERM)</span><h3>A date.<br />Not a barrier.</h3><p>The selected term stays attached to the position without delaying redemption.</p><div className={s.largeFact}>90<small>days*</small></div><footer><Check size={15} /> *Illustrative selected term</footer></article><article data-reveal style={{"--delay":"220ms"} as CSSProperties}><span className={s.eyebrow}>(03 — THE BEARER)</span><h3>Your note.<br />Your claim.</h3><p>The current holder can redeem the underlying balance immediately.</p><div className={s.largeFact}>NOW</div><footer><Check size={15} /> Claim active from mint</footer></article></div><div className={s.principleFoot}><Link href="/protocol">Explore the protocol</Link></div>
+      <div className={s.principleGrid}><article data-reveal style={{"--delay":"0ms"} as CSSProperties}><span className={s.eyebrow}>(01 — THE BALANCE)</span><h3>Same asset.<br />Same amount.</h3><p>The underlying tokens stay in the vault until the note is claimed.</p><div className={s.largeFact}>1:1</div><footer><Check size={15} /> One note represents one position</footer></article><article data-reveal style={{"--delay":"110ms"} as CSSProperties}><span className={s.eyebrow}>(02 — THE TERM)</span><h3>Any term.<br />Or instant.</h3><p>Choose any duration, or mint an instant note with no waiting period.</p><div className={s.largeFact}>ANY<small>term*</small></div><footer><Check size={15} /> *Instant notes available</footer></article><article data-reveal style={{"--delay":"220ms"} as CSSProperties}><span className={s.eyebrow}>(03 — THE BEARER)</span><h3>Your note.<br />Your claim.</h3><p>The current holder can redeem the underlying balance immediately.</p><div className={s.largeFact}>NOW</div><footer><Check size={15} /> Claim active from mint</footer></article></div><div className={s.principleFoot}><Link href="/protocol">Explore the protocol</Link></div>
     </section>
     <section className={s.process} id="how" ref={process}>
       <div className={s.processSticky}><div className={s.processGrid}><div className={s.processCopy}><span className={s.processKicker}>THE PROCESS</span><h2>Make room<br />for what’s next.</h2><Link href="/how-it-works" className={s.processLink}>Read the mechanics</Link></div><div className={s.processLine} aria-hidden="true"><span /></div><div className={s.stepList}>{steps.map((step,index)=><article className={s.step} data-active={activeStep===index} key={step.name}><h3>{step.name}</h3><p>{step.copy}</p><small>{step.detail}</small></article>)}</div></div></div>

@@ -5,14 +5,14 @@
 .app :global(.wallet small){color:rgba(234,247,234,.62)!important}
 .app :global(.preview-card){width:100%!important;min-width:0!important;min-height:0!important;padding:0!important;overflow:visible!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .app :global(.preview-card)::before,.app :global(.preview-card)::after{display:none!important}
-.app :global(.app-bearer-wrap){position:relative;display:grid;width:100%!important;min-width:0!important;place-items:center;padding:22px 0;box-sizing:border-box}
+.app :global(.app-bearer-wrap){position:relative;display:grid;width:100%!important;min-width:0!important;place-items:center;padding:22px 0;box-sizing:border-box;animation:appCardFloat 7.5s 1s ease-in-out infinite;will-change:transform}
 .app :global(.app-bearer-wrap)::before{display:none}
 .app :global(.app-note-enter){z-index:1;width:min(100%,590px)!important;max-width:590px!important;min-width:0!important;transform-origin:50% 50%;animation:appCardReveal .56s cubic-bezier(.18,.78,.22,1) both!important}
-.app :global(.app-note-enter)>:first-child,.app :global(.app-note-enter)>:not(:first-child){animation:none!important}
-@keyframes appCardReveal{from{opacity:.14;transform:scale(.982);filter:blur(6px) brightness(1.08)}to{opacity:1;transform:none;filter:none}}
+@keyframes appCardReveal{from{opacity:.08;transform:translateY(20px) scale(.968) rotate(-.7deg);filter:blur(7px) brightness(1.08)}to{opacity:1;transform:none;filter:none}}
+@keyframes appCardFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}
 @media(max-width:1200px){.app :global(.app-note-enter){width:min(100%,550px)!important}}
 @media(max-width:650px){.app :global(.app-bearer-wrap){padding:10px 0}.app :global(.app-note-enter){width:min(100%,430px)!important}}
-@media(prefers-reduced-motion:reduce){.app :global(.app-bearer-wrap)::before,.app :global(.app-note-enter),.app :global(.app-note-enter)>:not(:first-child){animation:none!important}}
+@media(prefers-reduced-motion:reduce){.app :global(.app-bearer-wrap),.app :global(.app-bearer-wrap)::before,.app :global(.app-note-enter){animation:none!important}}
 
 /* Keep the working surface direct: controls and preview start on the same top edge. */
 .app :global(.app-layout){align-items:start!important}
@@ -24,4 +24,8 @@
 .app :global(.wrap-submit:disabled){cursor:not-allowed!important;opacity:.62!important}
 .app :global(.vault-required){border:1px solid rgba(216,255,118,.34)!important;background:rgba(216,255,118,.12)!important;color:#dfff9b!important;box-shadow:none!important}
 .app :global(.notes-action){display:flex!important;justify-content:flex-end!important}
+.app :global(.custom-term){display:grid;grid-template-columns:minmax(130px,220px) auto;align-items:center;gap:14px;margin:12px 0 4px}
+.app :global(.custom-term-input){margin:0!important;padding:13px 15px!important}
+.app :global(.custom-term>span){color:rgba(227,240,229,.58);font-size:9px;line-height:1.45}
+@media(max-width:520px){.app :global(.custom-term){grid-template-columns:minmax(0,1fr) auto;gap:10px}}
 @media(min-width:1001px){.app :global(.preview-card){position:sticky!important;top:96px!important}}
