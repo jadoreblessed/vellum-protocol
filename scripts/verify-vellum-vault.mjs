@@ -14,7 +14,7 @@ const contract = output.contracts["VellumVault.sol"].VellumVault;
 if (!contract.evm.bytecode.object) throw new Error("VellumVault bytecode was not emitted.");
 
 const functions = new Set(contract.abi.filter((item) => item.type === "function").map((item) => item.name));
-for (const required of ["wrap", "claim", "setWrapsPaused", "proposeGuardian", "acceptGuardian", "transferFrom", "safeTransferFrom"]) {
+for (const required of ["wrap", "claim", "isClaimable", "setWrapsPaused", "proposeGuardian", "acceptGuardian", "transferFrom", "safeTransferFrom"]) {
   if (!functions.has(required)) throw new Error(`Missing required function: ${required}`);
 }
 for (const forbidden of ["selfdestruct", "delegatecall", "upgradeTo", "withdraw"]) {
@@ -22,5 +22,6 @@ for (const forbidden of ["selfdestruct", "delegatecall", "upgradeTo", "withdraw"
 }
 if (!source.includes("received == amount")) throw new Error("Exact-balance accounting guard is missing.");
 if (!source.includes("function claim") || !source.includes("_safeTransfer(token, owner, amount)")) throw new Error("Claim payout path is missing.");
+if (source.includes('require(block.timestamp >= position.maturity')) throw new Error("Claim is still gated by maturity.");
 
 console.log("VellumVault compile and interface checks passed.");

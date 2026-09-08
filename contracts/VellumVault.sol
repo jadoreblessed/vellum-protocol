@@ -4,7 +4,7 @@ pragma solidity ^0.8.30;
 /// @title Vellum Vault
 /// @notice Custodies an exact ERC-20 balance and mints one transferable ERC-721 claim note.
 /// @dev This contract intentionally has no upgrade path and no admin asset-release method.
-///      The guardian can only pause new deposits; already-mature notes remain claimable.
+///      The selected term is immutable note metadata; every live note is claimable immediately.
 interface IERC20Vellum {
     function balanceOf(address account) external view returns (uint256);
 }
@@ -109,7 +109,7 @@ contract VellumVault {
         }
     }
 
-    /// @notice Deposit an exact ERC-20 balance and mint a note to the depositor.
+    /// @notice Deposit an exact ERC-20 balance and mint an immediately claimable note.
     /// @dev Fee-on-transfer and rebasing tokens are rejected to preserve a 1:1 claim.
     function wrap(address token, uint256 amount, uint64 termSeconds) external nonReentrant returns (uint256 tokenId) {
         require(!wrapsPaused, "Vellum: wraps paused");
@@ -129,13 +129,12 @@ contract VellumVault {
         emit NoteWrapped(tokenId, msg.sender, token, amount, maturity);
     }
 
-    /// @notice Redeem a mature note. Proceeds always go to its current ERC-721 holder.
+    /// @notice Redeem a live note at any time. Proceeds always go to its current ERC-721 holder.
     function claim(uint256 tokenId) external nonReentrant {
         address owner = ownerOf(tokenId);
         require(msg.sender == owner, "Vellum: holder only");
         Position storage position = positions[tokenId];
         require(!position.claimed, "Vellum: already claimed");
-        require(block.timestamp >= position.maturity, "Vellum: not mature");
 
         position.claimed = true;
         address token = position.token;
@@ -145,7 +144,12 @@ contract VellumVault {
         emit NoteClaimed(tokenId, owner, token, amount);
     }
 
-    /// @notice Emergency control can stop new wraps only. It cannot block mature claims.
+    /// @notice Returns true while a note exists and its underlying balance has not been claimed.
+    function isClaimable(uint256 tokenId) external view returns (bool) {
+        return _ownerOf[tokenId] != address(0) && !positions[tokenId].claimed;
+    }
+
+    /// @notice Emergency control can stop new wraps only. It cannot block existing claims.
     function setWrapsPaused(bool paused) external onlyGuardian {
         wrapsPaused = paused;
         emit WrapsPauseSet(paused);

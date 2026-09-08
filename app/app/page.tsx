@@ -295,6 +295,7 @@ export default function AppPage() {
 
             {tab === "notes" ? (
               <>
+                <div className="claim-status mono"><span aria-hidden="true" /><div><b>Claim active now</b><small>Selected term does not delay redemption</small></div></div>
                 <label className="form-label mono"><span>Note ID</span></label>
                 <input className="field" value={noteId} onChange={(event) => setNoteId(event.target.value)} placeholder="Enter Vellum note ID" inputMode="numeric" />
                 <div className="wrap-action notes-action">
@@ -314,7 +315,7 @@ export default function AppPage() {
                 </div>
                 <label className="form-label mono"><span>Amount</span><span>{token.symbol}</span></label>
                 <input className="field" value={amount} onChange={(event) => setAmount(event.target.value)} />
-                <label className="form-label mono"><span>Term</span><span>UNWRAP REVERTS UNTIL MATURITY</span></label>
+                <label className="form-label mono"><span>Term</span><span>CLAIM ACTIVE IMMEDIATELY</span></label>
                 <div className="term-pills">
                   {terms.map((item) => <button key={item} className={`pill ${term === item ? "active" : ""}`} onClick={() => setTerm(item)}>{item}</button>)}
                 </div>

@@ -98,7 +98,6 @@ contract VellumTestVault {
         require(msg.sender == owner, "Vellum: holder only");
         Position storage position = positions[tokenId];
         require(!position.claimed, "Vellum: already claimed");
-        require(block.timestamp >= position.maturity, "Vellum: not mature");
 
         position.claimed = true;
         address token = position.token;
@@ -106,6 +105,10 @@ contract VellumTestVault {
         _burn(tokenId, owner);
         require(IERC20Test(token).transfer(owner, amount), "Vellum: release failed");
         emit NoteClaimed(tokenId, owner, token, amount);
+    }
+
+    function isClaimable(uint256 tokenId) external view returns (bool) {
+        return _ownerOf[tokenId] != address(0) && !positions[tokenId].claimed;
     }
 
     function _burn(uint256 tokenId, address owner) private {
