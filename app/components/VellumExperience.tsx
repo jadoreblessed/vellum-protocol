@@ -91,12 +91,12 @@ export default function VellumExperience() {
     <section className={s.hero} aria-labelledby="hero-title">
       <Image className={s.heroPoster} src="/brand/vellum-wind-sky.webp" alt="Sunlit clouds in a deep blue sky" fill preload sizes="100vw" quality={90} />
       <div className={s.windField} aria-hidden="true">
-        <span className={`${s.windTicket} ${s.ticketEmerald}`}><Image src="/brand/vellum-ticket-emerald.webp" alt="" fill sizes="(max-width: 760px) 92vw, 47vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketAmber}`}><Image src="/brand/vellum-ticket-amber.webp" alt="" fill sizes="(max-width: 760px) 74vw, 38vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketCyan}`}><Image src="/brand/vellum-ticket-cyan.webp" alt="" fill sizes="(max-width: 760px) 42vw, 23vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintA}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="18vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintB}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="15vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintC}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="12vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketEmerald}`}><Image src="/brand/vellum-ticket-emerald.webp" alt="" fill sizes="(max-width: 760px) 68vw, 39vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketAmber}`}><Image src="/brand/vellum-ticket-amber.webp" alt="" fill sizes="(max-width: 760px) 57vw, 32vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketCyan}`}><Image src="/brand/vellum-ticket-cyan.webp" alt="" fill sizes="(max-width: 760px) 34vw, 19vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintA}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 21vw, 15vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintB}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 16vw, 12vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintC}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 20vw, 10vw" /></span>
       </div>
       <div className={s.heroShade} />
       <div className={s.heroCopy}><h1 id="hero-title">Hold the position.<br />Move the possibility.</h1><p>Your tokens. A visible term. One active note<br className={s.desktopBreak} /> you can hold, transfer or claim immediately.</p><div className={s.actions}><Link href="/app" className={s.primaryButton}>Open Vellum</Link><span className={`${s.glassButton} ${s.comingSoon}`}>CA COMING SOON</span></div></div>
