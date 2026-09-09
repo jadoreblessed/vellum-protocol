@@ -42,39 +42,42 @@ export default function VellumExperience() {
     // The large tickets carry more visual weight, while the distant tickets
     // answer the same occasional gust with a little more travel.
     const motion = [
-      { weight: 0.28, phase: 0.15, flutter: 0.72, delay: 0.1, exit: 0.55, rise: -0.05, turn: 3 },
-      { weight: 0.34, phase: 1.4, flutter: 0.81, delay: 0.16, exit: 0.62, rise: -0.02, turn: 4 },
-      { weight: 0.58, phase: 2.7, flutter: 0.94, delay: 0.04, exit: 0.78, rise: -0.08, turn: 6 },
-      { weight: 0.92, phase: 4.2, flutter: 1.16, delay: 0, exit: 0.95, rise: -0.12, turn: 9 },
-      { weight: 0.78, phase: 5.1, flutter: 1.04, delay: 0.03, exit: 0.8, rise: -0.09, turn: 8 },
-      { weight: 1, phase: 3.5, flutter: 1.22, delay: 0.08, exit: 0.42, rise: -0.1, turn: 7 },
+      { weight: 0.28, phase: 0.15, flutter: 0.72, response: 1.1 },
+      { weight: 0.34, phase: 1.4, flutter: 0.81, response: 1.25 },
+      { weight: 0.58, phase: 2.7, flutter: 0.94, response: 1.55 },
+      { weight: 0.92, phase: 4.2, flutter: 1.16, response: 2.15 },
+      { weight: 0.78, phase: 5.1, flutter: 1.04, response: 1.9 },
+      { weight: 1, phase: 3.5, flutter: 1.22, response: 2.35 },
     ];
+    const position = motion.map(() => ({ x: 0, y: 0, roll: 0 }));
     let frame = 0;
     let last = 0;
     let elapsed = 0;
     let visible = false;
     const tick = (now: number) => {
-      elapsed += last ? Math.min(now - last, 50) / 1000 : 0;
+      const delta = last ? Math.min(now - last, 50) / 1000 : 0;
+      elapsed += delta;
       last = now;
       const intro = 1 - Math.exp(-elapsed / 3);
       const amplitude = mobile.matches ? 0.55 : 1;
-      const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.11 - 1.3)), 7);
-      const sharedX = Math.sin(elapsed * 0.13) * 3 + Math.sin(elapsed * 0.047 + 1.1) * 1.6 + gust * 8;
-      const sharedY = Math.sin(elapsed * 0.09 + 0.7) * 1.9 - gust * 3.2;
-      const heroProgress = Math.min(1, Math.max(0, window.scrollY / Math.max(window.innerHeight * 0.78, 1)));
+      const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.105 - 1.3)), 7);
+      const sharedX = Math.sin(elapsed * 0.127) * 2.6 + Math.sin(elapsed * 0.043 + 1.1) * 1.4 + gust * 6.5;
+      const sharedY = Math.sin(elapsed * 0.089 + 0.7) * 1.55 - gust * 2.5;
       tickets.forEach((ticket, index) => {
         const item = motion[index];
-        const local = Math.sin(elapsed * item.flutter * 0.17 + item.phase);
+        const local = Math.sin(elapsed * item.flutter * 0.21 + item.phase)
+          + Math.sin(elapsed * item.flutter * 0.063 + item.phase * 1.7) * 0.35;
         const strength = item.weight * amplitude * intro;
-        const exitProgress = Math.min(1, Math.max(0, (heroProgress - item.delay) / (1 - item.delay)));
-        const exitEase = exitProgress * exitProgress * (3 - 2 * exitProgress);
-        ticket.style.setProperty("--drift-x", `${((sharedX + local * 2.4) * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-y", `${((sharedY - local * 1.5) * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-roll", `${((sharedX * 0.03 + local * 0.13) * strength).toFixed(3)}deg`);
-        ticket.style.setProperty("--exit-x", `${(window.innerWidth * item.exit * exitEase).toFixed(2)}px`);
-        ticket.style.setProperty("--exit-y", `${(window.innerHeight * item.rise * exitEase).toFixed(2)}px`);
-        ticket.style.setProperty("--exit-roll", `${(item.turn * exitEase).toFixed(3)}deg`);
-        ticket.style.setProperty("--ticket-opacity", `${Math.pow(1 - exitEase, 0.78).toFixed(3)}`);
+        const targetX = (sharedX + local * 2.1) * strength;
+        const targetY = (sharedY - local * 1.25) * strength;
+        const targetRoll = (sharedX * 0.026 + local * 0.11) * strength;
+        const follow = 1 - Math.exp(-delta * item.response);
+        position[index].x += (targetX - position[index].x) * follow;
+        position[index].y += (targetY - position[index].y) * follow;
+        position[index].roll += (targetRoll - position[index].roll) * follow;
+        ticket.style.setProperty("--drift-x", `${position[index].x.toFixed(3)}px`);
+        ticket.style.setProperty("--drift-y", `${position[index].y.toFixed(3)}px`);
+        ticket.style.setProperty("--drift-roll", `${position[index].roll.toFixed(3)}deg`);
       });
       frame = requestAnimationFrame(tick);
     };
@@ -86,10 +89,6 @@ export default function VellumExperience() {
           ticket.style.removeProperty("--drift-x");
           ticket.style.removeProperty("--drift-y");
           ticket.style.removeProperty("--drift-roll");
-          ticket.style.removeProperty("--exit-x");
-          ticket.style.removeProperty("--exit-y");
-          ticket.style.removeProperty("--exit-roll");
-          ticket.style.removeProperty("--ticket-opacity");
         });
       } else if (visible && !document.hidden) {
         frame = requestAnimationFrame(tick);

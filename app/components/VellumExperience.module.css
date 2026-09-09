@@ -96,7 +96,7 @@
 /* Quiet shared airflow; layout and base angles stay fixed. */
 .heroPoster{z-index:0}
 .windField{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none;transform:translateZ(0)}
-.windTicket{position:absolute;display:block;aspect-ratio:1.55;opacity:calc(var(--ticket-base-opacity,1) * var(--ticket-opacity,1));transform:translate3d(calc(var(--drift-x,0px) + var(--exit-x,0px)),calc(var(--drift-y,0px) + var(--exit-y,0px)),0) rotate(calc(var(--ticket-rotate) + var(--drift-roll,0deg) + var(--exit-roll,0deg)));will-change:transform,opacity}
+.windTicket{position:absolute;display:block;aspect-ratio:1.55;opacity:var(--ticket-base-opacity,1);transform:translate3d(var(--drift-x,0px),var(--drift-y,0px),0) rotate(calc(var(--ticket-rotate) + var(--drift-roll,0deg)));will-change:transform}
 .windTicket>img{object-fit:contain}
 .ticketEmerald{--ticket-rotate:-6deg;top:5%;right:6%;width:min(32vw,610px);z-index:3}
 .ticketAmber{--ticket-rotate:7deg;top:45%;right:9%;width:min(27vw,515px);z-index:2}
