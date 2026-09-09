@@ -39,9 +39,16 @@ export default function VellumExperience() {
     const tickets = Array.from(field.children) as HTMLElement[];
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 760px)");
-    // Shared airflow, with a delayed response for each depth plane.
-    // No perspective/scale changes: preserve the approved composition.
-    const weights = [0.55, 0.65, 0.8, 1, 0.9, 1.1];
+    // The large tickets carry more visual weight, while the distant tickets
+    // answer the same occasional gust with a little more travel.
+    const motion = [
+      { weight: 0.28, phase: 0.15, flutter: 0.72 },
+      { weight: 0.34, phase: 1.4, flutter: 0.81 },
+      { weight: 0.58, phase: 2.7, flutter: 0.94 },
+      { weight: 0.92, phase: 4.2, flutter: 1.16 },
+      { weight: 0.78, phase: 5.1, flutter: 1.04 },
+      { weight: 1, phase: 3.5, flutter: 1.22 },
+    ];
     let frame = 0;
     let last = 0;
     let elapsed = 0;
@@ -51,14 +58,16 @@ export default function VellumExperience() {
       last = now;
       const intro = 1 - Math.exp(-elapsed / 3);
       const amplitude = mobile.matches ? 0.55 : 1;
+      const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.11 - 1.3)), 7);
+      const sharedX = Math.sin(elapsed * 0.13) * 2.2 + Math.sin(elapsed * 0.047 + 1.1) * 1.2 + gust * 6;
+      const sharedY = Math.sin(elapsed * 0.09 + 0.7) * 1.35 - gust * 2.4;
       tickets.forEach((ticket, index) => {
-        const t = elapsed - index * 0.75;
-        const flow = Math.sin(t * 0.19) * 0.7 + Math.sin(t * 0.083) * 0.3;
-        const lift = Math.sin(t * 0.145 + 0.6) * 0.75 + Math.sin(t * 0.067) * 0.25;
-        const strength = weights[index] * amplitude * intro;
-        ticket.style.setProperty("--drift-x", `${(flow * 12 * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-y", `${(-lift * 6 * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-roll", `${(flow * 0.55 * strength).toFixed(3)}deg`);
+        const item = motion[index];
+        const local = Math.sin(elapsed * item.flutter * 0.17 + item.phase);
+        const strength = item.weight * amplitude * intro;
+        ticket.style.setProperty("--drift-x", `${((sharedX + local * 1.8) * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-y", `${((sharedY - local * 1.1) * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-roll", `${((sharedX * 0.024 + local * 0.1) * strength).toFixed(3)}deg`);
       });
       frame = requestAnimationFrame(tick);
     };
@@ -147,12 +156,12 @@ export default function VellumExperience() {
     <section className={s.hero} aria-labelledby="hero-title">
       <Image className={s.heroPoster} src="/brand/vellum-wind-sky.webp" alt="Sunlit clouds in a deep blue sky" fill preload sizes="100vw" quality={90} />
       <div className={s.windField} aria-hidden="true">
-        <span className={`${s.windTicket} ${s.ticketEmerald}`}><Image src="/brand/vellum-ticket-emerald.webp" alt="" fill sizes="(max-width: 760px) 68vw, 39vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketAmber}`}><Image src="/brand/vellum-ticket-amber.webp" alt="" fill sizes="(max-width: 760px) 57vw, 32vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketCyan}`}><Image src="/brand/vellum-ticket-cyan.webp" alt="" fill sizes="(max-width: 760px) 34vw, 19vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintA}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 21vw, 15vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintB}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 16vw, 12vw" /></span>
-        <span className={`${s.windTicket} ${s.ticketMintC}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 20vw, 10vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketEmerald}`}><Image src="/brand/vellum-ticket-emerald.webp" alt="" fill sizes="(max-width: 760px) 54vw, 32vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketAmber}`}><Image src="/brand/vellum-ticket-amber.webp" alt="" fill sizes="(max-width: 760px) 46vw, 27vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketCyan}`}><Image src="/brand/vellum-ticket-cyan.webp" alt="" fill sizes="(max-width: 760px) 27vw, 15vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintA}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 15vw, 9vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintB}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 12vw, 8vw" /></span>
+        <span className={`${s.windTicket} ${s.ticketMintC}`}><Image src="/brand/vellum-ticket-mint.webp" alt="" fill sizes="(max-width: 760px) 14vw, 8vw" /></span>
       </div>
       <div className={s.heroShade} />
       <div className={s.heroCopy}><h1 id="hero-title">Hold the position.<br />Move the possibility.</h1><p>Your tokens. A visible term. One active note<br className={s.desktopBreak} /> you can hold, transfer or claim immediately.</p><div className={s.actions}><Link href="/app" className={s.primaryButton}>Open Vellum</Link><span className={`${s.glassButton} ${s.comingSoon}`}>CA COMING SOON</span></div></div>
