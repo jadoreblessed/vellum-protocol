@@ -39,15 +39,15 @@ export default function VellumExperience() {
     const tickets = Array.from(field.children) as HTMLElement[];
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 760px)");
-    // One shared gust crosses the whole scene. Different response times give
-    // the larger tickets more mass without turning them into separate loops.
+    // A single gust hits every ticket at once, while its angle and apparent
+    // mass decide the direction. Each gust also leaves a new resting layout.
     const motion = [
-      { travel: 14, turn: 0.24, response: 1 },
-      { travel: 16, turn: 0.3, response: 1.12 },
-      { travel: 21, turn: 0.42, response: 1.5 },
-      { travel: 28, turn: 0.58, response: 2.1 },
-      { travel: 25, turn: 0.5, response: 1.9 },
-      { travel: 30, turn: 0.64, response: 2.3 },
+      { x: 18, y: -8, turn: -0.35, response: 1.15, rest: 7, restTurn: 0.16 },
+      { x: -22, y: 14, turn: 0.55, response: 1.45, rest: 8, restTurn: 0.2 },
+      { x: 24, y: 8, turn: -0.7, response: 1.8, rest: 10, restTurn: 0.28 },
+      { x: -24, y: -15, turn: 0.9, response: 2.2, rest: 13, restTurn: 0.38 },
+      { x: 20, y: 13, turn: -0.8, response: 2, rest: 12, restTurn: 0.34 },
+      { x: -18, y: 11, turn: 0.72, response: 2.4, rest: 14, restTurn: 0.4 },
     ];
     const position = motion.map(() => ({ x: 0, y: 0, roll: 0 }));
     let frame = 0;
@@ -66,11 +66,27 @@ export default function VellumExperience() {
       };
       const gust = smoothstep(1.4, 2.3, cycle) * (1 - smoothstep(4.1, 6.3, cycle));
       const texture = 1 + Math.sin(elapsed * 1.3) * 0.045 + Math.sin(elapsed * 2.1 + 0.8) * 0.02;
+      const cycleIndex = Math.floor(elapsed / 9.5);
+      const settle = smoothstep(5.3, 9.1, cycle);
       tickets.forEach((ticket, index) => {
         const item = motion[index];
-        const targetX = item.travel * gust * texture * amplitude;
-        const targetY = -item.travel * 0.32 * gust * texture * amplitude;
-        const targetRoll = item.turn * gust * texture * amplitude;
+        const restingPosition = (currentCycle: number) => {
+          if (currentCycle === 0) return { x: 0, y: 0, roll: 0 };
+          const seed = currentCycle * 7.13 + (index + 1) * 3.71;
+          return {
+            x: Math.sin(seed) * item.rest,
+            y: Math.cos(seed * 1.37) * item.rest * 0.65,
+            roll: Math.sin(seed * 0.73) * item.restTurn,
+          };
+        };
+        const restingFrom = restingPosition(cycleIndex);
+        const restingTo = restingPosition(cycleIndex + 1);
+        const restingX = restingFrom.x + (restingTo.x - restingFrom.x) * settle;
+        const restingY = restingFrom.y + (restingTo.y - restingFrom.y) * settle;
+        const restingRoll = restingFrom.roll + (restingTo.roll - restingFrom.roll) * settle;
+        const targetX = (restingX + item.x * gust * texture) * amplitude;
+        const targetY = (restingY + item.y * gust * texture) * amplitude;
+        const targetRoll = (restingRoll + item.turn * gust * texture) * amplitude;
         const follow = 1 - Math.exp(-delta * item.response);
         position[index].x += (targetX - position[index].x) * follow;
         position[index].y += (targetY - position[index].y) * follow;
