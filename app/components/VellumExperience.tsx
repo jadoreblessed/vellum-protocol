@@ -34,6 +34,62 @@ export default function VellumExperience() {
   const [activeStep, setActiveStep] = useState(0);
   const currentCase = useCases[activeCase];
   useEffect(() => {
+    const field = root.current?.querySelector<HTMLElement>(`.${s.windField}`);
+    if (!field) return;
+    const tickets = Array.from(field.children) as HTMLElement[];
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 760px)");
+    // Shared airflow, with a delayed response for each depth plane.
+    // No perspective/scale changes: preserve the approved composition.
+    const weights = [0.55, 0.65, 0.8, 1, 0.9, 1.1];
+    let frame = 0;
+    let last = 0;
+    let elapsed = 0;
+    let visible = false;
+    const tick = (now: number) => {
+      elapsed += last ? Math.min(now - last, 50) / 1000 : 0;
+      last = now;
+      const intro = 1 - Math.exp(-elapsed / 3);
+      const amplitude = mobile.matches ? 0.55 : 1;
+      tickets.forEach((ticket, index) => {
+        const t = elapsed - index * 0.75;
+        const flow = Math.sin(t * 0.19) * 0.7 + Math.sin(t * 0.083) * 0.3;
+        const lift = Math.sin(t * 0.145 + 0.6) * 0.75 + Math.sin(t * 0.067) * 0.25;
+        const strength = weights[index] * amplitude * intro;
+        ticket.style.setProperty("--drift-x", `${(flow * 12 * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-y", `${(-lift * 6 * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-roll", `${(flow * 0.55 * strength).toFixed(3)}deg`);
+      });
+      frame = requestAnimationFrame(tick);
+    };
+    const sync = () => {
+      cancelAnimationFrame(frame);
+      last = 0;
+      if (reduced.matches) {
+        tickets.forEach(ticket => {
+          ticket.style.removeProperty("--drift-x");
+          ticket.style.removeProperty("--drift-y");
+          ticket.style.removeProperty("--drift-roll");
+        });
+      } else if (visible && !document.hidden) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(field);
+    reduced.addEventListener("change", sync);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      reduced.removeEventListener("change", sync);
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, []);
+  useEffect(() => {
     const section = root.current;
     if (!section) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
