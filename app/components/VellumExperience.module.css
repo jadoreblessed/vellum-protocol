@@ -96,13 +96,13 @@
 /* Quiet shared airflow; layout and base angles stay fixed. */
 .heroPoster{z-index:0}
 .windField{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none;transform:translateZ(0)}
-.windTicket{position:absolute;display:block;aspect-ratio:1.55;transform:translate3d(var(--drift-x,0px),var(--drift-y,0px),0) rotate(calc(var(--ticket-rotate) + var(--drift-roll,0deg)));will-change:transform}
+.windTicket{position:absolute;display:block;aspect-ratio:1.55;opacity:calc(var(--ticket-base-opacity,1) * var(--ticket-opacity,1));transform:translate3d(calc(var(--drift-x,0px) + var(--exit-x,0px)),calc(var(--drift-y,0px) + var(--exit-y,0px)),0) rotate(calc(var(--ticket-rotate) + var(--drift-roll,0deg) + var(--exit-roll,0deg)));will-change:transform,opacity}
 .windTicket>img{object-fit:contain}
 .ticketEmerald{--ticket-rotate:-6deg;top:5%;right:6%;width:min(32vw,610px);z-index:3}
 .ticketAmber{--ticket-rotate:7deg;top:45%;right:9%;width:min(27vw,515px);z-index:2}
-.ticketCyan{--ticket-rotate:-15deg;top:25%;left:32%;width:min(15vw,285px);z-index:1;opacity:.8}
-.ticketMintA{--ticket-rotate:18deg;top:5%;left:7%;width:min(9vw,170px);opacity:.72}
-.ticketMintB{--ticket-rotate:-22deg;top:10%;left:26%;width:min(7.5vw,145px);opacity:.63}
-.ticketMintC{--ticket-rotate:12deg;right:-1%;bottom:7%;width:min(8vw,155px);opacity:.58}
+.ticketCyan{--ticket-rotate:-15deg;--ticket-base-opacity:.8;top:25%;left:32%;width:min(15vw,285px);z-index:1}
+.ticketMintA{--ticket-rotate:18deg;--ticket-base-opacity:.72;top:5%;left:7%;width:min(9vw,170px)}
+.ticketMintB{--ticket-rotate:-22deg;--ticket-base-opacity:.63;top:10%;left:26%;width:min(7.5vw,145px)}
+.ticketMintC{--ticket-rotate:12deg;--ticket-base-opacity:.58;right:-1%;bottom:7%;width:min(8vw,155px)}
 @media(max-width:760px){.ticketEmerald{top:10%;right:-5%;width:54vw}.ticketAmber{top:50%;right:-6%;width:46vw}.ticketCyan{top:29%;left:-8%;width:27vw}.ticketMintA{top:14%;left:2%;width:15vw}.ticketMintB{top:6%;left:30%;width:12vw}.ticketMintC{right:-5%;bottom:12%;width:14vw}}
 @media(prefers-reduced-motion:reduce){.windTicket{transform:rotate(var(--ticket-rotate));will-change:auto}}

@@ -42,12 +42,12 @@ export default function VellumExperience() {
     // The large tickets carry more visual weight, while the distant tickets
     // answer the same occasional gust with a little more travel.
     const motion = [
-      { weight: 0.28, phase: 0.15, flutter: 0.72 },
-      { weight: 0.34, phase: 1.4, flutter: 0.81 },
-      { weight: 0.58, phase: 2.7, flutter: 0.94 },
-      { weight: 0.92, phase: 4.2, flutter: 1.16 },
-      { weight: 0.78, phase: 5.1, flutter: 1.04 },
-      { weight: 1, phase: 3.5, flutter: 1.22 },
+      { weight: 0.28, phase: 0.15, flutter: 0.72, delay: 0.1, exit: 0.55, rise: -0.05, turn: 3 },
+      { weight: 0.34, phase: 1.4, flutter: 0.81, delay: 0.16, exit: 0.62, rise: -0.02, turn: 4 },
+      { weight: 0.58, phase: 2.7, flutter: 0.94, delay: 0.04, exit: 0.78, rise: -0.08, turn: 6 },
+      { weight: 0.92, phase: 4.2, flutter: 1.16, delay: 0, exit: 0.95, rise: -0.12, turn: 9 },
+      { weight: 0.78, phase: 5.1, flutter: 1.04, delay: 0.03, exit: 0.8, rise: -0.09, turn: 8 },
+      { weight: 1, phase: 3.5, flutter: 1.22, delay: 0.08, exit: 0.42, rise: -0.1, turn: 7 },
     ];
     let frame = 0;
     let last = 0;
@@ -61,13 +61,20 @@ export default function VellumExperience() {
       const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.11 - 1.3)), 7);
       const sharedX = Math.sin(elapsed * 0.13) * 2.2 + Math.sin(elapsed * 0.047 + 1.1) * 1.2 + gust * 6;
       const sharedY = Math.sin(elapsed * 0.09 + 0.7) * 1.35 - gust * 2.4;
+      const heroProgress = Math.min(1, Math.max(0, window.scrollY / Math.max(window.innerHeight * 0.78, 1)));
       tickets.forEach((ticket, index) => {
         const item = motion[index];
         const local = Math.sin(elapsed * item.flutter * 0.17 + item.phase);
         const strength = item.weight * amplitude * intro;
+        const exitProgress = Math.min(1, Math.max(0, (heroProgress - item.delay) / (1 - item.delay)));
+        const exitEase = exitProgress * exitProgress * (3 - 2 * exitProgress);
         ticket.style.setProperty("--drift-x", `${((sharedX + local * 1.8) * strength).toFixed(3)}px`);
         ticket.style.setProperty("--drift-y", `${((sharedY - local * 1.1) * strength).toFixed(3)}px`);
         ticket.style.setProperty("--drift-roll", `${((sharedX * 0.024 + local * 0.1) * strength).toFixed(3)}deg`);
+        ticket.style.setProperty("--exit-x", `${(window.innerWidth * item.exit * exitEase).toFixed(2)}px`);
+        ticket.style.setProperty("--exit-y", `${(window.innerHeight * item.rise * exitEase).toFixed(2)}px`);
+        ticket.style.setProperty("--exit-roll", `${(item.turn * exitEase).toFixed(3)}deg`);
+        ticket.style.setProperty("--ticket-opacity", `${Math.pow(1 - exitEase, 1.15).toFixed(3)}`);
       });
       frame = requestAnimationFrame(tick);
     };
@@ -79,6 +86,10 @@ export default function VellumExperience() {
           ticket.style.removeProperty("--drift-x");
           ticket.style.removeProperty("--drift-y");
           ticket.style.removeProperty("--drift-roll");
+          ticket.style.removeProperty("--exit-x");
+          ticket.style.removeProperty("--exit-y");
+          ticket.style.removeProperty("--exit-roll");
+          ticket.style.removeProperty("--ticket-opacity");
         });
       } else if (visible && !document.hidden) {
         frame = requestAnimationFrame(tick);
