@@ -59,8 +59,8 @@ export default function VellumExperience() {
       const intro = 1 - Math.exp(-elapsed / 3);
       const amplitude = mobile.matches ? 0.55 : 1;
       const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.11 - 1.3)), 7);
-      const sharedX = Math.sin(elapsed * 0.13) * 2.2 + Math.sin(elapsed * 0.047 + 1.1) * 1.2 + gust * 6;
-      const sharedY = Math.sin(elapsed * 0.09 + 0.7) * 1.35 - gust * 2.4;
+      const sharedX = Math.sin(elapsed * 0.13) * 3 + Math.sin(elapsed * 0.047 + 1.1) * 1.6 + gust * 8;
+      const sharedY = Math.sin(elapsed * 0.09 + 0.7) * 1.9 - gust * 3.2;
       const heroProgress = Math.min(1, Math.max(0, window.scrollY / Math.max(window.innerHeight * 0.78, 1)));
       tickets.forEach((ticket, index) => {
         const item = motion[index];
@@ -68,13 +68,13 @@ export default function VellumExperience() {
         const strength = item.weight * amplitude * intro;
         const exitProgress = Math.min(1, Math.max(0, (heroProgress - item.delay) / (1 - item.delay)));
         const exitEase = exitProgress * exitProgress * (3 - 2 * exitProgress);
-        ticket.style.setProperty("--drift-x", `${((sharedX + local * 1.8) * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-y", `${((sharedY - local * 1.1) * strength).toFixed(3)}px`);
-        ticket.style.setProperty("--drift-roll", `${((sharedX * 0.024 + local * 0.1) * strength).toFixed(3)}deg`);
+        ticket.style.setProperty("--drift-x", `${((sharedX + local * 2.4) * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-y", `${((sharedY - local * 1.5) * strength).toFixed(3)}px`);
+        ticket.style.setProperty("--drift-roll", `${((sharedX * 0.03 + local * 0.13) * strength).toFixed(3)}deg`);
         ticket.style.setProperty("--exit-x", `${(window.innerWidth * item.exit * exitEase).toFixed(2)}px`);
         ticket.style.setProperty("--exit-y", `${(window.innerHeight * item.rise * exitEase).toFixed(2)}px`);
         ticket.style.setProperty("--exit-roll", `${(item.turn * exitEase).toFixed(3)}deg`);
-        ticket.style.setProperty("--ticket-opacity", `${Math.pow(1 - exitEase, 1.15).toFixed(3)}`);
+        ticket.style.setProperty("--ticket-opacity", `${Math.pow(1 - exitEase, 0.78).toFixed(3)}`);
       });
       frame = requestAnimationFrame(tick);
     };
