@@ -42,23 +42,23 @@ export default function VellumExperience() {
     // A single gust hits every ticket at once, while its angle and apparent
     // mass decide the direction. Each gust also leaves a new resting layout.
     const motion = [
-      { x: 18, y: -8, turn: -0.35, response: 1.15, rest: 7, restTurn: 0.16 },
-      { x: -22, y: 14, turn: 0.55, response: 1.45, rest: 8, restTurn: 0.2 },
-      { x: 24, y: 8, turn: -0.7, response: 1.8, rest: 10, restTurn: 0.28 },
-      { x: -24, y: -15, turn: 0.9, response: 2.2, rest: 13, restTurn: 0.38 },
-      { x: 20, y: 13, turn: -0.8, response: 2, rest: 12, restTurn: 0.34 },
-      { x: -18, y: 11, turn: 0.72, response: 2.4, rest: 14, restTurn: 0.4 },
+      { x: 21, y: -9, turn: -0.42, response: 1.25, rest: 7, restTurn: 0.16 },
+      { x: -26, y: 17, turn: 0.68, response: 1.6, rest: 8, restTurn: 0.2 },
+      { x: 28, y: 10, turn: -0.82, response: 1.95, rest: 10, restTurn: 0.28 },
+      { x: -29, y: -18, turn: 1.05, response: 2.35, rest: 13, restTurn: 0.38 },
+      { x: 24, y: 16, turn: -0.94, response: 2.15, rest: 12, restTurn: 0.34 },
+      { x: -22, y: 14, turn: 0.84, response: 2.55, rest: 14, restTurn: 0.4 },
     ];
     const position = motion.map(() => ({ x: 0, y: 0, roll: 0 }));
     let frame = 0;
     let last = 0;
-    let elapsed = 0;
+    let elapsed = 1.7;
     let visible = false;
     const tick = (now: number) => {
       const delta = last ? Math.min(now - last, 50) / 1000 : 0;
       elapsed += delta;
       last = now;
-      const amplitude = mobile.matches ? 0.55 : 1;
+      const amplitude = mobile.matches ? 0.68 : 1;
       const cycle = elapsed % 9.5;
       const smoothstep = (start: number, end: number, value: number) => {
         const progress = Math.min(1, Math.max(0, (value - start) / (end - start)));
