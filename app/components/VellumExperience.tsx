@@ -39,15 +39,15 @@ export default function VellumExperience() {
     const tickets = Array.from(field.children) as HTMLElement[];
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 760px)");
-    // The large tickets carry more visual weight, while the distant tickets
-    // answer the same occasional gust with a little more travel.
+    // One shared gust crosses the whole scene. Different response times give
+    // the larger tickets more mass without turning them into separate loops.
     const motion = [
-      { weight: 0.28, phase: 0.15, flutter: 0.72, response: 1.1 },
-      { weight: 0.34, phase: 1.4, flutter: 0.81, response: 1.25 },
-      { weight: 0.58, phase: 2.7, flutter: 0.94, response: 1.55 },
-      { weight: 0.92, phase: 4.2, flutter: 1.16, response: 2.15 },
-      { weight: 0.78, phase: 5.1, flutter: 1.04, response: 1.9 },
-      { weight: 1, phase: 3.5, flutter: 1.22, response: 2.35 },
+      { travel: 14, turn: 0.24, response: 1 },
+      { travel: 16, turn: 0.3, response: 1.12 },
+      { travel: 21, turn: 0.42, response: 1.5 },
+      { travel: 28, turn: 0.58, response: 2.1 },
+      { travel: 25, turn: 0.5, response: 1.9 },
+      { travel: 30, turn: 0.64, response: 2.3 },
     ];
     const position = motion.map(() => ({ x: 0, y: 0, roll: 0 }));
     let frame = 0;
@@ -58,19 +58,19 @@ export default function VellumExperience() {
       const delta = last ? Math.min(now - last, 50) / 1000 : 0;
       elapsed += delta;
       last = now;
-      const intro = 1 - Math.exp(-elapsed / 3);
       const amplitude = mobile.matches ? 0.55 : 1;
-      const gust = Math.pow(Math.max(0, Math.sin(elapsed * 0.105 - 1.3)), 7);
-      const sharedX = Math.sin(elapsed * 0.127) * 2.6 + Math.sin(elapsed * 0.043 + 1.1) * 1.4 + gust * 6.5;
-      const sharedY = Math.sin(elapsed * 0.089 + 0.7) * 1.55 - gust * 2.5;
+      const cycle = elapsed % 9.5;
+      const smoothstep = (start: number, end: number, value: number) => {
+        const progress = Math.min(1, Math.max(0, (value - start) / (end - start)));
+        return progress * progress * (3 - 2 * progress);
+      };
+      const gust = smoothstep(1.4, 2.3, cycle) * (1 - smoothstep(4.1, 6.3, cycle));
+      const texture = 1 + Math.sin(elapsed * 1.3) * 0.045 + Math.sin(elapsed * 2.1 + 0.8) * 0.02;
       tickets.forEach((ticket, index) => {
         const item = motion[index];
-        const local = Math.sin(elapsed * item.flutter * 0.21 + item.phase)
-          + Math.sin(elapsed * item.flutter * 0.063 + item.phase * 1.7) * 0.35;
-        const strength = item.weight * amplitude * intro;
-        const targetX = (sharedX + local * 2.1) * strength;
-        const targetY = (sharedY - local * 1.25) * strength;
-        const targetRoll = (sharedX * 0.026 + local * 0.11) * strength;
+        const targetX = item.travel * gust * texture * amplitude;
+        const targetY = -item.travel * 0.32 * gust * texture * amplitude;
+        const targetRoll = item.turn * gust * texture * amplitude;
         const follow = 1 - Math.exp(-delta * item.response);
         position[index].x += (targetX - position[index].x) * follow;
         position[index].y += (targetY - position[index].y) * follow;
